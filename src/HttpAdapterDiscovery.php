@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Http Guesser package.
+ * This file is part of the Http Discovery package.
  *
  * (c) PHP HTTP Team <team@php-http.org>
  *
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Http\Guesser;
+namespace Http\Discovery;
 
 /**
- * Guesses an HTTP Adapter
+ * Finds an HTTP Adapter
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class HttpAdapterGuesser
+class HttpAdapterDiscovery
 {
     /**
      * @var array
@@ -45,13 +45,13 @@ class HttpAdapterGuesser
     }
 
     /**
-     * Guesses an HTTP Adapter
+     * Finds an HTTP Adapter
      *
      * @return object
      *
-     * @throws CannotGuessException
+     * @throws NotFoundException
      */
-    public function guess()
+    public function find()
     {
         // We have a cache
         if (isset(static::$cache)) {
@@ -64,6 +64,6 @@ class HttpAdapterGuesser
             }
         }
 
-        throw new CannotGuessException('No HTTP Adapter found');
+        throw new NotFoundException('No HTTP Adapter found');
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Http Guesser package.
+ * This file is part of the Http Discovery package.
  *
  * (c) PHP HTTP Team <team@php-http.org>
  *
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Http\Guesser;
+namespace Http\Discovery;
 
 /**
- * Guesses a Message Factory
+ * Finds a Message Factory
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class MessageFactoryGuesser
+class MessageFactoryDiscovery
 {
     /**
      * @var array
@@ -55,13 +55,13 @@ class MessageFactoryGuesser
     }
 
     /**
-     * Guesses a Message Factory
+     * Finds a Message Factory
      *
      * @return object
      *
-     * @throws CannotGuessException
+     * @throws NotFoundException
      */
-    public function guess()
+    public function find()
     {
         // We have a cache
         if (isset(static::$cache)) {
@@ -74,6 +74,6 @@ class MessageFactoryGuesser
             }
         }
 
-        throw new CannotGuessException('No Message Factory found');
+        throw new NotFoundException('No Message Factory found');
     }
 }

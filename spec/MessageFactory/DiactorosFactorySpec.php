@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Http\Guesser\MessageFactory;
+namespace spec\Http\Discovery\MessageFactory;
 
 use Psr\Http\Message\StreamInterface;
 use PhpSpec\Exception\Example\SkippingException;
@@ -17,7 +17,7 @@ class DiactorosFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Guesser\MessageFactory\DiactorosFactory');
+        $this->shouldHaveType('Http\Discovery\MessageFactory\DiactorosFactory');
     }
 
     function it_is_a_message_factory()
