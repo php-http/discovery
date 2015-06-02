@@ -24,11 +24,11 @@ class MessageFactoryDiscovery
     protected static $messageFactories = [
         'guzzle' => [
             'class'   => 'GuzzleHttp\Psr7\Request',
-            'factory' => 'Http\Message\MessageFactory\GuzzleFactory',
+            'factory' => 'Http\Discovery\MessageFactory\GuzzleFactory',
         ],
         'diactoros' => [
             'class'   => 'Zend\Diactoros\Request',
-            'factory' => 'Http\Message\MessageFactory\DiactorosFactory',
+            'factory' => 'Http\Discovery\MessageFactory\DiactorosFactory',
         ],
     ];
 
