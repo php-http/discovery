@@ -1,0 +1,10 @@
+suites:
+  guesser_suite:
+    namespace: Http\Guesser
+    psr4_prefix: Http\Guesser
+extensions:
+  - PhpSpec\Extension\CodeCoverageExtension
+formatter.name: pretty
+code_coverage:
+  format: clover
+  output: build/coverage.xml

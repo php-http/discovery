@@ -1,0 +1,5 @@
+suites:
+  guesser_suite:
+    namespace: Http\Guesser
+    psr4_prefix: Http\Guesser
+formatter.name: pretty
