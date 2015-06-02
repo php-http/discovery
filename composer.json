@@ -1,8 +1,8 @@
 {
-    "name": "php-http/guesser",
-    "description": "Guesses adapters and message factories",
+    "name": "php-http/discovery",
+    "description": "Finds installed adapters and message factories",
     "license": "MIT",
-    "keywords": ["http", "guesser", "adapter", "message", "factory"],
+    "keywords": ["http", "discovery", "adapter", "message", "factory"],
     "homepage": "http://php-http.org",
     "authors": [
         {
@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Http\\Guesser\\": "src/"
+            "Http\\Discovery\\": "src/"
         }
     },
     "extra": {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Http Guesser package.
+ * This file is part of the Http Discovery package.
  *
  * (c) PHP HTTP Team <team@php-http.org>
  *
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Http\Guesser;
+namespace Http\Discovery;
 
 /**
- * Thrown when a guesser cannot guess
+ * Thrown when a discovery does not find any matches
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class CannotGuessException extends \RuntimeException
+class NotFoundException extends \RuntimeException
 {
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Http Guesser package.
+ * This file is part of the Http Discovery package.
  *
  * (c) PHP HTTP Team <team@php-http.org>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Http\Guesser\MessageFactory;
+namespace Http\Discovery\MessageFactory;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Http\Guesser\MessageFactory;
+namespace spec\Http\Discovery\MessageFactory;
 
 use Psr\Http\Message\StreamInterface;
 use PhpSpec\ObjectBehavior;
@@ -9,7 +9,7 @@ class GuzzleFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Guesser\MessageFactory\GuzzleFactory');
+        $this->shouldHaveType('Http\Discovery\MessageFactory\GuzzleFactory');
     }
 
     function it_is_a_message_factory()

@@ -1,14 +1,14 @@
-# HTTP Guesser
+# HTTP Discovery
 
-[![Latest Version](https://img.shields.io/github/release/php-http/guesser.svg?style=flat-square)](https://github.com/php-http/guesser/releases)
+[![Latest Version](https://img.shields.io/github/release/php-http/discovery.svg?style=flat-square)](https://github.com/php-http/discovery/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status](https://img.shields.io/travis/php-http/guesser.svg?style=flat-square)](https://travis-ci.org/php-http/guesser)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-http/guesser.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/guesser)
-[![Quality Score](https://img.shields.io/scrutinizer/g/php-http/guesser.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/guesser)
-[![HHVM Status](https://img.shields.io/hhvm/php-http/guesser.svg?style=flat-square)](http://hhvm.h4cc.de/package/php-http/guesser)
-[![Total Downloads](https://img.shields.io/packagist/dt/php-http/guesser.svg?style=flat-square)](https://packagist.org/packages/php-http/guesser)
+[![Build Status](https://img.shields.io/travis/php-http/discovery.svg?style=flat-square)](https://travis-ci.org/php-http/discovery)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
+[![Quality Score](https://img.shields.io/scrutinizer/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
+[![HHVM Status](https://img.shields.io/hhvm/php-http/discovery.svg?style=flat-square)](http://hhvm.h4cc.de/package/php-http/discovery)
+[![Total Downloads](https://img.shields.io/packagist/dt/php-http/discovery.svg?style=flat-square)](https://packagist.org/packages/php-http/discovery)
 
-**Guesses adapters and message factories.**
+**Finds installed adapters and message factories.**
 
 
 ## Install
@@ -16,18 +16,18 @@
 Via Composer
 
 ``` bash
-$ composer require php-http/guesser
+$ composer require php-http/discovery
 ```
 
 
 ## Usage
 
-Guesser is a static container to easy auto initialization of objects.
+Static containers to ease the auto initialization of objects.
 
-Currently the following guessers are in the package:
+Currently the following discovery strategies are available:
 
-- Adapter
-- Message Factory
+- Http Adapter discovery
+- Message Factory discovery
 
 
 ## Testing
