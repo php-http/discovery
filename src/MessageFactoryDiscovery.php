@@ -61,7 +61,7 @@ class MessageFactoryDiscovery
      *
      * @throws NotFoundException
      */
-    public function find()
+    public static function find()
     {
         // We have a cache
         if (isset(static::$cache)) {
