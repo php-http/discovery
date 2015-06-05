@@ -11,69 +11,46 @@
 
 namespace Http\Discovery;
 
+use Http\Message\MessageFactory;
+
 /**
  * Finds a Message Factory
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class MessageFactoryDiscovery
+class MessageFactoryDiscovery extends ClassDiscovery
 {
     /**
-     * @var array
-     */
-    protected static $messageFactories = [
-        'guzzle' => [
-            'class'   => 'GuzzleHttp\Psr7\Request',
-            'factory' => 'Http\Discovery\MessageFactory\GuzzleFactory',
-        ],
-        'diactoros' => [
-            'class'   => 'Zend\Diactoros\Request',
-            'factory' => 'Http\Discovery\MessageFactory\DiactorosFactory',
-        ],
-    ];
-
-    /**
-     * @var string
+     * Cached factory
+     *
+     * @var MessageFactory
      */
     protected static $cache;
 
     /**
-     * Register a Message Factory
-     *
-     * @param string $name
-     * @param string $class
-     * @param string $factory
+     * @var array
      */
-    public static function register($name, $class, $factory)
-    {
-        static::$cache = null;
-
-        static::$messageFactories[$name] = [
-            'class'   => $class,
-            'factory' => $factory,
-        ];
-    }
+    protected static $classes = [
+        'guzzle' => [
+            'class' => 'Http\Discovery\MessageFactory\GuzzleFactory',
+            'condition'=> 'GuzzleHttp\Psr7\Request',
+        ],
+        'diactoros' => [
+            'class' => 'Http\Discovery\MessageFactory\DiactorosFactory',
+            'condition' => 'Zend\Diactoros\Request',
+        ],
+    ];
 
     /**
-     * Finds a Message Factory
+     * Find Message Factory
      *
-     * @return object
+     * @return MessageFactory
      *
      * @throws NotFoundException
      */
     public static function find()
     {
-        // We have a cache
-        if (isset(static::$cache)) {
-            return static::$cache;
-        }
-
-        foreach (static::$messageFactories as $name => $definition) {
-            if (class_exists($definition['class'])) {
-                return static::$cache = new $definition['factory'];
-            }
-        }
-
-        throw new NotFoundException('No Message Factory found');
+        // Override only used for return type declaration
+        return parent::find();
     }
 }

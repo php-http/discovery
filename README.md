@@ -42,7 +42,6 @@ HttpAdapterDiscovery::register('my_adapter', 'My\Adapter\Class');
 $adapter = HttpAdapterDiscovery::find();
 ```
 
-
 ### Message Factory discovery
 
 Two common message factories are bundled with this package. ([Guzzle](https://github.com/guzzle/psr7), [Diactoros](https://github.com/zendframework/zend-diactoros))
@@ -52,8 +51,22 @@ use Http\Discovery\MessageFactoryDiscovery;
 
 MessageFactoryDiscovery::register('my_factory', 'Psr\Request\Implementation\Class', 'My\Factory\Class');
 
-$adapter = MessageFactoryDiscovery::find();
+$factory = MessageFactoryDiscovery::find();
 ```
+
+### URI Factory discovery
+
+Two common URI factories are bundled with this package: ([Guzzle](https://github.com/guzzle/psr7)
+and [Diactoros](https://github.com/zendframework/zend-diactoros)).
+
+``` php
+use Http\Discovery\UriFactoryDiscovery;
+
+MessageFactoryDiscovery::register('my_factory', 'Psr\Uri\Implementation\Class', 'My\Factory\Class');
+
+$factory = UriFactoryDiscovery::find();
+```
+
 
 
 ## Testing

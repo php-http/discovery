@@ -11,59 +11,47 @@
 
 namespace Http\Discovery;
 
+use Http\Adapter\HttpAdapter;
+
 /**
  * Finds an HTTP Adapter
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class HttpAdapterDiscovery
+class HttpAdapterDiscovery extends ClassDiscovery
 {
     /**
-     * @var array
-     */
-    protected static $adapters = [
-        'guzzle6' => 'Http\Adapter\Guzzle6HttpAdapter',
-        'guzzle5' => 'Http\Adapter\Guzzle5HttpAdapter',
-    ];
-
-    /**
-     * @var string
+     * Cached adapter
+     *
+     * @var HttpAdapter
      */
     protected static $cache;
 
     /**
-     * Register an HTTP Adapter
-     *
-     * @param string $name
-     * @param string $class
+     * @var array
      */
-    public static function register($name, $class)
-    {
-        static::$cache = null;
+    protected static $classes = [
+        'guzzle6' => [
+            'class' => 'Http\Adapter\Guzzle6HttpAdapter',
+            'condition' => 'Http\Adapter\Guzzle6HttpAdapter'
 
-        static::$adapters[$name] = $class;
-    }
+        ],
+        'guzzle5' => [
+            'class' => 'Http\Adapter\Guzzle5HttpAdapter',
+            'condition' => 'Http\Adapter\Guzzle6HttpAdapter'
+        ],
+    ];
 
     /**
      * Finds an HTTP Adapter
      *
-     * @return object
+     * @return HttpAdapter
      *
      * @throws NotFoundException
      */
     public static function find()
     {
-        // We have a cache
-        if (isset(static::$cache)) {
-            return static::$cache;
-        }
-
-        foreach (static::$adapters as $name => $class) {
-            if (class_exists($class)) {
-                return static::$cache = new $class;
-            }
-        }
-
-        throw new NotFoundException('No HTTP Adapter found');
+        // Override only used for return type declaration
+        return parent::find();
     }
 }
