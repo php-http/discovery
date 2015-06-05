@@ -2,6 +2,8 @@
 
 namespace spec\Http\Discovery;
 
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\UriFactoryDiscovery;
 use PhpSpec\ObjectBehavior;
 
 class HttpAdapterDiscoverySpec extends ObjectBehavior

@@ -15,7 +15,7 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
     {
         $this->reset();
 
-        $this->register('guzzle', 'spec\Http\Discovery\TestClass', 'spec\Http\Discovery\Factory');
+        $this->register('guzzle', 'spec\Http\Discovery\Factory', 'spec\Http\Discovery\TestClass');
 
         $this->find()->shouldHaveType('spec\Http\Discovery\Factory');
     }
@@ -26,7 +26,7 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
 
         $firstGuess = $this->find();
 
-        $this->register('guzzle', 'spec\Http\Discovery\TestClass', 'spec\Http\Discovery\Factory');
+        $this->register('guzzle', 'spec\Http\Discovery\Factory', 'spec\Http\Discovery\TestClass');
 
         $this->find()->shouldNotBe($firstGuess);
     }
@@ -65,8 +65,8 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
 
     function reset()
     {
-        $this->register('guzzle', 'GuzzleHttp\Psr7\Request', 'Http\Discovery\MessageFactory\GuzzleFactory');
-        $this->register('diactoros', 'Zend\Diactoros\Request', 'Http\Discovery\MessageFactory\DiactorosFactory');
+        $this->register('guzzle', 'Http\Discovery\MessageFactory\GuzzleFactory', 'GuzzleHttp\Psr7\Request');
+        $this->register('diactoros', 'Http\Discovery\MessageFactory\DiactorosFactory', 'Zend\Diactoros\Request');
     }
 }
 
