@@ -12,6 +12,7 @@
 namespace Http\Discovery\UriFactory;
 
 use Http\Message\UriFactory;
+use Psr\Http\Message\UriInterface;
 use Zend\Diactoros\Uri;
 
 /**
@@ -26,6 +27,12 @@ class DiactorosFactory implements UriFactory
      */
     public function createUri($uri)
     {
-        return new Uri($uri);
+        if ($uri instanceof UriInterface) {
+            return $uri;
+        } elseif (is_string($uri)) {
+            return new Uri($uri);
+        }
+
+        throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }
 }
