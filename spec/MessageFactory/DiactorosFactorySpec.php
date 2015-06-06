@@ -30,6 +30,30 @@ class DiactorosFactorySpec extends ObjectBehavior
         $this->createRequest('GET', '/')->shouldHaveType('Psr\Http\Message\RequestInterface');
     }
 
+    function it_creates_a_request_with_string_body()
+    {
+        $this->createRequest('POST', '/', '1.1', [], 'body')->shouldHaveType('Psr\Http\Message\RequestInterface');
+    }
+
+    function it_creates_a_request_with_empty_body()
+    {
+        $this->createRequest('POST', '/', '1.1', [], null)->shouldHaveType('Psr\Http\Message\RequestInterface');
+    }
+
+    function it_creates_a_request_with_stream_body(StreamInterface $stream)
+    {
+        $stream->rewind()->shouldBeCalled();
+
+        $this->createRequest('POST', '/', '1.1', [], $stream)->shouldHaveType('Psr\Http\Message\RequestInterface');
+    }
+
+    function it_creates_a_request_with_resource_body()
+    {
+        $resource = tmpfile();
+
+        $this->createRequest('POST', '/', '1.1', [], $resource)->shouldHaveType('Psr\Http\Message\RequestInterface');
+    }
+
     function it_creates_a_response()
     {
         $this->createResponse()->shouldHaveType('Psr\Http\Message\ResponseInterface');
