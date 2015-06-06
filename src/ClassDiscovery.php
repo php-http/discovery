@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Http Discovery package.
+ *
+ * (c) PHP HTTP Team <team@php-http.org>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Http\Discovery;
 
 /**
@@ -10,7 +19,7 @@ namespace Http\Discovery;
 abstract class ClassDiscovery
 {
     /**
-     * Add a condition (and class) to the discovery registry
+     * Add a class (and condition) to the discovery registry
      *
      * @param string $name
      * @param string $class     Class that will be instantiated if found
@@ -21,13 +30,13 @@ abstract class ClassDiscovery
         static::$cache = null;
 
         static::$classes[$name] = [
-            'class' => $class,
+            'class'     => $class,
             'condition' => $condition ?: $class,
         ];
     }
 
     /**
-     * Finds a Factory
+     * Finds a Class
      *
      * @return object
      *

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Http Discovery package.
+ *
+ * (c) PHP HTTP Team <team@php-http.org>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Http\Discovery;
 
 use Http\Message\UriFactory;
@@ -12,28 +21,26 @@ use Http\Message\UriFactory;
 class UriFactoryDiscovery extends ClassDiscovery
 {
     /**
-     * Cached factory
-     *
      * @var UriFactory
      */
-    public static $cache;
+    protected static $cache;
 
     /**
      * @var array
      */
     protected static $classes = [
         'guzzle' => [
-            'class' => 'Http\Discovery\UriFactory\GuzzleFactory',
+            'class'     => 'Http\Discovery\UriFactory\GuzzleFactory',
             'condition' => 'GuzzleHttp\Psr7\Uri',
         ],
         'diactoros' => [
-            'class' => 'Http\Discovery\UriFactory\DiactorosFactory',
+            'class'     => 'Http\Discovery\UriFactory\DiactorosFactory',
             'condition' => 'Zend\Diactoros\Uri',
         ],
     ];
 
     /**
-     * Find URI Factory
+     * Finds a URI Factory
      *
      * @return UriFactory
      */

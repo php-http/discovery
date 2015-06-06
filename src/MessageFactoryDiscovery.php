@@ -21,8 +21,6 @@ use Http\Message\MessageFactory;
 class MessageFactoryDiscovery extends ClassDiscovery
 {
     /**
-     * Cached factory
-     *
      * @var MessageFactory
      */
     protected static $cache;
@@ -32,17 +30,17 @@ class MessageFactoryDiscovery extends ClassDiscovery
      */
     protected static $classes = [
         'guzzle' => [
-            'class' => 'Http\Discovery\MessageFactory\GuzzleFactory',
-            'condition'=> 'GuzzleHttp\Psr7\Request',
+            'class'     => 'Http\Discovery\MessageFactory\GuzzleFactory',
+            'condition' => 'GuzzleHttp\Psr7\Request',
         ],
         'diactoros' => [
-            'class' => 'Http\Discovery\MessageFactory\DiactorosFactory',
+            'class'     => 'Http\Discovery\MessageFactory\DiactorosFactory',
             'condition' => 'Zend\Diactoros\Request',
         ],
     ];
 
     /**
-     * Find Message Factory
+     * Finds a Message Factory
      *
      * @return MessageFactory
      *
