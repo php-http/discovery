@@ -70,6 +70,17 @@ $factory = UriFactoryDiscovery::find();
 ```
 
 
+### Custom conditions
+
+You can use various types of conditions to check for a class:
+
+- string (checked for class existence)
+- callable
+- boolean
+
+Any further types are treated as invalid and evaulated to false boolean value.
+
+
 ## Testing
 
 ``` bash
