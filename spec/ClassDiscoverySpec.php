@@ -30,8 +30,38 @@ class ClassDiscoverySpec extends ObjectBehavior
     {
         $this->reset();
 
-        $this->register('class1', 'spec\Http\Discovery\ClassToFind', 'invalid');
+        $this->register('class1', 'spec\Http\Discovery\ClassToFind', false);
         $this->register('class2', 'spec\Http\Discovery\AnotherClassToFind', 'spec\Http\Discovery\TestClass');
+
+        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
+    }
+
+    function it_registers_a_class_with_a_callable_condition()
+    {
+        $this->reset();
+
+        $this->register('class1', 'spec\Http\Discovery\ClassToFind', false);
+        $this->register('class2', 'spec\Http\Discovery\AnotherClassToFind', function() { return true; });
+
+        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
+    }
+
+    function it_registers_a_class_with_a_boolean_condition()
+    {
+        $this->reset();
+
+        $this->register('class1', 'spec\Http\Discovery\ClassToFind', false);
+        $this->register('class2', 'spec\Http\Discovery\AnotherClassToFind', true);
+
+        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
+    }
+
+    function it_registers_a_class_with_an_invalid_condition()
+    {
+        $this->reset();
+
+        $this->register('class1', 'spec\Http\Discovery\ClassToFind', new \stdClass);
+        $this->register('class2', 'spec\Http\Discovery\AnotherClassToFind', true);
 
         $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
     }
