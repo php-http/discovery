@@ -5,7 +5,6 @@
 [![Build Status](https://img.shields.io/travis/php-http/discovery.svg?style=flat-square)](https://travis-ci.org/php-http/discovery)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
 [![Quality Score](https://img.shields.io/scrutinizer/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
-[![HHVM Status](https://img.shields.io/hhvm/php-http/discovery.svg?style=flat-square)](http://hhvm.h4cc.de/package/php-http/discovery)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-http/discovery.svg?style=flat-square)](https://packagist.org/packages/php-http/discovery)
 
 **Finds installed adapters and message factories.**
