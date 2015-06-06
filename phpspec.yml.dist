@@ -2,4 +2,5 @@ suites:
   discovery_suite:
     namespace: Http\Discovery
     psr4_prefix: Http\Discovery
+bootstrap: spec/bootstrap.php
 formatter.name: pretty

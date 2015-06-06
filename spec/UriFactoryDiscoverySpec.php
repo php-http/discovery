@@ -12,6 +12,11 @@ class UriFactoryDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\UriFactoryDiscovery');
     }
 
+    function it_is_a_class_discovery()
+    {
+        $this->shouldHaveType('Http\Discovery\ClassDiscovery');
+    }
+
     function it_finds_guzzle_then_zend_by_default()
     {
         $this->find()->shouldHaveType('Http\Discovery\UriFactory\GuzzleFactory');

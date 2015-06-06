@@ -46,12 +46,14 @@ abstract class ClassDiscovery
     {
         // We have a cache
         if (isset(static::$cache)) {
-            return static::$cache;
+            return new static::$cache;
         }
 
         foreach (static::$classes as $name => $definition) {
             if (class_exists($definition['condition'])) {
-                return static::$cache = new $definition['class'];
+                static::$cache = $definition['class'];
+
+                return new $definition['class'];
             }
         }
 

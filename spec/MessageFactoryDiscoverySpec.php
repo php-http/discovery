@@ -11,39 +11,13 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\MessageFactoryDiscovery');
     }
 
-    function it_registers_a_factory()
+    function it_is_a_class_discovery()
     {
-        $this->reset();
-
-        $this->register('guzzle', 'spec\Http\Discovery\Factory', 'spec\Http\Discovery\TestClass');
-
-        $this->find()->shouldHaveType('spec\Http\Discovery\Factory');
-    }
-
-    function it_resets_cache_when_a_factory_is_registered()
-    {
-        $this->reset();
-
-        $firstGuess = $this->find();
-
-        $this->register('guzzle', 'spec\Http\Discovery\Factory', 'spec\Http\Discovery\TestClass');
-
-        $this->find()->shouldNotBe($firstGuess);
-    }
-
-    function it_caches_a_found_message_factory()
-    {
-        $this->reset();
-
-        $firstGuess = $this->find()->shouldHaveType('Http\Discovery\MessageFactory\GuzzleFactory');
-
-        $this->find()->shouldReturn($firstGuess);
+        $this->shouldHaveType('Http\Discovery\ClassDiscovery');
     }
 
     function it_finds_guzzle_then_zend_by_default()
     {
-        $this->reset();
-
         $this->find()->shouldHaveType('Http\Discovery\MessageFactory\GuzzleFactory');
 
         $this->register('guzzle', 'invalid', '');
@@ -52,23 +26,4 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
             $this->find()->shouldHaveType('Http\Discovery\MessageFactory\DiactorosFactory');
         }
     }
-
-    function it_throws_an_exception_when_no_message_factory_is_found()
-    {
-        $this->reset();
-
-        $this->register('guzzle', 'invalid', '');
-        $this->register('diactoros', 'invalid', '');
-
-        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFind();
-    }
-
-    function reset()
-    {
-        $this->register('guzzle', 'Http\Discovery\MessageFactory\GuzzleFactory', 'GuzzleHttp\Psr7\Request');
-        $this->register('diactoros', 'Http\Discovery\MessageFactory\DiactorosFactory', 'Zend\Diactoros\Request');
-    }
 }
-
-class TestClass {}
-class Factory {}

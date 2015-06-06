@@ -2,6 +2,7 @@ suites:
   discovery_suite:
     namespace: Http\Discovery
     psr4_prefix: Http\Discovery
+bootstrap: spec/bootstrap.php
 extensions:
   - PhpSpec\Extension\CodeCoverageExtension
 formatter.name: pretty
