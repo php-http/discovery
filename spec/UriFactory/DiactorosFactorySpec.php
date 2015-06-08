@@ -3,6 +3,7 @@
 namespace spec\Http\Discovery\UriFactory;
 
 use Psr\Http\Message\UriInterface;
+use PhpSpec\Exception\Example\SkippingException;
 use PhpSpec\ObjectBehavior;
 
 class DiactorosFactorySpec extends ObjectBehavior

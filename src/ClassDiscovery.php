@@ -31,7 +31,7 @@ abstract class ClassDiscovery
 
         static::$classes[$name] = [
             'class'     => $class,
-            'condition' => $condition ?: $class,
+            'condition' => isset($condition) ? $condition : $class,
         ];
     }
 
@@ -46,15 +46,38 @@ abstract class ClassDiscovery
     {
         // We have a cache
         if (isset(static::$cache)) {
-            return static::$cache;
+            return new static::$cache;
         }
 
         foreach (static::$classes as $name => $definition) {
-            if (class_exists($definition['condition'])) {
-                return static::$cache = new $definition['class'];
+            if (static::evaluateCondition($definition['condition'])) {
+                static::$cache = $definition['class'];
+
+                return new $definition['class'];
             }
         }
 
         throw new NotFoundException('Not found');
+    }
+
+    /**
+     * Evaulates conditions to boolean
+     *
+     * @param mixed $condition
+     *
+     * @return boolean
+     */
+    protected static function evaluateCondition($condition)
+    {
+        if (is_string($condition)) {
+            // Should be extended for functions, extensions???
+            return class_exists($condition);
+        } elseif (is_callable($condition)) {
+            return $condition();
+        } elseif (is_bool($condition)) {
+            return $condition;
+        }
+
+        return false;
     }
 }

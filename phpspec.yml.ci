@@ -2,9 +2,10 @@ suites:
   discovery_suite:
     namespace: Http\Discovery
     psr4_prefix: Http\Discovery
+bootstrap: spec/bootstrap.php
+formatter.name: pretty
 extensions:
   - PhpSpec\Extension\CodeCoverageExtension
-formatter.name: pretty
 code_coverage:
   format: clover
   output: build/coverage.xml
