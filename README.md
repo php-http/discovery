@@ -19,65 +19,9 @@ $ composer require php-http/discovery
 ```
 
 
-## Usage
+## Documentation
 
-Static containers to ease the auto initialization of objects.
-
-Currently the following discovery strategies are available:
-
-- Http Adapter discovery
-- Message Factory discovery
-- URI Factory discovery
-
-
-### Http Adapter discovery
-
-HTTP Adapters provided by us are registered in the discovery by default.
-
-``` php
-use Http\Discovery\HttpAdapterDiscovery;
-
-HttpAdapterDiscovery::register('my_adapter', 'My\Adapter\Class');
-
-$adapter = HttpAdapterDiscovery::find();
-```
-
-
-### Message Factory discovery
-
-Two common message factories are bundled with this package. ([Guzzle](https://github.com/guzzle/psr7) and [Diactoros](https://github.com/zendframework/zend-diactoros))
-
-``` php
-use Http\Discovery\MessageFactoryDiscovery;
-
-MessageFactoryDiscovery::register('my_factory', 'My\Factory\Class', 'Psr\Request\Implementation\Class');
-
-$factory = MessageFactoryDiscovery::find();
-```
-
-
-### URI Factory discovery
-
-Two common URI factories are bundled with this package: ([Guzzle](https://github.com/guzzle/psr7) and [Diactoros](https://github.com/zendframework/zend-diactoros)).
-
-``` php
-use Http\Discovery\UriFactoryDiscovery;
-
-MessageFactoryDiscovery::register('my_factory', 'My\Factory\Class', 'Psr\Uri\Implementation\Class');
-
-$factory = UriFactoryDiscovery::find();
-```
-
-
-### Custom conditions
-
-You can use various types of conditions to check for a class:
-
-- string (checked for class existence)
-- callable
-- boolean
-
-Any further types are treated as invalid and evaulated to false boolean value.
+Please see the [official documentation](http://php-http.readthedocs.org/en/latest/discovery/).
 
 
 ## Testing
