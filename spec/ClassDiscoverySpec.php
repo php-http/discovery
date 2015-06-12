@@ -21,7 +21,7 @@ class ClassDiscoverySpec extends ObjectBehavior
     {
         $this->reset();
 
-        $this->register('class1', 'spec\Http\Discovery\AnotherClassToFind');
+        $this->register('spec\Http\Discovery\AnotherClassToFind');
 
         $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
     }
@@ -30,8 +30,8 @@ class ClassDiscoverySpec extends ObjectBehavior
     {
         $this->reset();
 
-        $this->register('class1', 'spec\Http\Discovery\ClassToFind', false);
-        $this->register('class2', 'spec\Http\Discovery\AnotherClassToFind', 'spec\Http\Discovery\TestClass');
+        $this->register('spec\Http\Discovery\AnotherClassToFind', 'spec\Http\Discovery\TestClass');
+        $this->register('spec\Http\Discovery\ClassToFind', false);
 
         $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
     }
@@ -40,8 +40,8 @@ class ClassDiscoverySpec extends ObjectBehavior
     {
         $this->reset();
 
-        $this->register('class1', 'spec\Http\Discovery\ClassToFind', false);
-        $this->register('class2', 'spec\Http\Discovery\AnotherClassToFind', function() { return true; });
+        $this->register('spec\Http\Discovery\AnotherClassToFind', function() { return true; });
+        $this->register('spec\Http\Discovery\ClassToFind', false);
 
         $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
     }
@@ -50,8 +50,8 @@ class ClassDiscoverySpec extends ObjectBehavior
     {
         $this->reset();
 
-        $this->register('class1', 'spec\Http\Discovery\ClassToFind', false);
-        $this->register('class2', 'spec\Http\Discovery\AnotherClassToFind', true);
+        $this->register('spec\Http\Discovery\AnotherClassToFind', true);
+        $this->register('spec\Http\Discovery\ClassToFind', false);
 
         $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
     }
@@ -60,8 +60,8 @@ class ClassDiscoverySpec extends ObjectBehavior
     {
         $this->reset();
 
-        $this->register('class1', 'spec\Http\Discovery\ClassToFind', new \stdClass);
-        $this->register('class2', 'spec\Http\Discovery\AnotherClassToFind', true);
+        $this->register('spec\Http\Discovery\AnotherClassToFind', true);
+        $this->register('spec\Http\Discovery\ClassToFind', new \stdClass);
 
         $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
     }
@@ -72,7 +72,7 @@ class ClassDiscoverySpec extends ObjectBehavior
 
         $this->find()->shouldHaveType('spec\Http\Discovery\ClassToFind');
 
-        $this->register('class1', 'spec\Http\Discovery\AnotherClassToFind');
+        $this->register('spec\Http\Discovery\AnotherClassToFind');
 
         $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
     }
@@ -83,16 +83,14 @@ class ClassDiscoverySpec extends ObjectBehavior
 
         $this->find()->shouldHaveType('spec\Http\Discovery\ClassToFind');
 
-        $this->registerWithoutCacheReset('class1', 'spec\Http\Discovery\AnotherClassToFind');
+        $this->registerWithoutCacheReset('spec\Http\Discovery\AnotherClassToFind');
 
         $this->find()->shouldhaveType('spec\Http\Discovery\ClassToFind');
     }
 
     function it_throws_an_exception_when_no_class_is_found()
     {
-        $this->reset();
-
-        $this->register('class1', 'invalid');
+        $this->resetEmpty();
 
         $this->shouldThrow('Http\Discovery\NotFoundException')->duringFind();
     }
@@ -115,19 +113,28 @@ class DiscoveryStub extends ClassDiscovery
         static::$cache = null;
 
         static::$classes = [
-            'class1' => [
+            [
                 'class'     => 'spec\Http\Discovery\ClassToFind',
                 'condition' => 'spec\Http\Discovery\ClassToFind'
             ],
         ];
     }
 
-    public function registerWithoutCacheReset($name, $class, $condition = null)
+    public function registerWithoutCacheReset($class, $condition = null)
     {
-        static::$classes[$name] = [
+        $definition = [
             'class'     => $class,
-            'condition' => $condition ?: $class,
+            'condition' => isset($condition) ? $condition : $class,
         ];
+
+        array_unshift(static::$classes, $definition);
+    }
+
+    public function resetEmpty()
+    {
+        static::$cache = null;
+
+        static::$classes = [];
     }
 }
 

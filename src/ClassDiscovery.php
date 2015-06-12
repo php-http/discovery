@@ -21,18 +21,19 @@ abstract class ClassDiscovery
     /**
      * Add a class (and condition) to the discovery registry
      *
-     * @param string $name
      * @param string $class     Class that will be instantiated if found
      * @param string $condition Optional other class to check for existence
      */
-    public static function register($name, $class, $condition = null)
+    public static function register($class, $condition = null)
     {
         static::$cache = null;
 
-        static::$classes[$name] = [
+        $definition = [
             'class'     => $class,
             'condition' => isset($condition) ? $condition : $class,
         ];
+
+        array_unshift(static::$classes, $definition);
     }
 
     /**

@@ -16,14 +16,8 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\ClassDiscovery');
     }
 
-    function it_finds_guzzle_then_zend_by_default()
+    function it_finds_an_http_message_factory()
     {
-        $this->find()->shouldHaveType('Http\Discovery\MessageFactory\GuzzleFactory');
-
-        $this->register('guzzle', 'invalid', '');
-
-        if (class_exists('Zend\Diactoros\Request')) {
-            $this->find()->shouldHaveType('Http\Discovery\MessageFactory\DiactorosFactory');
-        }
+        $this->find()->shouldHaveType('Http\Message\MessageFactory');
     }
 }
