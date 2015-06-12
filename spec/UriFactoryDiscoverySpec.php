@@ -3,7 +3,6 @@
 namespace spec\Http\Discovery;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class UriFactoryDiscoverySpec extends ObjectBehavior
 {
@@ -17,14 +16,8 @@ class UriFactoryDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\ClassDiscovery');
     }
 
-    function it_finds_guzzle_then_zend_by_default()
+    function it_finds_an_http_uri_factory()
     {
-        $this->find()->shouldHaveType('Http\Discovery\UriFactory\GuzzleFactory');
-
-        $this->register('guzzle', 'invalid', '');
-
-        if (class_exists('Zend\Diactoros\Request')) {
-            $this->find()->shouldHaveType('Http\Discovery\UriFactory\DiactorosFactory');
-        }
+        $this->find()->shouldHaveType('Http\Message\UriFactory');
     }
 }
