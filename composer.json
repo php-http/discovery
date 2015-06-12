@@ -21,7 +21,7 @@
     "require-dev": {
         "zendframework/zend-diactoros": "~1.0",
         "guzzlehttp/psr7": "~1.0",
-        "phpspec/phpspec": "~2.1",
+        "phpspec/phpspec": "~2.2",
         "henrikbjorn/phpspec-code-coverage" : "~1.0"
     },
     "suggest": {
