@@ -36,7 +36,7 @@ class HttpAdapterDiscovery extends ClassDiscovery
         ],
         'guzzle5' => [
             'class'     => 'Http\Adapter\Guzzle5HttpAdapter',
-            'condition' => 'Http\Adapter\Guzzle6HttpAdapter'
+            'condition' => 'Http\Adapter\Guzzle5HttpAdapter'
         ],
     ];
 
