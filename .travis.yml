@@ -15,8 +15,8 @@ matrix:
     - php: 5.5
       env:
         - COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
-        - PHPSPEC_FLAGS="-c phpspec.yml.ci"
         - COVERAGE=true
+        - PHPSPEC_FLAGS="-c phpspec.yml.ci"
 
 install:
   - travis_retry composer self-update
