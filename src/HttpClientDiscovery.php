@@ -11,17 +11,17 @@
 
 namespace Http\Discovery;
 
-use Http\Adapter\HttpAdapter;
+use Http\Client\HttpClient;
 
 /**
- * Finds an HTTP Adapter
+ * Finds an HTTP Client
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class HttpAdapterDiscovery extends ClassDiscovery
+class HttpClientDiscovery extends ClassDiscovery
 {
     /**
-     * @var HttpAdapter
+     * @var HttpClient
      */
     protected static $cache;
 
@@ -43,7 +43,7 @@ class HttpAdapterDiscovery extends ClassDiscovery
     /**
      * Finds an HTTP Adapter
      *
-     * @return HttpAdapter
+     * @return HttpClient
      *
      * @throws NotFoundException
      */

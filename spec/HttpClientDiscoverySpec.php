@@ -4,11 +4,11 @@ namespace spec\Http\Discovery;
 
 use PhpSpec\ObjectBehavior;
 
-class HttpAdapterDiscoverySpec extends ObjectBehavior
+class HttpClientDiscoverySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Discovery\HttpAdapterDiscovery');
+        $this->shouldHaveType('Http\Discovery\HttpClientDiscovery');
     }
 
     function it_is_a_class_discovery()
