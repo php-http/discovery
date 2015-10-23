@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=5.4",
-        "php-http/message-factory": "^0.1"
+        "php-http/message-factory": "~0.2@dev"
     },
     "require-dev": {
         "zendframework/zend-diactoros": "^1.0",
