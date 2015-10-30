@@ -18,6 +18,6 @@ class HttpClientDiscoverySpec extends ObjectBehavior
 
     function it_finds_an_http_adapter()
     {
-        $this->find()->shouldHaveType('Http\Adapter\HttpAdapter');
+        $this->find()->shouldImplement('Http\Client\HttpClient');
     }
 }
