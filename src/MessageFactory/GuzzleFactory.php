@@ -26,9 +26,9 @@ class GuzzleFactory implements MessageFactory
     public function createRequest(
         $method,
         $uri,
-        $protocolVersion = '1.1',
         array $headers = [],
-        $body = null
+        $body = null,
+        $protocolVersion = '1.1'
     ) {
         return new Request(
             $method,
@@ -45,9 +45,9 @@ class GuzzleFactory implements MessageFactory
     public function createResponse(
         $statusCode = 200,
         $reasonPhrase = null,
-        $protocolVersion = '1.1',
         array $headers = [],
-        $body = null
+        $body = null,
+        $protocolVersion = '1.1'
     ) {
         return new Response(
             $statusCode,
