@@ -28,9 +28,9 @@ class DiactorosFactory implements MessageFactory
     public function createRequest(
         $method,
         $uri,
-        $protocolVersion = '1.1',
         array $headers = [],
-        $body = null
+        $body = null,
+        $protocolVersion = '1.1'
     ) {
         return (new Request(
             $uri,
@@ -46,9 +46,9 @@ class DiactorosFactory implements MessageFactory
     public function createResponse(
         $statusCode = 200,
         $reasonPhrase = null,
-        $protocolVersion = '1.1',
         array $headers = [],
-        $body = null
+        $body = null,
+        $protocolVersion = '1.1'
     ) {
         return (new Response(
             $this->createStream($body),

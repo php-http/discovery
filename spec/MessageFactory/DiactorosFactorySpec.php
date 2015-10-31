@@ -32,26 +32,26 @@ class DiactorosFactorySpec extends ObjectBehavior
 
     function it_creates_a_request_with_string_body()
     {
-        $this->createRequest('POST', '/', '1.1', [], 'body')->shouldHaveType('Psr\Http\Message\RequestInterface');
+        $this->createRequest('POST', '/', [], 'body', '1.1')->shouldHaveType('Psr\Http\Message\RequestInterface');
     }
 
     function it_creates_a_request_with_empty_body()
     {
-        $this->createRequest('POST', '/', '1.1', [], null)->shouldHaveType('Psr\Http\Message\RequestInterface');
+        $this->createRequest('POST', '/', [], null, '1.1')->shouldHaveType('Psr\Http\Message\RequestInterface');
     }
 
     function it_creates_a_request_with_stream_body(StreamInterface $stream)
     {
         $stream->rewind()->shouldBeCalled();
 
-        $this->createRequest('POST', '/', '1.1', [], $stream)->shouldHaveType('Psr\Http\Message\RequestInterface');
+        $this->createRequest('POST', '/', [], $stream, '1.1')->shouldHaveType('Psr\Http\Message\RequestInterface');
     }
 
     function it_creates_a_request_with_resource_body()
     {
         $resource = tmpfile();
 
-        $this->createRequest('POST', '/', '1.1', [], $resource)->shouldHaveType('Psr\Http\Message\RequestInterface');
+        $this->createRequest('POST', '/', [], $resource, '1.1')->shouldHaveType('Psr\Http\Message\RequestInterface');
     }
 
     function it_creates_a_response()
