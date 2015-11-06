@@ -41,11 +41,11 @@ class HttpClientDiscovery extends ClassDiscovery
     ];
 
     /**
-     * Finds an HTTP Adapter
+     * Finds an HTTP Client
      *
      * @return HttpClient
      *
-     * @throws NotFoundException
+     * @throws NotFoundException If no suitable client is available
      */
     public static function find()
     {

@@ -1,8 +1,8 @@
 {
     "name": "php-http/discovery",
-    "description": "Finds installed adapters and message factories",
+    "description": "Finds installed clients and message factories",
     "license": "MIT",
-    "keywords": ["http", "discovery", "adapter", "message", "factory"],
+    "keywords": ["http", "discovery", "client", "adapter", "message", "factory"],
     "homepage": "http://php-http.org",
     "authors": [
         {
