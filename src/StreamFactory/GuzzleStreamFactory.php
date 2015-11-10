@@ -15,8 +15,6 @@ use Http\Message\StreamFactory;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Guzzle Stream Factory
- *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
 class GuzzleStreamFactory implements StreamFactory

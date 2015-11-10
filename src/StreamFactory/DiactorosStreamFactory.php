@@ -18,8 +18,6 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\Stream;
 
 /**
- * Zend Diactoros StreamFactory
- *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
 class DiactorosStreamFactory implements StreamFactory
