@@ -9,7 +9,7 @@ use Http\Client\HttpAsyncClient;
  *
  * @author Joel Wurtz <joel.wurtz@gmail.com>
  */
-class HttpAsyncClientDiscovery extends ClassDiscovery
+final class HttpAsyncClientDiscovery extends ClassDiscovery
 {
     /**
      * @var HttpAsyncClient

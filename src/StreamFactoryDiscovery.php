@@ -18,7 +18,7 @@ use Http\Message\StreamFactory;
  *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
-class StreamFactoryDiscovery extends ClassDiscovery
+final class StreamFactoryDiscovery extends ClassDiscovery
 {
     /**
      * @var StreamFactory

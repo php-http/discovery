@@ -18,7 +18,7 @@ use Http\Message\UriFactory;
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-class UriFactoryDiscovery extends ClassDiscovery
+final class UriFactoryDiscovery extends ClassDiscovery
 {
     /**
      * @var UriFactory

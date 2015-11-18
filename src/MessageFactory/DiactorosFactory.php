@@ -20,7 +20,7 @@ use Zend\Diactoros\Response;
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class DiactorosFactory implements MessageFactory
+final class DiactorosFactory implements MessageFactory
 {
     /**
      * @var DiactorosStreamFactory

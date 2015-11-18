@@ -20,7 +20,7 @@ use Zend\Diactoros\Uri;
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-class DiactorosFactory implements UriFactory
+final class DiactorosFactory implements UriFactory
 {
     /**
      * {@inheritdoc}
