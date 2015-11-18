@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Http Discovery package.
- *
- * (c) PHP HTTP Team <team@php-http.org>
- *
- * For the full copyright and license information, please read the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Http\Discovery\StreamFactory;
 
 use Http\Message\StreamFactory;
@@ -18,19 +9,14 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\Stream;
 
 /**
+ * Creates Diactoros streams.
+ *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
 final class DiactorosStreamFactory implements StreamFactory
 {
     /**
-     * Creates a stream
-     *
-     * @param string|resource|StreamInterface|null $body
-     *
-     * @return StreamInterface
-     *
-     * @throws \InvalidArgumentException If the stream body is invalid
-     * @throws \RuntimeException If cannot write into stream
+     * {@inheritdoc}
      */
     public function createStream($body = null)
     {

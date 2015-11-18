@@ -5,7 +5,7 @@ namespace Http\Discovery;
 use Http\Client\HttpAsyncClient;
 
 /**
- * Finds an HTTP Asynchronous Client
+ * Finds an HTTP Asynchronous Client.
  *
  * @author Joel Wurtz <joel.wurtz@gmail.com>
  */
@@ -27,7 +27,7 @@ final class HttpAsyncClientDiscovery extends ClassDiscovery
     ];
 
     /**
-     * Finds an HTTP Async Client
+     * Finds an HTTP Async Client.
      *
      * @return HttpAsyncClient
      *

@@ -1,20 +1,11 @@
 <?php
 
-/*
- * This file is part of the Http Discovery package.
- *
- * (c) PHP HTTP Team <team@php-http.org>
- *
- * For the full copyright and license information, please read the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Http\Discovery;
 
 use Http\Message\StreamFactory;
 
 /**
- * Finds a Stream Factory
+ * Finds a Stream Factory.
  *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
@@ -40,7 +31,7 @@ final class StreamFactoryDiscovery extends ClassDiscovery
     ];
 
     /**
-     * Finds a Stream Factory
+     * Finds a Stream Factory.
      *
      * @return StreamFactory
      *

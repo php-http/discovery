@@ -1,20 +1,11 @@
 <?php
 
-/*
- * This file is part of the Http Discovery package.
- *
- * (c) PHP HTTP Team <team@php-http.org>
- *
- * For the full copyright and license information, please read the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Http\Discovery;
 
 use Http\Client\HttpClient;
 
 /**
- * Finds an HTTP Client
+ * Finds an HTTP Client.
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
@@ -40,11 +31,11 @@ final class HttpClientDiscovery extends ClassDiscovery
     ];
 
     /**
-     * Finds an HTTP Client
+     * Finds an HTTP Client.
      *
      * @return HttpClient
      *
-     * @throws NotFoundException If no suitable client is available
+     * @throws NotFoundException
      */
     public static function find()
     {
