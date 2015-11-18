@@ -6,7 +6,7 @@ use Psr\Http\Message\UriInterface;
 use PhpSpec\Exception\Example\SkippingException;
 use PhpSpec\ObjectBehavior;
 
-class DiactorosFactorySpec extends ObjectBehavior
+class DiactorosUriFactorySpec extends ObjectBehavior
 {
     function let()
     {
@@ -17,7 +17,7 @@ class DiactorosFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Discovery\UriFactory\DiactorosFactory');
+        $this->shouldHaveType('Http\Discovery\UriFactory\DiactorosUriFactory');
     }
 
     function it_is_a_uri_factory()

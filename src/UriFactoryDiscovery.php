@@ -21,11 +21,11 @@ final class UriFactoryDiscovery extends ClassDiscovery
      */
     protected static $classes = [
         'guzzle' => [
-            'class'     => 'Http\Discovery\UriFactory\GuzzleFactory',
+            'class'     => 'Http\Discovery\UriFactory\GuzzleUriFactory',
             'condition' => 'GuzzleHttp\Psr7\Uri',
         ],
         'diactoros' => [
-            'class'     => 'Http\Discovery\UriFactory\DiactorosFactory',
+            'class'     => 'Http\Discovery\UriFactory\DiactorosUriFactory',
             'condition' => 'Zend\Diactoros\Uri',
         ],
     ];
