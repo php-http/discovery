@@ -5,7 +5,7 @@ namespace Http\Discovery;
 use Http\Message\UriFactory;
 
 /**
- * Finds a URI Factory
+ * Finds a URI Factory.
  *
  * @author David de Boer <david@ddeboer.nl>
  */
@@ -31,7 +31,7 @@ class UriFactoryDiscovery extends ClassDiscovery
     ];
 
     /**
-     * Finds a URI Factory
+     * Finds a URI Factory.
      *
      * @return UriFactory
      */

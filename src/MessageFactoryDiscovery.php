@@ -5,7 +5,7 @@ namespace Http\Discovery;
 use Http\Message\MessageFactory;
 
 /**
- * Finds a Message Factory
+ * Finds a Message Factory.
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
@@ -31,7 +31,7 @@ class MessageFactoryDiscovery extends ClassDiscovery
     ];
 
     /**
-     * Finds a Message Factory
+     * Finds a Message Factory.
      *
      * @return MessageFactory
      *

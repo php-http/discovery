@@ -9,19 +9,14 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\Stream;
 
 /**
+ * Creates Diactoros streams.
+ *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
 class DiactorosStreamFactory implements StreamFactory
 {
     /**
-     * Creates a stream
-     *
-     * @param string|resource|StreamInterface|null $body
-     *
-     * @return StreamInterface
-     *
-     * @throws \InvalidArgumentException If the stream body is invalid
-     * @throws \RuntimeException If cannot write into stream
+     * {@inheritdoc}
      */
     public function createStream($body = null)
     {

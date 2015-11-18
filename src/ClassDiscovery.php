@@ -3,14 +3,14 @@
 namespace Http\Discovery;
 
 /**
- * Registry that based find results on class existence
+ * Registry that based find results on class existence.
  *
  * @author David de Boer <david@ddeboer.nl>
  */
 abstract class ClassDiscovery
 {
     /**
-     * Add a class (and condition) to the discovery registry
+     * Add a class (and condition) to the discovery registry.
      *
      * @param string $class     Class that will be instantiated if found
      * @param string $condition Optional other class to check for existence
@@ -28,7 +28,7 @@ abstract class ClassDiscovery
     }
 
     /**
-     * Finds a Class
+     * Finds a Class.
      *
      * @return object
      *
@@ -53,7 +53,7 @@ abstract class ClassDiscovery
     }
 
     /**
-     * Evaulates conditions to boolean
+     * Evaulates conditions to boolean.
      *
      * @param mixed $condition
      *

@@ -9,6 +9,8 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\Stream;
 
 /**
+ * Creates Diactoros messages.
+ *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class DiactorosFactory implements MessageFactory

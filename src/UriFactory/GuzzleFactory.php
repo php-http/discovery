@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7;
 use Http\Message\UriFactory;
 
 /**
- * Creates a guzzlehttp/psr7 URI object
+ * Creates Guzzle URI.
  *
  * @author David de Boer <david@ddeboer.nl>
  */

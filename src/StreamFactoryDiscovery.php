@@ -5,7 +5,7 @@ namespace Http\Discovery;
 use Http\Message\StreamFactory;
 
 /**
- * Finds a Stream Factory
+ * Finds a Stream Factory.
  *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
@@ -31,7 +31,7 @@ class StreamFactoryDiscovery extends ClassDiscovery
     ];
 
     /**
-     * Finds a Stream Factory
+     * Finds a Stream Factory.
      *
      * @return StreamFactory
      *

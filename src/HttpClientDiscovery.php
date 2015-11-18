@@ -5,7 +5,7 @@ namespace Http\Discovery;
 use Http\Client\HttpClient;
 
 /**
- * Finds an HTTP Client
+ * Finds an HTTP Client.
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
@@ -31,11 +31,11 @@ class HttpClientDiscovery extends ClassDiscovery
     ];
 
     /**
-     * Finds an HTTP Client
+     * Finds an HTTP Client.
      *
      * @return HttpClient
      *
-     * @throws NotFoundException If no suitable client is available
+     * @throws NotFoundException
      */
     public static function find()
     {

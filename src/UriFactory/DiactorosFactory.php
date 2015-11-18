@@ -7,7 +7,7 @@ use Psr\Http\Message\UriInterface;
 use Zend\Diactoros\Uri;
 
 /**
- * Creates a zend/diactoros URI object
+ * Creates Diactoros URI.
  *
  * @author David de Boer <david@ddeboer.nl>
  */

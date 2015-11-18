@@ -6,18 +6,14 @@ use Http\Message\StreamFactory;
 use Psr\Http\Message\StreamInterface;
 
 /**
+ * Creates Guzzle streams.
+ *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
 class GuzzleStreamFactory implements StreamFactory
 {
     /**
-     * Creates a stream
-     *
-     * @param string|resource|StreamInterface|null $body
-     *
-     * @return StreamInterface
-     *
-     * @throws \InvalidArgumentException if the $body arg is not valid.
+     * {@inheritdoc}
      */
     public function createStream($body = null)
     {

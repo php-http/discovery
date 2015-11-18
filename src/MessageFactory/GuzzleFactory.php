@@ -7,6 +7,8 @@ use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory;
 
 /**
+ * Creates Guzzle messages.
+ *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
 class GuzzleFactory implements MessageFactory
