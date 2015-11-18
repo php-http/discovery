@@ -6,7 +6,7 @@ use Psr\Http\Message\StreamInterface;
 use PhpSpec\Exception\Example\SkippingException;
 use PhpSpec\ObjectBehavior;
 
-class DiactorosFactorySpec extends ObjectBehavior
+class DiactorosMessageFactorySpec extends ObjectBehavior
 {
     function let()
     {
@@ -17,7 +17,7 @@ class DiactorosFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Discovery\MessageFactory\DiactorosFactory');
+        $this->shouldHaveType('Http\Discovery\MessageFactory\DiactorosMessageFactory');
     }
 
     function it_is_a_message_factory()

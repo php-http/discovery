@@ -5,11 +5,11 @@ namespace spec\Http\Discovery\UriFactory;
 use Psr\Http\Message\UriInterface;
 use PhpSpec\ObjectBehavior;
 
-class GuzzleFactorySpec extends ObjectBehavior
+class GuzzleUriFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Discovery\UriFactory\GuzzleFactory');
+        $this->shouldHaveType('Http\Discovery\UriFactory\GuzzleUriFactory');
     }
 
     function it_is_a_uri_factory()

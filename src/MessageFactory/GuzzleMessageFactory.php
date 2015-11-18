@@ -11,7 +11,7 @@ use Http\Message\MessageFactory;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-final class GuzzleFactory implements MessageFactory
+final class GuzzleMessageFactory implements MessageFactory
 {
     /**
      * {@inheritdoc}

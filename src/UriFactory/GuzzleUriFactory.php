@@ -10,7 +10,7 @@ use Http\Message\UriFactory;
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-final class GuzzleFactory implements UriFactory
+final class GuzzleUriFactory implements UriFactory
 {
     /**
      * {@inheritdoc}

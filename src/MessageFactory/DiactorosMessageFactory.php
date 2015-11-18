@@ -13,7 +13,7 @@ use Zend\Diactoros\Response;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-final class DiactorosFactory implements MessageFactory
+final class DiactorosMessageFactory implements MessageFactory
 {
     /**
      * @var DiactorosStreamFactory
