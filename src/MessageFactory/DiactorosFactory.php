@@ -11,17 +11,27 @@
 
 namespace Http\Discovery\MessageFactory;
 
+use Http\Discovery\StreamFactory\DiactorosStreamFactory;
 use Http\Message\MessageFactory;
 use Psr\Http\Message\StreamInterface;
 use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
-use Zend\Diactoros\Stream;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
 class DiactorosFactory implements MessageFactory
 {
+    /**
+     * @var DiactorosStreamFactory
+     */
+    private $streamFactory;
+
+    public function __construct()
+    {
+        $this->streamFactory = new DiactorosStreamFactory();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,7 +45,7 @@ class DiactorosFactory implements MessageFactory
         return (new Request(
             $uri,
             $method,
-            $this->createStream($body),
+            $this->streamFactory->createStream($body),
             $headers
         ))->withProtocolVersion($protocolVersion);
     }
@@ -51,39 +61,9 @@ class DiactorosFactory implements MessageFactory
         $protocolVersion = '1.1'
     ) {
         return (new Response(
-            $this->createStream($body),
+            $this->streamFactory->createStream($body),
             $statusCode,
             $headers
         ))->withProtocolVersion($protocolVersion);
-    }
-
-    /**
-     * Creates a stream
-     *
-     * @param string|resource|StreamInterface|null $body
-     *
-     * @return StreamInterface
-     *
-     * @throws \InvalidArgumentException If the stream body is invalid
-     */
-    protected function createStream($body = null)
-    {
-        if (!$body instanceof StreamInterface) {
-            if (is_resource($body)) {
-                $body = new Stream($body);
-            } else {
-                $stream = new Stream('php://memory', 'rw');
-
-                if (isset($body)) {
-                    $stream->write((string) $body);
-                }
-
-                $body = $stream;
-            }
-        }
-
-        $body->rewind();
-
-        return $body;
     }
 }
