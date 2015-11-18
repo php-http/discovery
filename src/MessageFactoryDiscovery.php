@@ -18,7 +18,7 @@ use Http\Message\MessageFactory;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class MessageFactoryDiscovery extends ClassDiscovery
+final class MessageFactoryDiscovery extends ClassDiscovery
 {
     /**
      * @var MessageFactory

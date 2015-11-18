@@ -16,7 +16,6 @@ namespace Http\Discovery;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class NotFoundException extends \RuntimeException
+final class NotFoundException extends \RuntimeException
 {
-
 }

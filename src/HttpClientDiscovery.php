@@ -18,7 +18,7 @@ use Http\Client\HttpClient;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-class HttpClientDiscovery extends ClassDiscovery
+final class HttpClientDiscovery extends ClassDiscovery
 {
     /**
      * @var HttpClient

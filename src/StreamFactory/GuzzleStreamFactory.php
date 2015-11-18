@@ -17,7 +17,7 @@ use Psr\Http\Message\StreamInterface;
 /**
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
-class GuzzleStreamFactory implements StreamFactory
+final class GuzzleStreamFactory implements StreamFactory
 {
     /**
      * Creates a stream

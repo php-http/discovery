@@ -20,7 +20,7 @@ use Zend\Diactoros\Stream;
 /**
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
-class DiactorosStreamFactory implements StreamFactory
+final class DiactorosStreamFactory implements StreamFactory
 {
     /**
      * Creates a stream
