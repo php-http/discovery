@@ -16,17 +16,17 @@
     ],
     "require": {
         "php": ">=5.4",
-        "php-http/message-factory": "~0.2@dev"
+        "php-http/message-factory": "^0.4"
     },
     "require-dev": {
         "zendframework/zend-diactoros": "^1.0",
         "guzzlehttp/psr7": "^1.0",
-        "phpspec/phpspec": "^2.2",
+        "phpspec/phpspec": "^2.4@dev",
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
     },
     "suggest": {
-        "zendframework/zend-diactoros": "Used with Diactoros MessageFactory",
-        "guzzlehttp/psr7": "Used with Guzzle PSR-7 MessageFactory"
+        "zendframework/zend-diactoros": "Used with Diactoros Factories",
+        "guzzlehttp/psr7": "Used with Guzzle PSR-7 Factories"
     },
     "autoload": {
         "psr-4": {
