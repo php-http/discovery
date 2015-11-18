@@ -5,11 +5,11 @@ namespace spec\Http\Discovery\MessageFactory;
 use Psr\Http\Message\StreamInterface;
 use PhpSpec\ObjectBehavior;
 
-class GuzzleFactorySpec extends ObjectBehavior
+class GuzzleMessageFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Discovery\MessageFactory\GuzzleFactory');
+        $this->shouldHaveType('Http\Discovery\MessageFactory\GuzzleMessageFactory');
     }
 
     function it_is_a_message_factory()
