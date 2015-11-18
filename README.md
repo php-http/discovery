@@ -1,4 +1,4 @@
-# HTTP Discovery
+# HTTPlug Discovery
 
 [![Latest Version](https://img.shields.io/github/release/php-http/discovery.svg?style=flat-square)](https://github.com/php-http/discovery/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
@@ -27,18 +27,19 @@ Please see the [official documentation](http://php-http.readthedocs.org/en/lates
 ## Testing
 
 ``` bash
-$ phpspec run
+$ composer test
 ```
 
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
 
 
 ## Security
 
-If you discover any security related issues, please contact us at [security@php-http.org](mailto:security@php-http.org).
+If you discover any security related issues, please contact us at [security@httplug.io](mailto:security@httplug.io)
+or [security@php-http.org](mailto:security@php-http.org).
 
 
 ## License

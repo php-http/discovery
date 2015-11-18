@@ -1,5 +1,11 @@
 language: php
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 php:
   - 5.4
   - 5.5
@@ -7,24 +13,27 @@ php:
   - 7.0
   - hhvm
 
+env:
+  global:
+    - TEST_COMMAND="composer test"
+
 matrix:
   allow_failures:
     - php: 7.0
-    - php: hhvm
+  fast_finish: true
   include:
     - php: 5.5
-      env:
-        - COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
-        - COVERAGE=true
-        - PHPSPEC_FLAGS="-c phpspec.yml.ci"
+      env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci"
+
+before_install:
+  - travis_retry composer self-update
 
 install:
-  - travis_retry composer self-update
-  - if [[ "$TRAVIS_PHP_VERSION" == "5.4" ]]; then composer remove "zendframework/zend-diactoros" --dev --no-update; fi
   - travis_retry composer update ${COMPOSER_FLAGS} --prefer-source --no-interaction
 
-script: vendor/bin/phpspec run ${PHPSPEC_FLAGS}
+script:
+  - $TEST_COMMAND
 
-after_script:
+after_success:
   - if [[ "$COVERAGE" = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
   - if [[ "$COVERAGE" = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi
