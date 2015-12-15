@@ -1,9 +1,9 @@
 {
     "name": "php-http/discovery",
-    "description": "Finds installed clients and message factories",
+    "description": "Finds installed HTTPlug implementations and PSR-7 message factories",
     "license": "MIT",
     "keywords": ["http", "discovery", "client", "adapter", "message", "factory"],
-    "homepage": "http://php-http.org",
+    "homepage": "http://httplug.io",
     "authors": [
         {
             "name": "Eric GELOEN",

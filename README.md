@@ -7,7 +7,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-http/discovery.svg?style=flat-square)](https://packagist.org/packages/php-http/discovery)
 
-**Finds installed Httplug implementations and message factories.**
+**Finds installed HTTPlug implementations and PSR-7 message factories.**
 
 
 ## Install
