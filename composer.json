@@ -22,7 +22,7 @@
         "zendframework/zend-diactoros": "^1.0",
         "guzzlehttp/psr7": "^1.0",
         "php-http/guzzle6-adapter": "^0.2",
-        "phpspec/phpspec": "^2.4@dev",
+        "phpspec/phpspec": "^2.4",
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
     },
     "suggest": {
