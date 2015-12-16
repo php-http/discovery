@@ -9,7 +9,7 @@ use Http\Message\UriFactory;
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-final class UriFactoryDiscovery extends ClassDiscovery
+final class UriFactoryDiscovery extends FactoryDiscovery
 {
     /**
      * @var UriFactory

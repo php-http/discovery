@@ -9,7 +9,7 @@ use Http\Message\StreamFactory;
  *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
-final class StreamFactoryDiscovery extends ClassDiscovery
+final class StreamFactoryDiscovery extends FactoryDiscovery
 {
     /**
      * @var StreamFactory

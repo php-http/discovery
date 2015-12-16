@@ -9,7 +9,7 @@ use Http\Message\MessageFactory;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-final class MessageFactoryDiscovery extends ClassDiscovery
+final class MessageFactoryDiscovery extends FactoryDiscovery
 {
     /**
      * @var MessageFactory
