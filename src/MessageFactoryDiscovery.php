@@ -9,7 +9,7 @@ use Http\Message\MessageFactory;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-final class MessageFactoryDiscovery extends ClassDiscovery
+final class MessageFactoryDiscovery extends FactoryDiscovery
 {
     /**
      * @var MessageFactory
@@ -21,12 +21,18 @@ final class MessageFactoryDiscovery extends ClassDiscovery
      */
     protected static $classes = [
         'guzzle' => [
-            'class'     => 'Http\Discovery\MessageFactory\GuzzleMessageFactory',
-            'condition' => 'GuzzleHttp\Psr7\Request',
+            'class' => 'Http\Client\Utils\MessageFactory\GuzzleMessageFactory',
+            'condition' => [
+                'Http\Client\Utils\MessageFactory\GuzzleMessageFactory',
+                'GuzzleHttp\Psr7\Request',
+            ],
         ],
         'diactoros' => [
-            'class'     => 'Http\Discovery\MessageFactory\DiactorosMessageFactory',
-            'condition' => 'Zend\Diactoros\Request',
+            'class' => 'Http\Client\Utils\MessageFactory\DiactorosMessageFactory',
+            'condition' => [
+                'Http\Client\Utils\MessageFactory\DiactorosMessageFactory',
+                'Zend\Diactoros\Request',
+            ],
         ],
     ];
 

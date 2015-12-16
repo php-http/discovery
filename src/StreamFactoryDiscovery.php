@@ -9,7 +9,7 @@ use Http\Message\StreamFactory;
  *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
-final class StreamFactoryDiscovery extends ClassDiscovery
+final class StreamFactoryDiscovery extends FactoryDiscovery
 {
     /**
      * @var StreamFactory
@@ -21,12 +21,18 @@ final class StreamFactoryDiscovery extends ClassDiscovery
      */
     protected static $classes = [
         'guzzle' => [
-            'class'     => 'Http\Discovery\StreamFactory\GuzzleStreamFactory',
-            'condition' => 'GuzzleHttp\Psr7\Stream',
+            'class' => 'Http\Client\Utils\StreamFactory\GuzzleStreamFactory',
+            'condition' => [
+                'Http\Client\Utils\StreamFactory\GuzzleStreamFactory',
+                'GuzzleHttp\Psr7\Stream',
+            ],
         ],
         'diactoros' => [
-            'class'     => 'Http\Discovery\StreamFactory\DiactorosStreamFactory',
-            'condition' => 'Zend\Diactoros\Stream',
+            'class' => 'Http\Client\Utils\StreamFactory\DiactorosStreamFactory',
+            'condition' => [
+                'Http\Client\Utils\StreamFactory\DiactorosStreamFactory',
+                'Zend\Diactoros\Stream',
+            ],
         ],
     ];
 
