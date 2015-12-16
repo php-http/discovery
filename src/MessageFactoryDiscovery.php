@@ -22,11 +22,17 @@ final class MessageFactoryDiscovery extends ClassDiscovery
     protected static $classes = [
         'guzzle' => [
             'class'     => 'Http\Discovery\MessageFactory\GuzzleMessageFactory',
-            'condition' => 'GuzzleHttp\Psr7\Request',
+            'condition' => [
+                'Http\Discovery\MessageFactory\GuzzleMessageFactory',
+                'GuzzleHttp\Psr7\Request',
+            ],
         ],
         'diactoros' => [
             'class'     => 'Http\Discovery\MessageFactory\DiactorosMessageFactory',
-            'condition' => 'Zend\Diactoros\Request',
+            'condition' => [
+                'Http\Discovery\MessageFactory\DiactorosMessageFactory',
+                'Zend\Diactoros\Request',
+            ],
         ],
     ];
 
