@@ -56,6 +56,28 @@ class ClassDiscoverySpec extends ObjectBehavior
         $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
     }
 
+    function it_registers_a_class_with_an_array_condition()
+    {
+        $this->reset();
+
+        $this->register(
+            'spec\Http\Discovery\AnotherClassToFind',
+            [
+                true,
+                'spec\Http\Discovery\AnotherClassToFind',
+            ]
+        );
+        $this->register(
+            'spec\Http\Discovery\ClassToFind',
+            [
+                false,
+                'spec\Http\Discovery\ClassToFind',
+            ]
+        );
+
+        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
+    }
+
     function it_registers_a_class_with_an_invalid_condition()
     {
         $this->reset();

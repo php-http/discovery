@@ -68,6 +68,15 @@ abstract class ClassDiscovery
             return $condition();
         } elseif (is_bool($condition)) {
             return $condition;
+        } elseif (is_array($condition)) {
+            $evaluatedCondition = true;
+
+            // Immediately stop execution if the condition is false
+            for ($i = 0; $i < count($condition) && false !== $evaluatedCondition; $i++) {
+                $evaluatedCondition &= static::evaluateCondition($condition[$i]);
+            }
+
+            return $evaluatedCondition;
         }
 
         return false;
