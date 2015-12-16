@@ -9,7 +9,7 @@ use Http\Message\UriFactory;
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-final class UriFactoryDiscovery extends ClassDiscovery
+final class UriFactoryDiscovery extends FactoryDiscovery
 {
     /**
      * @var UriFactory
@@ -21,12 +21,18 @@ final class UriFactoryDiscovery extends ClassDiscovery
      */
     protected static $classes = [
         'guzzle' => [
-            'class'     => 'Http\Discovery\UriFactory\GuzzleUriFactory',
-            'condition' => 'GuzzleHttp\Psr7\Uri',
+            'class'     => 'Http\Client\Utils\UriFactory\GuzzleUriFactory',
+            'condition' => [
+                'Http\Client\Utils\UriFactory\GuzzleUriFactory',
+                'GuzzleHttp\Psr7\Uri',
+            ],
         ],
         'diactoros' => [
-            'class'     => 'Http\Discovery\UriFactory\DiactorosUriFactory',
-            'condition' => 'Zend\Diactoros\Uri',
+            'class'     => 'Http\Client\Utils\UriFactory\DiactorosUriFactory',
+            'condition' => [
+                'Http\Client\Utils\UriFactory\DiactorosUriFactory',
+                'Zend\Diactoros\Uri',
+            ],
         ],
     ];
 
