@@ -20,7 +20,7 @@ abstract class ClassDiscovery
         static::$cache = null;
 
         $definition = [
-            'class'     => $class,
+            'class' => $class,
             'condition' => isset($condition) ? $condition : $class,
         ];
 
@@ -38,14 +38,14 @@ abstract class ClassDiscovery
     {
         // We have a cache
         if (isset(static::$cache)) {
-            return new static::$cache;
+            return new static::$cache();
         }
 
         foreach (static::$classes as $name => $definition) {
             if (static::evaluateCondition($definition['condition'])) {
                 static::$cache = $definition['class'];
 
-                return new $definition['class'];
+                return new $definition['class']();
             }
         }
 
@@ -57,7 +57,7 @@ abstract class ClassDiscovery
      *
      * @param mixed $condition
      *
-     * @return boolean
+     * @return bool
      */
     protected static function evaluateCondition($condition)
     {
@@ -68,6 +68,15 @@ abstract class ClassDiscovery
             return $condition();
         } elseif (is_bool($condition)) {
             return $condition;
+        } elseif (is_array($condition)) {
+            $evaluatedCondition = true;
+
+            // Immediately stop execution if the condition is false
+            for ($i = 0; $i < count($condition) && false !== $evaluatedCondition; ++$i) {
+                $evaluatedCondition &= static::evaluateCondition($condition[$i]);
+            }
+
+            return $evaluatedCondition;
         }
 
         return false;
