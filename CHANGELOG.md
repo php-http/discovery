@@ -1,11 +1,22 @@
 # Change Log
 
 
+## 0.4.0 - 2015-12-17
+
+### Added
+
+- Array condition evaluation in the Class Discovery
+
+### Removed
+
+- Message factories (moved to php-http/utils)
+
+
 ## 0.3.0 - 2015-11-18
 
 ### Added
 
-- HTTP Asyn Client Discovery
+- HTTP Async Client Discovery
 - Stream factories
 
 ### Changed
