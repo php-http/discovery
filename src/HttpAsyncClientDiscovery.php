@@ -21,7 +21,7 @@ final class HttpAsyncClientDiscovery extends ClassDiscovery
      */
     protected static $classes = [
         'guzzle6' => [
-            'class'     => 'Http\Adapter\Guzzle6HttpAdapter',
+            'class' => 'Http\Adapter\Guzzle6HttpAdapter',
             'condition' => 'Http\Adapter\Guzzle6HttpAdapter',
         ],
     ];
