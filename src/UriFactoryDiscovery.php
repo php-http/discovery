@@ -9,33 +9,8 @@ use Http\Message\UriFactory;
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-final class UriFactoryDiscovery extends FactoryDiscovery
+final class UriFactoryDiscovery extends ClassDiscovery
 {
-    /**
-     * @var UriFactory
-     */
-    protected static $cache;
-
-    /**
-     * @var array
-     */
-    protected static $classes = [
-        'guzzle' => [
-            'class' => 'Http\Message\UriFactory\GuzzleUriFactory',
-            'condition' => [
-                'Http\Message\UriFactory\GuzzleUriFactory',
-                'GuzzleHttp\Psr7\Uri',
-            ],
-        ],
-        'diactoros' => [
-            'class' => 'Http\Message\UriFactory\DiactorosUriFactory',
-            'condition' => [
-                'Http\Message\UriFactory\DiactorosUriFactory',
-                'Zend\Diactoros\Uri',
-            ],
-        ],
-    ];
-
     /**
      * Finds a URI Factory.
      *
@@ -43,7 +18,16 @@ final class UriFactoryDiscovery extends FactoryDiscovery
      */
     public static function find()
     {
-        // Override only used for return type declaration
-        return parent::find();
+        try {
+            $uriFactory = static::findOneByType('Http\Message\UriFactory');
+
+            return new $uriFactory();
+        } catch (NotFoundException $e) {
+            throw new NotFoundException(
+                'No factories found. Install php-http/message to use Guzzle or Diactoros factories.',
+                0,
+                $e
+            );
+        }
     }
 }

@@ -3,13 +3,29 @@
 namespace spec\Http\Discovery;
 
 use Http\Discovery\ClassDiscovery;
+use Puli\Discovery\Binding\ClassBinding;
+use Puli\GeneratedPuliFactory;
+use Puli\Discovery\Api\Discovery;
+use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
 
 class ClassDiscoverySpec extends ObjectBehavior
 {
-    function let()
+    function let(
+        GeneratedPuliFactory $puliFactory,
+        ResourceRepository $repository,
+        Discovery $discovery
+    ) {
+        $puliFactory->createRepository()->willReturn($repository);
+        $puliFactory->createDiscovery($repository)->willReturn($discovery);
+
+        $this->beAnInstanceOf('spec\Http\Discovery\ClassDiscoveryStub');
+        $this->setPuliFactory($puliFactory);
+    }
+
+    function letgo()
     {
-        $this->beAnInstanceOf('spec\Http\Discovery\DiscoveryStub');
+        $this->resetPuliFactory();
     }
 
     function it_is_initializable()
@@ -17,149 +33,53 @@ class ClassDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\ClassDiscovery');
     }
 
-    function it_registers_a_class()
+    function it_has_a_puli_factory(GeneratedPuliFactory $puliFactory)
     {
-        $this->reset();
-
-        $this->register('spec\Http\Discovery\AnotherClassToFind');
-
-        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
+        $this->getPuliFactory()->shouldReturn($puliFactory);
     }
 
-    function it_registers_a_class_with_a_condition()
+    function it_has_a_puli_discovery(Discovery $discovery)
     {
-        $this->reset();
-
-        $this->register('spec\Http\Discovery\AnotherClassToFind', 'spec\Http\Discovery\TestClass');
-        $this->register('spec\Http\Discovery\ClassToFind', false);
-
-        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
+        $this->getPuliDiscovery()->shouldReturn($discovery);
     }
 
-    function it_registers_a_class_with_a_callable_condition()
+    function it_throws_an_exception_when_binding_not_found(Discovery $discovery)
     {
-        $this->reset();
+        $discovery->findBindings('InvalidBinding')->willReturn([]);
 
-        $this->register('spec\Http\Discovery\AnotherClassToFind', function() { return true; });
-        $this->register('spec\Http\Discovery\ClassToFind', false);
-
-        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
+        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFindOneByType('InvalidBinding');
     }
 
-    function it_registers_a_class_with_a_boolean_condition()
+    function it_returns_a_class_binding(Discovery $discovery, ClassBinding $binding)
     {
-        $this->reset();
+        $binding->hasParameterValue('depends')->willReturn(false);
+        $binding->getClassName()->willReturn('ClassName');
 
-        $this->register('spec\Http\Discovery\AnotherClassToFind', true);
-        $this->register('spec\Http\Discovery\ClassToFind', false);
+        $discovery->findBindings('Binding')->willReturn([$binding]);
 
-        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
+        $this->findOneByType('Binding')->shouldReturn('ClassName');
     }
 
-    function it_registers_a_class_with_an_array_condition()
-    {
-        $this->reset();
+    function it_returns_a_class_binding_with_dependency(
+        Discovery $discovery,
+        ClassBinding $binding1,
+        ClassBinding $binding2
+    ) {
+        $binding1->hasParameterValue('depends')->willReturn(true);
+        $binding1->getParameterValue('depends')->willReturn(false);
 
-        $this->register(
-            'spec\Http\Discovery\AnotherClassToFind',
-            [
-                true,
-                'spec\Http\Discovery\AnotherClassToFind',
-            ]
-        );
-        $this->register(
-            'spec\Http\Discovery\ClassToFind',
-            [
-                false,
-                'spec\Http\Discovery\ClassToFind',
-            ]
-        );
+        $binding2->hasParameterValue('depends')->willReturn(false);
+        $binding2->getClassName()->willReturn('ClassName');
 
-        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
-    }
+        $discovery->findBindings('Binding')->willReturn([
+            $binding1,
+            $binding2,
+        ]);
 
-    function it_registers_a_class_with_an_invalid_condition()
-    {
-        $this->reset();
-
-        $this->register('spec\Http\Discovery\AnotherClassToFind', true);
-        $this->register('spec\Http\Discovery\ClassToFind', new \stdClass);
-
-        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
-    }
-
-    function it_resets_cache_when_a_class_is_registered()
-    {
-        $this->reset();
-
-        $this->find()->shouldHaveType('spec\Http\Discovery\ClassToFind');
-
-        $this->register('spec\Http\Discovery\AnotherClassToFind');
-
-        $this->find()->shouldHaveType('spec\Http\Discovery\AnotherClassToFind');
-    }
-
-    function it_caches_a_found_class()
-    {
-        $this->reset();
-
-        $this->find()->shouldHaveType('spec\Http\Discovery\ClassToFind');
-
-        $this->registerWithoutCacheReset('spec\Http\Discovery\AnotherClassToFind');
-
-        $this->find()->shouldhaveType('spec\Http\Discovery\ClassToFind');
-    }
-
-    function it_throws_an_exception_when_no_class_is_found()
-    {
-        $this->resetEmpty();
-
-        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFind();
+        $this->findOneByType('Binding')->shouldReturn('ClassName');
     }
 }
 
-class DiscoveryStub extends ClassDiscovery
+class ClassDiscoveryStub extends ClassDiscovery
 {
-    protected static $cache;
-
-    /**
-     * @var array
-     */
-    protected static $classes;
-
-    /**
-     * Reset classes
-     */
-    public function reset()
-    {
-        static::$cache = null;
-
-        static::$classes = [
-            [
-                'class'     => 'spec\Http\Discovery\ClassToFind',
-                'condition' => 'spec\Http\Discovery\ClassToFind'
-            ],
-        ];
-    }
-
-    public function registerWithoutCacheReset($class, $condition = null)
-    {
-        $definition = [
-            'class'     => $class,
-            'condition' => isset($condition) ? $condition : $class,
-        ];
-
-        array_unshift(static::$classes, $definition);
-    }
-
-    public function resetEmpty()
-    {
-        static::$cache = null;
-
-        static::$classes = [];
-    }
 }
-
-class ClassToFind {}
-class AnotherClassToFind {}
-class TestClass {}
