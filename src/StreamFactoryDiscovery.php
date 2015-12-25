@@ -21,16 +21,16 @@ final class StreamFactoryDiscovery extends FactoryDiscovery
      */
     protected static $classes = [
         'guzzle' => [
-            'class' => 'Http\Client\Utils\StreamFactory\GuzzleStreamFactory',
+            'class' => 'Http\Message\StreamFactory\GuzzleStreamFactory',
             'condition' => [
-                'Http\Client\Utils\StreamFactory\GuzzleStreamFactory',
+                'Http\Message\StreamFactory\GuzzleStreamFactory',
                 'GuzzleHttp\Psr7\Stream',
             ],
         ],
         'diactoros' => [
-            'class' => 'Http\Client\Utils\StreamFactory\DiactorosStreamFactory',
+            'class' => 'Http\Message\StreamFactory\DiactorosStreamFactory',
             'condition' => [
-                'Http\Client\Utils\StreamFactory\DiactorosStreamFactory',
+                'Http\Message\StreamFactory\DiactorosStreamFactory',
                 'Zend\Diactoros\Stream',
             ],
         ],

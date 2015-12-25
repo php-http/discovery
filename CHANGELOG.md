@@ -1,6 +1,13 @@
 # Change Log
 
 
+## 0.5.0 - 2015-12-25
+
+### Changed
+
+- Updated message factory dependency (php-http/message)
+
+
 ## 0.4.0 - 2015-12-17
 
 ### Added

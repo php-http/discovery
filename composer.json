@@ -19,7 +19,7 @@
         "php-http/message-factory": "^1.0"
     },
     "require-dev": {
-        "php-http/utils": "^0.2",
+        "php-http/message": "^0.1",
         "zendframework/zend-diactoros": "^1.0",
         "guzzlehttp/psr7": "^1.0",
         "php-http/guzzle6-adapter": "^0.2",

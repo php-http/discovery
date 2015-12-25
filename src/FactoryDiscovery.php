@@ -18,7 +18,7 @@ abstract class FactoryDiscovery extends ClassDiscovery
             return parent::find();
         } catch (NotFoundException $e) {
             throw new NotFoundException(
-                'No factories found. Install php-http/utils >= 0.2 to use Guzzle or Diactoros factories.',
+                'No factories found. Install php-http/message to use Guzzle or Diactoros factories.',
                 0,
                 $e
             );
