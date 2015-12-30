@@ -16,22 +16,24 @@
     ],
     "require": {
         "php": ">=5.4",
-        "php-http/message-factory": "^1.0"
+        "puli/composer-plugin": "1.0.0-beta8",
+        "puli/discovery": "1.0.0-beta8"
     },
     "require-dev": {
-        "php-http/message": "^0.1",
-        "zendframework/zend-diactoros": "^1.0",
-        "guzzlehttp/psr7": "^1.0",
-        "php-http/guzzle6-adapter": "^0.2",
+        "php-http/httplug": "1.0.0-beta",
+        "php-http/message-factory": "^1.0",
+        "puli/cli": "1.0.0-beta9",
         "phpspec/phpspec": "^2.4",
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
-    },
-    "suggest": {
-        "php-http/utils": "To use Guzzle or Diactoros factories"
     },
     "autoload": {
         "psr-4": {
             "Http\\Discovery\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Http\\Discovery\\": "spec/"
         }
     },
     "scripts": {
@@ -40,7 +42,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.5-dev"
+            "dev-master": "0.6-dev"
         }
     },
     "prefer-stable": true,

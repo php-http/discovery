@@ -9,43 +9,25 @@ use Http\Message\MessageFactory;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-final class MessageFactoryDiscovery extends FactoryDiscovery
+final class MessageFactoryDiscovery extends ClassDiscovery
 {
-    /**
-     * @var MessageFactory
-     */
-    protected static $cache;
-
-    /**
-     * @var array
-     */
-    protected static $classes = [
-        'guzzle' => [
-            'class' => 'Http\Message\MessageFactory\GuzzleMessageFactory',
-            'condition' => [
-                'Http\Message\MessageFactory\GuzzleMessageFactory',
-                'GuzzleHttp\Psr7\Request',
-            ],
-        ],
-        'diactoros' => [
-            'class' => 'Http\Message\MessageFactory\DiactorosMessageFactory',
-            'condition' => [
-                'Http\Message\MessageFactory\DiactorosMessageFactory',
-                'Zend\Diactoros\Request',
-            ],
-        ],
-    ];
-
     /**
      * Finds a Message Factory.
      *
      * @return MessageFactory
-     *
-     * @throws NotFoundException
      */
     public static function find()
     {
-        // Override only used for return type declaration
-        return parent::find();
+        try {
+            $messageFactory = static::findOneByType('Http\Message\MessageFactory');
+
+            return new $messageFactory();
+        } catch (NotFoundException $e) {
+            throw new NotFoundException(
+                'No factories found. Install php-http/message to use Guzzle or Diactoros factories.',
+                0,
+                $e
+            );
+        }
     }
 }

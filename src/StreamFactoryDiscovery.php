@@ -9,43 +9,25 @@ use Http\Message\StreamFactory;
  *
  * @author Михаил Красильников <m.krasilnikov@yandex.ru>
  */
-final class StreamFactoryDiscovery extends FactoryDiscovery
+final class StreamFactoryDiscovery extends ClassDiscovery
 {
-    /**
-     * @var StreamFactory
-     */
-    protected static $cache;
-
-    /**
-     * @var array
-     */
-    protected static $classes = [
-        'guzzle' => [
-            'class' => 'Http\Message\StreamFactory\GuzzleStreamFactory',
-            'condition' => [
-                'Http\Message\StreamFactory\GuzzleStreamFactory',
-                'GuzzleHttp\Psr7\Stream',
-            ],
-        ],
-        'diactoros' => [
-            'class' => 'Http\Message\StreamFactory\DiactorosStreamFactory',
-            'condition' => [
-                'Http\Message\StreamFactory\DiactorosStreamFactory',
-                'Zend\Diactoros\Stream',
-            ],
-        ],
-    ];
-
     /**
      * Finds a Stream Factory.
      *
      * @return StreamFactory
-     *
-     * @throws NotFoundException
      */
     public static function find()
     {
-        // Override only used for return type declaration
-        return parent::find();
+        try {
+            $streamFactory = static::findOneByType('Http\Message\StreamFactory');
+
+            return new $streamFactory();
+        } catch (NotFoundException $e) {
+            throw new NotFoundException(
+                'No factories found. Install php-http/message to use Guzzle or Diactoros factories.',
+                0,
+                $e
+            );
+        }
     }
 }

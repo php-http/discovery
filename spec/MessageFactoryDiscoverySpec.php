@@ -2,10 +2,30 @@
 
 namespace spec\Http\Discovery;
 
+use Puli\GeneratedPuliFactory;
+use Puli\Discovery\Api\Discovery;
+use Puli\Discovery\Binding\ClassBinding;
+use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
 
 class MessageFactoryDiscoverySpec extends ObjectBehavior
 {
+    function let(
+        GeneratedPuliFactory $puliFactory,
+        ResourceRepository $repository,
+        Discovery $discovery
+    ) {
+        $puliFactory->createRepository()->willReturn($repository);
+        $puliFactory->createDiscovery($repository)->willReturn($discovery);
+
+        $this->setPuliFactory($puliFactory);
+    }
+
+    function letgo()
+    {
+        $this->resetPuliFactory();
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Http\Discovery\MessageFactoryDiscovery');
@@ -16,13 +36,15 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\ClassDiscovery');
     }
 
-    function it_is_a_factory_discovery()
-    {
-        $this->shouldHaveType('Http\Discovery\FactoryDiscovery');
-    }
+    function it_finds_a_message_factory(
+        Discovery $discovery,
+        ClassBinding $binding
+    ) {
+        $binding->hasParameterValue('depends')->willReturn(false);
+        $binding->getClassName()->willReturn('spec\Http\Discovery\Stub\MessageFactoryStub');
 
-    function it_finds_an_http_message_factory()
-    {
-        $this->find()->shouldHaveType('Http\Message\MessageFactory');
+        $discovery->findBindings('Http\Message\MessageFactory')->willReturn([$binding]);
+
+        $this->find()->shouldImplement('Http\Message\MessageFactory');
     }
 }

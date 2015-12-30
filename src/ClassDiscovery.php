@@ -2,54 +2,126 @@
 
 namespace Http\Discovery;
 
+use Puli\Discovery\Api\Discovery;
+
 /**
  * Registry that based find results on class existence.
  *
  * @author David de Boer <david@ddeboer.nl>
+ * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
 abstract class ClassDiscovery
 {
     /**
-     * Add a class (and condition) to the discovery registry.
-     *
-     * @param string $class     Class that will be instantiated if found
-     * @param string $condition Optional other class to check for existence
+     * @var GeneratedPuliFactory
      */
-    public static function register($class, $condition = null)
+    private static $puliFactory;
+
+    /**
+     * @var Discovery
+     */
+    private static $puliDiscovery;
+
+    /**
+     * @return GeneratedPuliFactory
+     */
+    public static function getPuliFactory()
     {
-        static::$cache = null;
+        if (null === self::$puliFactory) {
+            if (!defined('PULI_FACTORY_CLASS')) {
+                throw new \RuntimeException('Puli Factory is not available');
+            }
 
-        $definition = [
-            'class' => $class,
-            'condition' => isset($condition) ? $condition : $class,
-        ];
+            $puliFactoryClass = PULI_FACTORY_CLASS;
 
-        array_unshift(static::$classes, $definition);
+            if (!class_exists($puliFactoryClass)) {
+                throw new \RuntimeException('Puli Factory class does not exist');
+            }
+
+            self::$puliFactory = new $puliFactoryClass();
+        }
+
+        return self::$puliFactory;
     }
 
     /**
-     * Finds a Class.
+     * Sets the Puli factory.
      *
-     * @return object
+     * @param object $puliFactory
+     */
+    public static function setPuliFactory($puliFactory)
+    {
+        if (!is_callable([$puliFactory, 'createRepository']) || !is_callable([$puliFactory, 'createDiscovery'])) {
+            throw new \InvalidArgumentException('The Puli Factory must expose a repository and a discovery');
+        }
+
+        self::$puliFactory = $puliFactory;
+        self::$puliDiscovery = null;
+    }
+
+    /**
+     * Resets the factory.
+     */
+    public static function resetPuliFactory()
+    {
+        self::$puliFactory = null;
+        self::$puliDiscovery = null;
+    }
+
+    /**
+     * Returns the Puli discovery layer.
+     *
+     * @return Discovery
+     */
+    public static function getPuliDiscovery()
+    {
+        if (!isset(self::$puliDiscovery)) {
+            $factory = self::getPuliFactory();
+            $repository = $factory->createRepository();
+
+            self::$puliDiscovery = $factory->createDiscovery($repository);
+        }
+
+        return self::$puliDiscovery;
+    }
+
+    /**
+     * Finds a class.
+     *
+     * @param $type
+     *
+     * @return string
      *
      * @throws NotFoundException
      */
+    public static function findOneByType($type)
+    {
+        $bindings = self::getPuliDiscovery()->findBindings($type);
+
+        foreach ($bindings as $binding) {
+            if ($binding->hasParameterValue('depends')) {
+                $dependency = $binding->getParameterValue('depends');
+
+                if (!self::evaluateCondition($dependency)) {
+                    continue;
+                }
+            }
+
+            // TODO: check class binding
+            return $binding->getClassName();
+        }
+
+        throw new NotFoundException(sprintf('Binding of type "%s" not found', $type));
+    }
+
+    /**
+     * Finds a resource.
+     *
+     * @return object
+     */
     public static function find()
     {
-        // We have a cache
-        if (isset(static::$cache)) {
-            return new static::$cache();
-        }
-
-        foreach (static::$classes as $name => $definition) {
-            if (static::evaluateCondition($definition['condition'])) {
-                static::$cache = $definition['class'];
-
-                return new $definition['class']();
-            }
-        }
-
-        throw new NotFoundException('Not found');
+        throw new \LogicException('Not implemented');
     }
 
     /**
