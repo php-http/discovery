@@ -6,6 +6,7 @@
 ### Changed
 
 - Use [Puli](http://puli.io) for discovery
+- Improved exception messages
 
 
 ## 0.5.0 - 2015-12-25

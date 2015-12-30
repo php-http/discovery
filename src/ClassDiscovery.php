@@ -111,7 +111,7 @@ abstract class ClassDiscovery
             return $binding->getClassName();
         }
 
-        throw new NotFoundException(sprintf('Binding of type "%s" not found', $type));
+        throw new NotFoundException(sprintf('Resource of type "%s" not found', $type));
     }
 
     /**

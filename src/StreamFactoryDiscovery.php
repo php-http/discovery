@@ -24,7 +24,7 @@ final class StreamFactoryDiscovery extends ClassDiscovery
             return new $streamFactory();
         } catch (NotFoundException $e) {
             throw new NotFoundException(
-                'No factories found. Install php-http/message to use Guzzle or Diactoros factories.',
+                'No factories found. To use Guzzle or Diactoros factories install php-http/message and the chosen message implementation.',
                 0,
                 $e
             );

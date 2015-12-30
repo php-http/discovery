@@ -26,6 +26,9 @@
         "phpspec/phpspec": "^2.4",
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
     },
+    "suggest": {
+        "php-http/message": "Allow to use Guzzle or Diactoros factories"
+    },
     "autoload": {
         "psr-4": {
             "Http\\Discovery\\": "src/"
