@@ -1,7 +1,7 @@
 # Change Log
 
 
-## Unreleased
+## 0.6.0 - 2015-12-30
 
 ### Changed
 
