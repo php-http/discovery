@@ -11,9 +11,9 @@
         }
     ],
     "require": {
-        "php": ">=5.4",
-        "puli/composer-plugin": "1.0.0-beta8",
-        "puli/discovery": "1.0.0-beta8"
+        "php": "^5.4|7.*",
+        "puli/composer-plugin": "~1.0.0-beta8",
+        "puli/discovery": "~1.0.0-beta8"
     },
     "require-dev": {
         "php-http/httplug": "1.0.0-beta",
