@@ -1,6 +1,13 @@
 # Change Log
 
 
+## 0.6.1 - 2016-01-03
+
+### Changed
+
+- More flexible Puli requirement
+
+
 ## 0.6.0 - 2015-12-30
 
 ### Changed
