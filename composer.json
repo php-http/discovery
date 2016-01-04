@@ -13,12 +13,12 @@
     "require": {
         "php": "^5.4|7.*",
         "puli/composer-plugin": "~1.0.0-beta8",
-        "puli/discovery": "~1.0.0-beta8"
+        "puli/discovery": "~1.0.0-beta8",
+        "puli/cli": "~1.0.0-beta9"
     },
     "require-dev": {
         "php-http/httplug": "1.0.0-beta",
         "php-http/message-factory": "^1.0",
-        "puli/cli": "1.0.0-beta9",
         "phpspec/phpspec": "^2.4",
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
     },
