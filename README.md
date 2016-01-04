@@ -21,7 +21,7 @@ $ composer require php-http/discovery
 
 ## Documentation
 
-Please see the [official documentation](http://php-http.readthedocs.org/en/latest/discovery/).
+Please see the [official documentation](http://php-http.readthedocs.org/en/latest/discovery.html).
 
 
 ## Testing
