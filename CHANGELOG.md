@@ -1,6 +1,20 @@
 # Change Log
 
 
+## 0.6.4 - 2016-01-07
+
+### Fixed
+
+- Puli [not working](https://twitter.com/PuliPHP/status/685132540588507137) with the latest json-schema
+
+
+## 0.6.3 - 2016-01-04
+
+### Changed
+
+- Adjust Puli dependencies
+
+
 ## 0.6.2 - 2016-01-04
 
 ### Changed
