@@ -17,7 +17,7 @@
         "puli/cli": "~1.0.0-beta10"
     },
     "require-dev": {
-        "php-http/httplug": "1.0.0-beta",
+        "php-http/httplug": "^1.0",
         "php-http/message-factory": "^1.0",
         "phpspec/phpspec": "^2.4",
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
