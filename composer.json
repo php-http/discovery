@@ -12,9 +12,7 @@
     ],
     "require": {
         "php": "^5.4|7.*",
-        "puli/composer-plugin": "1.0.0-beta9",
-        "puli/discovery": "1.0.0-beta9",
-        "puli/cli": "~1.0.0-beta10"
+        "puli/composer-plugin": "1.0.0-beta9"
     },
     "require-dev": {
         "php-http/httplug": "^1.0",
@@ -36,14 +34,20 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpspec run",
-        "test-ci": "vendor/bin/phpspec run -c phpspec.yml.ci"
+        "test": "bin/phpspec run",
+        "test-ci": "bin/phpspec run -c phpspec.yml.ci"
     },
+    "bin": [
+        "bin/puli.phar"
+    ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.7-dev"
+            "dev-master": "0.8-dev"
         }
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "prefer-stable": true,
-    "minimum-stability": "dev"
+    "minimum-stability": "beta"
 }

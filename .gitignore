@@ -1,4 +1,6 @@
 .puli/
+bin/*
+!bin/puli.phar
 build/
 vendor/
 composer.lock

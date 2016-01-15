@@ -9,6 +9,13 @@
 
 **Finds installed HTTPlug implementations and PSR-7 message factories.**
 
+> **Note for 0.7.x releases**
+>
+> Puli binary is added to this repository until [puli/issues#165](https://github.com/puli/issues/issues/165) is resolved.
+>
+> However, if you have puli globally installed, it will be used.
+> Make sure that your puli binary is at least beta10
+
 
 ## Install
 

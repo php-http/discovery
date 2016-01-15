@@ -1,6 +1,23 @@
 # Change Log
 
 
+## 0.7.0 - 2016-01-15
+
+### Added
+
+- Temporary puli.phar (Beta 10) executable
+
+### Changed
+
+- Updated HTTPlug dependencies
+- Updated Puli dependencies
+- Local configuration to make tests passing
+
+### Removed
+
+- Puli CLI dependency
+
+
 ## 0.6.4 - 2016-01-07
 
 ### Fixed
