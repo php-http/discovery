@@ -12,10 +12,9 @@
     ],
     "require": {
         "php": "^5.4|7.*",
-        "puli/composer-plugin": "~1.0.0-beta8",
-        "puli/discovery": "1.0.0-beta8",
-        "puli/cli": "~1.0.0-beta9@dev",
-        "justinrainbow/json-schema": "<1.5"
+        "puli/composer-plugin": "1.0.0-beta9",
+        "puli/discovery": "1.0.0-beta9",
+        "puli/cli": "~1.0.0-beta10"
     },
     "require-dev": {
         "php-http/httplug": "1.0.0-beta",
