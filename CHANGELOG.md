@@ -1,6 +1,13 @@
 # Change Log
 
 
+## UNRELEASED
+
+### Changed
+
+- Puli composer plugin must be installed separately
+
+
 ## 0.7.0 - 2016-01-15
 
 ### Added

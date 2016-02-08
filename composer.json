@@ -11,16 +11,17 @@
         }
     ],
     "require": {
-        "php": "^5.4|7.*",
-        "puli/composer-plugin": "1.0.0-beta9"
+        "php": "^5.4|7.*"
     },
     "require-dev": {
         "php-http/httplug": "^1.0",
         "php-http/message-factory": "^1.0",
+        "puli/composer-plugin": "1.0.0-beta9",
         "phpspec/phpspec": "^2.4",
         "henrikbjorn/phpspec-code-coverage" : "^1.0"
     },
     "suggest": {
+        "puli/composer-plugin": "Sets up Puli which is required for Discovery to work. Check http://docs.php-http.org/en/latest/discovery.html for more details.",
         "php-http/message": "Allow to use Guzzle or Diactoros factories"
     },
     "autoload": {
