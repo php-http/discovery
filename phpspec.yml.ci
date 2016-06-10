@@ -7,3 +7,4 @@ extensions:
 code_coverage:
     format: clover
     output: build/coverage.xml
+bootstrap: spec/autoload.php

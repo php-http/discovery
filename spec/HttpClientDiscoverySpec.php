@@ -2,28 +2,23 @@
 
 namespace spec\Http\Discovery;
 
+use Http\Client\HttpClient;
+use Http\Discovery\ClassDiscovery;
+use Http\Discovery\Exception\NotFoundException;
+use Http\Discovery\Strategy\DiscoveryStrategy;
 use Puli\GeneratedPuliFactory;
 use Puli\Discovery\Api\Discovery;
 use Puli\Discovery\Binding\ClassBinding;
 use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
+use spec\Http\Discovery\Helper\DiscoveryHelper;
 
 class HttpClientDiscoverySpec extends ObjectBehavior
 {
-    function let(
-        GeneratedPuliFactory $puliFactory,
-        ResourceRepository $repository,
-        Discovery $discovery
-    ) {
-        $puliFactory->createRepository()->willReturn($repository);
-        $puliFactory->createDiscovery($repository)->willReturn($discovery);
-
-        $this->setPuliFactory($puliFactory);
-    }
-
-    function letgo()
+    function let()
     {
-        $this->resetPuliFactory();
+        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        DiscoveryHelper::clearClasses();
     }
 
     function it_is_initializable()
@@ -36,15 +31,15 @@ class HttpClientDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\ClassDiscovery');
     }
 
-    function it_finds_an_http_client(
-        Discovery $discovery,
-        ClassBinding $binding
-    ) {
-        $binding->hasParameterValue('depends')->willReturn(false);
-        $binding->getClassName()->willReturn('spec\Http\Discovery\Stub\HttpClientStub');
+    function it_finds_a_http_client(DiscoveryStrategy $strategy) {
 
-        $discovery->findBindings('Http\Client\HttpClient')->willReturn([$binding]);
+        $candidate = ['class' => 'spec\Http\Discovery\Stub\HttpClientStub', 'condition' => true];
+        DiscoveryHelper::setClasses(HttpClient::class, [$candidate]);
 
         $this->find()->shouldImplement('Http\Client\HttpClient');
+    }
+
+    function it_throw_exception(DiscoveryStrategy $strategy) {
+        $this->shouldThrow(NotFoundException::class)->duringFind();
     }
 }

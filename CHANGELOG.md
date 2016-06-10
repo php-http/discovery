@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.9.0 - 2016-06-25
+
+### Changed
+
+- Support of multiple strategies to find classes. This will make Puli optional
+- Updated exceptions
 
 ## 0.8.0 - 2016-02-11
 

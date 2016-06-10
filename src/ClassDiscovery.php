@@ -2,126 +2,126 @@
 
 namespace Http\Discovery;
 
-use Puli\Discovery\Api\Discovery;
+use Http\Discovery\Exception\DiscoveryFailedException;
+use Http\Discovery\Exception\StrategyUnavailableException;
 
 /**
  * Registry that based find results on class existence.
  *
  * @author David de Boer <david@ddeboer.nl>
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 abstract class ClassDiscovery
 {
     /**
-     * @var GeneratedPuliFactory
-     */
-    private static $puliFactory;
-
-    /**
-     * @var Discovery
-     */
-    private static $puliDiscovery;
-
-    /**
-     * @return GeneratedPuliFactory
-     */
-    public static function getPuliFactory()
-    {
-        if (null === self::$puliFactory) {
-            if (!defined('PULI_FACTORY_CLASS')) {
-                throw new \RuntimeException('Puli Factory is not available');
-            }
-
-            $puliFactoryClass = PULI_FACTORY_CLASS;
-
-            if (!class_exists($puliFactoryClass)) {
-                throw new \RuntimeException('Puli Factory class does not exist');
-            }
-
-            self::$puliFactory = new $puliFactoryClass();
-        }
-
-        return self::$puliFactory;
-    }
-
-    /**
-     * Sets the Puli factory.
+     * A list of strategies to find classes.
      *
-     * @param object $puliFactory
+     * @var array
      */
-    public static function setPuliFactory($puliFactory)
-    {
-        if (!is_callable([$puliFactory, 'createRepository']) || !is_callable([$puliFactory, 'createDiscovery'])) {
-            throw new \InvalidArgumentException('The Puli Factory must expose a repository and a discovery');
-        }
-
-        self::$puliFactory = $puliFactory;
-        self::$puliDiscovery = null;
-    }
+    private static $strategies = [
+        Strategy\Puli::class,
+        Strategy\CommonClassesStrategy::class,
+    ];
 
     /**
-     * Resets the factory.
-     */
-    public static function resetPuliFactory()
-    {
-        self::$puliFactory = null;
-        self::$puliDiscovery = null;
-    }
-
-    /**
-     * Returns the Puli discovery layer.
+     * Discovery cache to make the second time we use discovery faster.
      *
-     * @return Discovery
+     * @var array
      */
-    public static function getPuliDiscovery()
-    {
-        if (!isset(self::$puliDiscovery)) {
-            $factory = self::getPuliFactory();
-            $repository = $factory->createRepository();
-
-            self::$puliDiscovery = $factory->createDiscovery($repository);
-        }
-
-        return self::$puliDiscovery;
-    }
+    private static $cache = [];
 
     /**
      * Finds a class.
      *
-     * @param $type
+     * @param string $type
      *
      * @return string
      *
-     * @throws NotFoundException
+     * @throws DiscoveryFailedException
      */
-    public static function findOneByType($type)
+    protected static function findOneByType($type)
     {
-        $bindings = self::getPuliDiscovery()->findBindings($type);
-
-        foreach ($bindings as $binding) {
-            if ($binding->hasParameterValue('depends')) {
-                $dependency = $binding->getParameterValue('depends');
-
-                if (!self::evaluateCondition($dependency)) {
-                    continue;
-                }
-            }
-
-            // TODO: check class binding
-            return $binding->getClassName();
+        // Look in the cache
+        if (null !== ($class = self::getFromCache($type))) {
+            return $class;
         }
 
-        throw new NotFoundException(sprintf('Resource of type "%s" not found', $type));
+        $exceptions = [];
+        foreach (self::$strategies as $strategy) {
+            try {
+                $candidates = call_user_func($strategy.'::getCandidates', $type);
+            } catch (StrategyUnavailableException $e) {
+                $exceptions[] = $e;
+                continue;
+            }
+
+            foreach ($candidates as $candidate) {
+                if (isset($candidate['condition'])) {
+                    if (!self::evaluateCondition($candidate['condition'])) {
+                        continue;
+                    }
+                }
+
+                // save the result for later use
+                self::storeInCache($type, $candidate);
+
+                return $candidate['class'];
+            }
+        }
+
+        throw new DiscoveryFailedException('Could not find resource using any discovery strategy', $exceptions);
     }
 
     /**
-     * Finds a resource.
+     * Get a value from cache.
      *
-     * @return object
+     * @param string $type
+     *
+     * @return string|null
      */
-    public static function find()
+    private static function getFromCache($type)
     {
-        throw new \LogicException('Not implemented');
+        if (!isset(self::$cache[$type])) {
+            return;
+        }
+
+        $candidate = self::$cache[$type];
+        if (!self::evaluateCondition($candidate['condition'])) {
+            return;
+        }
+
+        return $candidate['class'];
+    }
+
+    /**
+     * Store a value in cache.
+     *
+     * @param string $type
+     * @param string $class
+     */
+    private static function storeInCache($type, $class)
+    {
+        self::$cache[$type] = $class;
+    }
+
+    /**
+     * Set new strategies and clear the cache.
+     *
+     * @param array $strategies
+     */
+    public static function setStrategies(array $strategies)
+    {
+        self::$strategies = $strategies;
+        self::clearCache();
+    }
+
+    /**
+     * Clear the cache.
+     */
+    public static function clearCache()
+    {
+        self::$cache = [];
     }
 
     /**
