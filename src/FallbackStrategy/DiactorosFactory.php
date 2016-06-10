@@ -38,5 +38,4 @@ class DiactorosFactory implements FallbackStrategy
 
         return false;
     }
-
 }

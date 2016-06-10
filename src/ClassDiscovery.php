@@ -106,7 +106,7 @@ abstract class ClassDiscovery
         } catch (PuliNotAvailableException $e) {
             if (false !== $class = HttpClients::findOneByType($type)) {
                 return $class;
-            }elseif (false !== $class = GuzzleFactory::findOneByType($type)) {
+            } elseif (false !== $class = GuzzleFactory::findOneByType($type)) {
                 return $class;
             } elseif (false !== $class = DiactorosFactory::findOneByType($type)) {
                 return $class;

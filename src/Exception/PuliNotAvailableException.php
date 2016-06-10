@@ -9,5 +9,4 @@ namespace Http\Discovery\Exception;
  */
 class PuliNotAvailableException extends \RuntimeException
 {
-
 }
