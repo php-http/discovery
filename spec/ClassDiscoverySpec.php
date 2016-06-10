@@ -47,7 +47,7 @@ class ClassDiscoverySpec extends ObjectBehavior
     {
         $discovery->findBindings('InvalidBinding')->willReturn([]);
 
-        $this->shouldThrow('Http\Discovery\NotFoundException')->duringFindOneByType('InvalidBinding');
+        $this->shouldThrow('Http\Discovery\Exception\NotFoundException')->duringFindOneByType('InvalidBinding');
     }
 
     function it_returns_a_class_binding(Discovery $discovery, ClassBinding $binding)
