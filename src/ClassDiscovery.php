@@ -2,6 +2,11 @@
 
 namespace Http\Discovery;
 
+use Http\Discovery\Exception\NotFoundException;
+use Http\Discovery\Exception\PuliNotAvailableException;
+use Http\Discovery\FallbackStrategy\HttpClients;
+use Http\Discovery\FallbackStrategy\DiactorosFactory;
+use Http\Discovery\FallbackStrategy\GuzzleFactory;
 use Puli\Discovery\Api\Discovery;
 
 /**
@@ -29,13 +34,13 @@ abstract class ClassDiscovery
     {
         if (null === self::$puliFactory) {
             if (!defined('PULI_FACTORY_CLASS')) {
-                throw new \RuntimeException('Puli Factory is not available');
+                throw new PuliNotAvailableException('Puli Factory is not available');
             }
 
             $puliFactoryClass = PULI_FACTORY_CLASS;
 
             if (!class_exists($puliFactoryClass)) {
-                throw new \RuntimeException('Puli Factory class does not exist');
+                throw new PuliNotAvailableException('Puli Factory class does not exist');
             }
 
             self::$puliFactory = new $puliFactoryClass();
@@ -95,6 +100,32 @@ abstract class ClassDiscovery
      * @throws NotFoundException
      */
     public static function findOneByType($type)
+    {
+        try {
+            return self::puliFindOneByType($type);
+        } catch (PuliNotAvailableException $e) {
+            if (false !== $class = HttpClients::findOneByType($type)) {
+                return $class;
+            }elseif (false !== $class = GuzzleFactory::findOneByType($type)) {
+                return $class;
+            } elseif (false !== $class = DiactorosFactory::findOneByType($type)) {
+                return $class;
+            }
+            throw new NotFoundException('Could not find resource using Puli nor common Guzzle/Diactoros classes', 0, $e);
+        }
+    }
+
+    /**
+     * Finds a class using Puli.
+     *
+     * @param $type
+     *
+     * @return string
+     *
+     * @throws NotFoundException
+     * @throws PuliNotAvailableException
+     */
+    private static function puliFindOneByType($type)
     {
         $bindings = self::getPuliDiscovery()->findBindings($type);
 

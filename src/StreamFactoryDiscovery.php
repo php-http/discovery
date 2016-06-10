@@ -2,6 +2,7 @@
 
 namespace Http\Discovery;
 
+use Http\Discovery\Exception\NotFoundException;
 use Http\Message\StreamFactory;
 
 /**
