@@ -2,28 +2,23 @@
 
 namespace spec\Http\Discovery;
 
+use Http\Discovery\ClassDiscovery;
+use Http\Discovery\Exception\NotFoundException;
+use Http\Discovery\Strategy\DiscoveryStrategy;
+use Http\Message\MessageFactory;
 use Puli\GeneratedPuliFactory;
 use Puli\Discovery\Api\Discovery;
 use Puli\Discovery\Binding\ClassBinding;
 use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
+use spec\Http\Discovery\Helper\DiscoveryHelper;
 
 class MessageFactoryDiscoverySpec extends ObjectBehavior
 {
-    function let(
-        GeneratedPuliFactory $puliFactory,
-        ResourceRepository $repository,
-        Discovery $discovery
-    ) {
-        $puliFactory->createRepository()->willReturn($repository);
-        $puliFactory->createDiscovery($repository)->willReturn($discovery);
-
-        $this->setPuliFactory($puliFactory);
-    }
-
-    function letgo()
+    function let()
     {
-        $this->resetPuliFactory();
+        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        DiscoveryHelper::clearClasses();
     }
 
     function it_is_initializable()
@@ -36,15 +31,17 @@ class MessageFactoryDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\ClassDiscovery');
     }
 
-    function it_finds_a_message_factory(
-        Discovery $discovery,
-        ClassBinding $binding
-    ) {
-        $binding->hasParameterValue('depends')->willReturn(false);
-        $binding->getClassName()->willReturn('spec\Http\Discovery\Stub\MessageFactoryStub');
+    function it_finds_a_message_factory(DiscoveryStrategy $strategy) {
 
-        $discovery->findBindings('Http\Message\MessageFactory')->willReturn([$binding]);
+        $candidate = ['class' => 'spec\Http\Discovery\Stub\MessageFactoryStub', 'condition' => true];
+        DiscoveryHelper::setClasses(MessageFactory::class, [$candidate]);
 
         $this->find()->shouldImplement('Http\Message\MessageFactory');
+    }
+
+    function it_throw_exception(DiscoveryStrategy $strategy) {
+        $strategy->getCandidates('Http\Message\MessageFactory')->willReturn([]);
+
+        $this->shouldThrow(NotFoundException::class)->duringFind();
     }
 }

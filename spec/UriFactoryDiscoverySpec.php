@@ -2,28 +2,23 @@
 
 namespace spec\Http\Discovery;
 
+use Http\Discovery\ClassDiscovery;
+use Http\Discovery\Exception\NotFoundException;
+use Http\Discovery\Strategy\DiscoveryStrategy;
+use Http\Message\UriFactory;
 use Puli\GeneratedPuliFactory;
 use Puli\Discovery\Api\Discovery;
 use Puli\Discovery\Binding\ClassBinding;
 use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
+use spec\Http\Discovery\Helper\DiscoveryHelper;
 
 class UriFactoryDiscoverySpec extends ObjectBehavior
 {
-    function let(
-        GeneratedPuliFactory $puliFactory,
-        ResourceRepository $repository,
-        Discovery $discovery
-    ) {
-        $puliFactory->createRepository()->willReturn($repository);
-        $puliFactory->createDiscovery($repository)->willReturn($discovery);
-
-        $this->setPuliFactory($puliFactory);
-    }
-
-    function letgo()
+    function let()
     {
-        $this->resetPuliFactory();
+        ClassDiscovery::setStrategies([DiscoveryHelper::class]);
+        DiscoveryHelper::clearClasses();
     }
 
     function it_is_initializable()
@@ -36,15 +31,17 @@ class UriFactoryDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType('Http\Discovery\ClassDiscovery');
     }
 
-    function it_finds_a_uri_factory(
-        Discovery $discovery,
-        ClassBinding $binding
-    ) {
-        $binding->hasParameterValue('depends')->willReturn(false);
-        $binding->getClassName()->willReturn('spec\Http\Discovery\Stub\UriFactoryStub');
+    function it_finds_a_uri_factory(DiscoveryStrategy $strategy) {
 
-        $discovery->findBindings('Http\Message\UriFactory')->willReturn([$binding]);
+        $candidate = ['class' => 'spec\Http\Discovery\Stub\UriFactoryStub', 'condition' => true];
+        DiscoveryHelper::setClasses(UriFactory::class, [$candidate]);
 
         $this->find()->shouldImplement('Http\Message\UriFactory');
+    }
+
+    function it_throw_exception(DiscoveryStrategy $strategy) {
+        $strategy->getCandidates('Http\Message\UriFactory')->willReturn([]);
+
+        $this->shouldThrow(NotFoundException::class)->duringFind();
     }
 }

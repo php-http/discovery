@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Discovery;
+namespace Http\Discovery\Exception;
 
 /**
  * Thrown when a discovery does not find any matches.
