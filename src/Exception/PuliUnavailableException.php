@@ -7,6 +7,6 @@ namespace Http\Discovery\Exception;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class PuliUnavailableException extends StrategyUnavailableException
+final class PuliUnavailableException extends StrategyUnavailableException
 {
 }

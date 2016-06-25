@@ -20,7 +20,7 @@ use Http\Adapter\Buzz\Client as Buzz;
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class CommonClassesStrategy implements DiscoveryStrategy
+final class CommonClassesStrategy implements DiscoveryStrategy
 {
     /**
      * @var array

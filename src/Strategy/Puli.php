@@ -10,6 +10,7 @@ use Puli\GeneratedPuliFactory;
  * Find candidates using Puli.
  *
  * @internal
+ * @final
  *
  * @author David de Boer <david@ddeboer.nl>
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
