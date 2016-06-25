@@ -1,11 +1,18 @@
 # Change Log
 
+
 ## 0.9.0 - 2016-06-25
+
+### Added
+
+- Discovery strategies to find classes
 
 ### Changed
 
-- Support of multiple strategies to find classes. This will make Puli optional
-- Updated exceptions
+- [Puli](http://puli.io) made optional
+- Improved exceptions
+- **[BC] `NotFoundException` moved to `Http\Discovery\Exception\NotFoundException`**
+
 
 ## 0.8.0 - 2016-02-11
 
