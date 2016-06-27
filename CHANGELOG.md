@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Dropping PHP 5.4 support becuase we are using the ::class constant. 
+- Dropping PHP 5.4 support because we use the ::class constant. 
 
 ## 0.9.0 - 2016-06-25
 
