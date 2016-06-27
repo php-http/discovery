@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.9.1 - 2016-06-28
+
+### Changed
+
+- Dropping PHP 5.4 support becuase we are using the ::class constant. 
 
 ## 0.9.0 - 2016-06-25
 
