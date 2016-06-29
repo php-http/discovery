@@ -4,7 +4,7 @@ namespace spec\Http\Discovery\Strategy;
 
 use Http\Discovery\ClassDiscovery;
 use Http\Discovery\Exception\NotFoundException;
-use Http\Discovery\Strategy\Puli;
+use Http\Discovery\Strategy\PuliBetaStrategy;
 use Puli\Discovery\Binding\ClassBinding;
 use Puli\GeneratedPuliFactory;
 use Puli\Discovery\Api\Discovery;
@@ -82,7 +82,7 @@ class PuliSpec extends ObjectBehavior
     }
 }
 
-class PuliStub extends Puli
+class PuliBetaStrategyStub extends PuliBetaStrategy
 {
     /**
      * Sets the Puli factory.
