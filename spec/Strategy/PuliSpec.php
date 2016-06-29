@@ -20,7 +20,7 @@ class PuliSpec extends ObjectBehavior
     ) {
         $puliFactory->createRepository()->willReturn($repository);
         $puliFactory->createDiscovery($repository)->willReturn($discovery);
-        $this->beAnInstanceOf('spec\Http\Discovery\Strategy\PuliStub');
+        $this->beAnInstanceOf('spec\Http\Discovery\Strategy\PuliBetaStrategyStub');
         $this->setPuliFactory($puliFactory);
     }
 
@@ -31,7 +31,7 @@ class PuliSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Discovery\Strategy\Puli');
+        $this->shouldHaveType('Http\Discovery\Strategy\PuliBetaStrategy');
     }
 
     function it_returns_a_class_binding(Discovery $discovery, ClassBinding $binding)
