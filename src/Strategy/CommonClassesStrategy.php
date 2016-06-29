@@ -19,7 +19,7 @@ use Http\Adapter\Buzz\Client as Buzz;
 
 /**
  * @internal
- * 
+ *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 final class CommonClassesStrategy implements DiscoveryStrategy
