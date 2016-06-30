@@ -36,7 +36,7 @@ abstract class ClassDiscovery
      *
      * @param string $type
      *
-     * @return string
+     * @return string|\Closure
      *
      * @throws DiscoveryFailedException
      */
