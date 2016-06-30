@@ -24,7 +24,7 @@ final class StreamFactoryDiscovery extends ClassDiscovery
         try {
             $streamFactory = static::findOneByType(StreamFactory::class);
 
-            return new $streamFactory();
+            return static::instantiateClass($streamFactory);
         } catch (DiscoveryFailedException $e) {
             throw new NotFoundException(
                 'No stream factories found. To use Guzzle or Diactoros factories install php-http/message and the chosen message implementation.',
