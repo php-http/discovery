@@ -4,7 +4,7 @@ namespace spec\Http\Discovery\Strategy;
 
 use Http\Discovery\ClassDiscovery;
 use Http\Discovery\Exception\NotFoundException;
-use Http\Discovery\Strategy\Puli;
+use Http\Discovery\Strategy\PuliBetaStrategy;
 use Puli\Discovery\Binding\ClassBinding;
 use Puli\GeneratedPuliFactory;
 use Puli\Discovery\Api\Discovery;
@@ -20,7 +20,7 @@ class PuliSpec extends ObjectBehavior
     ) {
         $puliFactory->createRepository()->willReturn($repository);
         $puliFactory->createDiscovery($repository)->willReturn($discovery);
-        $this->beAnInstanceOf('spec\Http\Discovery\Strategy\PuliStub');
+        $this->beAnInstanceOf('spec\Http\Discovery\Strategy\PuliBetaStrategyStub');
         $this->setPuliFactory($puliFactory);
     }
 
@@ -31,7 +31,7 @@ class PuliSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Http\Discovery\Strategy\Puli');
+        $this->shouldHaveType('Http\Discovery\Strategy\PuliBetaStrategy');
     }
 
     function it_returns_a_class_binding(Discovery $discovery, ClassBinding $binding)
@@ -82,7 +82,7 @@ class PuliSpec extends ObjectBehavior
     }
 }
 
-class PuliStub extends Puli
+class PuliBetaStrategyStub extends PuliBetaStrategy
 {
     /**
      * Sets the Puli factory.
