@@ -117,6 +117,16 @@ abstract class ClassDiscovery
     }
 
     /**
+     * Get the current strategies
+     *
+     * @return array
+     */
+    public static function getStrategies()
+    {
+        return self::$strategies;
+    }
+
+    /**
      * Clear the cache.
      */
     public static function clearCache()
