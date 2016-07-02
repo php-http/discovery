@@ -2,6 +2,8 @@
 
 namespace Http\Discovery\Exception;
 
+use Http\Discovery\Exception;
+
 /**
  * Thrown when a discovery does not find any matches.
  *
@@ -9,6 +11,6 @@ namespace Http\Discovery\Exception;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-/*final */class NotFoundException extends \RuntimeException
+/*final */class NotFoundException extends \RuntimeException implements Exception
 {
 }

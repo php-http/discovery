@@ -6,6 +6,7 @@
 ### Added
 
 - Added back `Http\Discovery\NotFoundException` to preserve BC with 0.8 version
+- Added interface `Http\Discovery\Exception` which is implemented by all our exceptions
 
 ### Changed
 
