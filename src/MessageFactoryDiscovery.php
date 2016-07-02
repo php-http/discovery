@@ -23,7 +23,7 @@ final class MessageFactoryDiscovery extends ClassDiscovery
     {
         try {
             $messageFactory = static::findOneByType(MessageFactory::class);
-            
+
             return static::instantiateClass($messageFactory);
         } catch (DiscoveryFailedException $e) {
             throw new NotFoundException(

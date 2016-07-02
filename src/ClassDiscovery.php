@@ -199,7 +199,7 @@ abstract class ClassDiscovery
         } catch (\Exception $e) {
             throw new ClassinstantiationFailedException('Unexcepced exception when instantiating class.', 0, $e);
         }
-        
+
         throw new ClassinstantiationFailedException('Could not instantiate class becuase parameter is neitehr a callable or a string');
     }
 }
