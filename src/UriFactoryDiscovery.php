@@ -3,7 +3,6 @@
 namespace Http\Discovery;
 
 use Http\Discovery\Exception\DiscoveryFailedException;
-use Http\Discovery\NotFoundException;
 use Http\Message\UriFactory;
 
 /**
