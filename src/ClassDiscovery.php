@@ -4,6 +4,7 @@ namespace Http\Discovery;
 
 use Http\Discovery\Exception\DiscoveryFailedException;
 use Http\Discovery\Exception\StrategyUnavailableException;
+use Http\Discovery\Strategy\DiscoveryStrategy;
 
 /**
  * Registry that based find results on class existence.
@@ -108,7 +109,7 @@ abstract class ClassDiscovery
     /**
      * Set new strategies and clear the cache.
      *
-     * @param array $strategies
+     * @param DiscoveryStrategy[] $strategies
      */
     public static function setStrategies(array $strategies)
     {
@@ -117,13 +118,25 @@ abstract class ClassDiscovery
     }
 
     /**
-     * Get the current strategies
+     * Append a strategy at the end of the strategy queue.
      *
-     * @return array
+     * @param DiscoveryStrategy $strategy
      */
-    public static function getStrategies()
+    public static function appendStrategy(DiscoveryStrategy $strategy)
     {
-        return self::$strategies;
+        self::$strategies[] = $strategy;
+        self::clearCache();
+    }
+
+    /**
+     * Prepend a strategy at the beginning of the strategy queue.
+     * 
+     * @param DiscoveryStrategy $strategy
+     */
+    public static function prependStrategy(DiscoveryStrategy $strategy)
+    {
+        self::$strategies = array_unshift(self::$strategies, $strategy);
+        self::clearCache();
     }
 
     /**
