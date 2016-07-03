@@ -130,7 +130,7 @@ abstract class ClassDiscovery
 
     /**
      * Prepend a strategy at the beginning of the strategy queue.
-     * 
+     *
      * @param DiscoveryStrategy $strategy
      */
     public static function prependStrategy(DiscoveryStrategy $strategy)
