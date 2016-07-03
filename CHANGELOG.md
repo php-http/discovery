@@ -1,10 +1,19 @@
 # Change Log
 
+
+## UNRELEASED
+
+### Changed
+
+- Puli strategy renamed to Puli Beta strategy to prevent incompatibility with a future Puli stable
+
+
 ## 0.9.1 - 2016-06-28
 
 ### Changed
 
-- Dropping PHP 5.4 support because we use the ::class constant. 
+- Dropping PHP 5.4 support because we use the ::class constant.
+
 
 ## 0.9.0 - 2016-06-25
 
