@@ -3,9 +3,17 @@
 
 ## UNRELEASED
 
+### Added
+
+- Added back `Http\Discovery\NotFoundException` to preserve BC with 0.8 version
+
 ### Changed
 
 - Puli strategy renamed to Puli Beta strategy to prevent incompatibility with a future Puli stable
+
+### Deprecated
+
+- `Http\Discovery\NotFoundException` will be removed in 2.0, use `Http\Discovery\Exception\NotFoundException` instead
 
 
 ## 0.9.1 - 2016-06-28

@@ -4,7 +4,7 @@ namespace spec\Http\Discovery;
 
 use Http\Client\HttpClient;
 use Http\Discovery\ClassDiscovery;
-use Http\Discovery\Exception\NotFoundException;
+use Http\Discovery\NotFoundException;
 use Http\Discovery\Strategy\DiscoveryStrategy;
 use Puli\GeneratedPuliFactory;
 use Puli\Discovery\Api\Discovery;
