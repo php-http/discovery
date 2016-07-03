@@ -87,8 +87,10 @@ abstract class ClassDiscovery
         }
 
         $candidate = self::$cache[$type];
-        if (!self::evaluateCondition($candidate['condition'])) {
-            return;
+        if (isset($candidate['condition'])) {
+            if (!self::evaluateCondition($candidate['condition'])) {
+                return;
+            }
         }
 
         return $candidate['class'];
@@ -134,7 +136,7 @@ abstract class ClassDiscovery
      */
     public static function prependStrategy($strategy)
     {
-        self::$strategies = array_unshift(self::$strategies, $strategy);
+        array_unshift(self::$strategies, $strategy);
         self::clearCache();
     }
 
