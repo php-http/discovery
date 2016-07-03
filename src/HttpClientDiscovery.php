@@ -4,7 +4,7 @@ namespace Http\Discovery;
 
 use Http\Client\HttpClient;
 use Http\Discovery\Exception\DiscoveryFailedException;
-use Http\Discovery\Exception\NotFoundException;
+use Http\Discovery\NotFoundException;
 
 /**
  * Finds an HTTP Client.

@@ -4,7 +4,6 @@ namespace spec\Http\Discovery;
 
 use Http\Discovery\ClassDiscovery;
 use Http\Discovery\Exception\DiscoveryFailedException;
-use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\Strategy\DiscoveryStrategy;
 use Puli\Discovery\Binding\ClassBinding;
 use Puli\GeneratedPuliFactory;
