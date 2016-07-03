@@ -17,7 +17,7 @@ final class UriFactoryDiscovery extends ClassDiscovery
      *
      * @return UriFactory
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {

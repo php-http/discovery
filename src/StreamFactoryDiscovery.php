@@ -17,7 +17,7 @@ final class StreamFactoryDiscovery extends ClassDiscovery
      *
      * @return StreamFactory
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {

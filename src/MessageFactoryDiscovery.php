@@ -17,7 +17,7 @@ final class MessageFactoryDiscovery extends ClassDiscovery
      *
      * @return MessageFactory
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {

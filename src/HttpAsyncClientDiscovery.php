@@ -17,7 +17,7 @@ final class HttpAsyncClientDiscovery extends ClassDiscovery
      *
      * @return HttpAsyncClient
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {

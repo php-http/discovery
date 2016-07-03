@@ -17,7 +17,7 @@ final class HttpClientDiscovery extends ClassDiscovery
      *
      * @return HttpClient
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {
