@@ -13,7 +13,7 @@
 
 ### Deprecated
 
-- `Http\Discovery\NotFoundException` will be removed in 2.0, use `Http\Discovery\Exception\NotFoundException` instead
+- For BC reasons, the old `Http\Discovery\NotFoundException` (extending the new exception) will be thrown until version 2.0
 
 
 ## 0.9.1 - 2016-06-28
