@@ -110,7 +110,7 @@ abstract class ClassDiscovery
     /**
      * Set new strategies and clear the cache.
      *
-     * @param array $strategies string array of FQN to a DiscoveryStrategy
+     * @param array $strategies string array of fully qualified class name to a DiscoveryStrategy
      */
     public static function setStrategies(array $strategies)
     {
@@ -121,7 +121,7 @@ abstract class ClassDiscovery
     /**
      * Append a strategy at the end of the strategy queue.
      *
-     * @param string $strategy FQN to a DiscoveryStrategy
+     * @param string $strategy Fully qualified class name to a DiscoveryStrategy
      */
     public static function appendStrategy($strategy)
     {
@@ -132,7 +132,7 @@ abstract class ClassDiscovery
     /**
      * Prepend a strategy at the beginning of the strategy queue.
      *
-     * @param string $strategy FQN to a DiscoveryStrategy
+     * @param string $strategy Fully qualified class name to a DiscoveryStrategy
      */
     public static function prependStrategy($strategy)
     {
