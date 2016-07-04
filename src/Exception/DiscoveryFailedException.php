@@ -2,12 +2,14 @@
 
 namespace Http\Discovery\Exception;
 
+use Http\Discovery\Exception;
+
 /**
  * Thrown when all discovery strategies fails to find a resource.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-final class DiscoveryFailedException extends \Exception
+final class DiscoveryFailedException extends \Exception implements Exception
 {
     /**
      * @var array
