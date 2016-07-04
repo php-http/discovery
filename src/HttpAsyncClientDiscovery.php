@@ -4,7 +4,6 @@ namespace Http\Discovery;
 
 use Http\Client\HttpAsyncClient;
 use Http\Discovery\Exception\DiscoveryFailedException;
-use Http\Discovery\Exception\NotFoundException;
 
 /**
  * Finds an HTTP Asynchronous Client.
@@ -18,7 +17,7 @@ final class HttpAsyncClientDiscovery extends ClassDiscovery
      *
      * @return HttpAsyncClient
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {

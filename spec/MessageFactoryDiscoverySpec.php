@@ -3,7 +3,7 @@
 namespace spec\Http\Discovery;
 
 use Http\Discovery\ClassDiscovery;
-use Http\Discovery\Exception\NotFoundException;
+use Http\Discovery\NotFoundException;
 use Http\Discovery\Strategy\DiscoveryStrategy;
 use Http\Message\MessageFactory;
 use Puli\GeneratedPuliFactory;

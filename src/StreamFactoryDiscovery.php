@@ -3,7 +3,6 @@
 namespace Http\Discovery;
 
 use Http\Discovery\Exception\DiscoveryFailedException;
-use Http\Discovery\Exception\NotFoundException;
 use Http\Message\StreamFactory;
 
 /**
@@ -18,7 +17,7 @@ final class StreamFactoryDiscovery extends ClassDiscovery
      *
      * @return StreamFactory
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {

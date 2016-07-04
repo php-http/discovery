@@ -3,7 +3,6 @@
 namespace Http\Discovery;
 
 use Http\Discovery\Exception\DiscoveryFailedException;
-use Http\Discovery\Exception\NotFoundException;
 use Http\Message\MessageFactory;
 
 /**
@@ -18,7 +17,7 @@ final class MessageFactoryDiscovery extends ClassDiscovery
      *
      * @return MessageFactory
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {

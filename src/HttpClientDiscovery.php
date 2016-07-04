@@ -4,7 +4,6 @@ namespace Http\Discovery;
 
 use Http\Client\HttpClient;
 use Http\Discovery\Exception\DiscoveryFailedException;
-use Http\Discovery\Exception\NotFoundException;
 
 /**
  * Finds an HTTP Client.
@@ -18,7 +17,7 @@ final class HttpClientDiscovery extends ClassDiscovery
      *
      * @return HttpClient
      *
-     * @throws NotFoundException
+     * @throws Exception\NotFoundException
      */
     public static function find()
     {
