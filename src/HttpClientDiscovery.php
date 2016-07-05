@@ -24,7 +24,7 @@ final class HttpClientDiscovery extends ClassDiscovery
         try {
             $client = static::findOneByType(HttpClient::class);
 
-            return new $client();
+            return static::instantiateClass($client);
         } catch (DiscoveryFailedException $e) {
             throw new NotFoundException(
                 'No HTTPlug clients found. Make sure to install a package providing "php-http/client-implementation". Example: "php-http/guzzle6-adapter".',
