@@ -4,7 +4,6 @@ namespace Http\Discovery;
 
 use Http\Discovery\Exception\DiscoveryFailedException;
 use Http\Discovery\Exception\StrategyUnavailableException;
-use Http\Discovery\Strategy\DiscoveryStrategy;
 
 /**
  * Registry that based find results on class existence.
@@ -88,8 +87,10 @@ abstract class ClassDiscovery
         }
 
         $candidate = self::$cache[$type];
-        if (!self::evaluateCondition($candidate['condition'])) {
-            return;
+        if (isset($candidate['condition'])) {
+            if (!self::evaluateCondition($candidate['condition'])) {
+                return;
+            }
         }
 
         return $candidate['class'];
@@ -109,7 +110,7 @@ abstract class ClassDiscovery
     /**
      * Set new strategies and clear the cache.
      *
-     * @param DiscoveryStrategy[] $strategies
+     * @param array $strategies string array of fully qualified class name to a DiscoveryStrategy
      */
     public static function setStrategies(array $strategies)
     {
@@ -120,9 +121,9 @@ abstract class ClassDiscovery
     /**
      * Append a strategy at the end of the strategy queue.
      *
-     * @param DiscoveryStrategy $strategy
+     * @param string $strategy Fully qualified class name to a DiscoveryStrategy
      */
-    public static function appendStrategy(DiscoveryStrategy $strategy)
+    public static function appendStrategy($strategy)
     {
         self::$strategies[] = $strategy;
         self::clearCache();
@@ -131,11 +132,11 @@ abstract class ClassDiscovery
     /**
      * Prepend a strategy at the beginning of the strategy queue.
      *
-     * @param DiscoveryStrategy $strategy
+     * @param string $strategy Fully qualified class name to a DiscoveryStrategy
      */
-    public static function prependStrategy(DiscoveryStrategy $strategy)
+    public static function prependStrategy($strategy)
     {
-        self::$strategies = array_unshift(self::$strategies, $strategy);
+        array_unshift(self::$strategies, $strategy);
         self::clearCache();
     }
 
