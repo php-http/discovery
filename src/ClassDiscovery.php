@@ -2,7 +2,7 @@
 
 namespace Http\Discovery;
 
-use Http\Discovery\Exception\ClassinstantiationFailedException;
+use Http\Discovery\Exception\ClassInstantiationFailedException;
 use Http\Discovery\Exception\DiscoveryFailedException;
 use Http\Discovery\Exception\StrategyUnavailableException;
 
@@ -182,9 +182,11 @@ abstract class ClassDiscovery
     /**
      * Get an instance of the $class.
      *
-     * @param string|\Closure $class A FQN of a class or a closure that instantiate the class.
+     * @param string|\Closure $class A FQCN of a class or a closure that instantiate the class.
      *
      * @return object
+     *
+     * @throws ClassInstantiationFailedException
      */
     protected static function instantiateClass($class)
     {
@@ -197,9 +199,9 @@ abstract class ClassDiscovery
                 return $class();
             }
         } catch (\Exception $e) {
-            throw new ClassinstantiationFailedException('Unexcepced exception when instantiating class.', 0, $e);
+            throw new ClassInstantiationFailedException('Unexcepced exception when instantiating class.', 0, $e);
         }
 
-        throw new ClassinstantiationFailedException('Could not instantiate class becuase parameter is neitehr a callable or a string');
+        throw new ClassInstantiationFailedException('Could not instantiate class becuase parameter is neither a callable nor a string');
     }
 }
