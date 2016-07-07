@@ -30,7 +30,7 @@ final class MessageFactoryDiscovery extends ClassDiscovery
                 $e
             );
         }
-        
+
         return static::instantiateClass($messageFactory);
     }
 }

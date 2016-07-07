@@ -30,7 +30,7 @@ final class HttpAsyncClientDiscovery extends ClassDiscovery
                 $e
             );
         }
-        
+
         return static::instantiateClass($asyncClient);
     }
 }
