@@ -185,6 +185,7 @@ abstract class ClassDiscovery
      * @param string|\Closure $class A FQCN of a class or a closure that instantiate the class.
      *
      * @return object
+     *
      * @throws ClassInstantiationFailedException
      */
     protected static function instantiateClass($class)
