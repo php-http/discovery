@@ -182,7 +182,7 @@ abstract class ClassDiscovery
     /**
      * Get an instance of the $class.
      *
-     * @param string|\Closure $class A FQN of a class or a closure that instantiate the class.
+     * @param string|\Closure $class A FQCN of a class or a closure that instantiate the class.
      *
      * @return object
      */
@@ -200,6 +200,6 @@ abstract class ClassDiscovery
             throw new ClassinstantiationFailedException('Unexcepced exception when instantiating class.', 0, $e);
         }
 
-        throw new ClassinstantiationFailedException('Could not instantiate class becuase parameter is neitehr a callable or a string');
+        throw new ClassinstantiationFailedException('Could not instantiate class becuase parameter is neither a callable nor a string');
     }
 }

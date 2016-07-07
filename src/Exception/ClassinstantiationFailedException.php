@@ -9,6 +9,6 @@ use Http\Discovery\Exception;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ClassinstantiationFailedException extends \RuntimeException implements Exception
+final class ClassinstantiationFailedException extends \RuntimeException implements Exception
 {
 }
