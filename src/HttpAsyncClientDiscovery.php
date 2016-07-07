@@ -23,8 +23,6 @@ final class HttpAsyncClientDiscovery extends ClassDiscovery
     {
         try {
             $asyncClient = static::findOneByType(HttpAsyncClient::class);
-
-            return static::instantiateClass($asyncClient);
         } catch (DiscoveryFailedException $e) {
             throw new NotFoundException(
                 'No HTTPlug async clients found. Make sure to install a package providing "php-http/async-client-implementation". Example: "php-http/guzzle6-adapter".',
@@ -32,5 +30,7 @@ final class HttpAsyncClientDiscovery extends ClassDiscovery
                 $e
             );
         }
+        
+        return static::instantiateClass($asyncClient);
     }
 }
