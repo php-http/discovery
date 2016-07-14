@@ -5,6 +5,7 @@ namespace Http\Discovery;
 use Http\Discovery\Exception\ClassInstantiationFailedException;
 use Http\Discovery\Exception\DiscoveryFailedException;
 use Http\Discovery\Exception\StrategyUnavailableException;
+use Http\Discovery\Strategy\DiscoveryStrategy;
 
 /**
  * Registry that based find results on class existence.
@@ -51,7 +52,15 @@ abstract class ClassDiscovery
         $exceptions = [];
         foreach (self::$strategies as $strategy) {
             try {
-                $candidates = call_user_func($strategy.'::getCandidates', $type);
+                if (is_callable($strategy)) {
+                    $candidates = $strategy($type);
+                } elseif ($strategy instanceof DiscoveryStrategy) {
+                    $candidates = $strategy->getCandidates($type);
+                } elseif (is_string($strategy)) {
+                    $candidates = call_user_func($strategy.'::getCandidates', $type);
+                } else {
+                    throw new \Exception("Stratiegy must be callable, an instance of DiscoveryStrategy or at least a FQCN to a instance of a DiscoveryStrategy");
+                }
             } catch (StrategyUnavailableException $e) {
                 $exceptions[] = $e;
                 continue;
