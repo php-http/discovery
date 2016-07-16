@@ -1,9 +1,8 @@
-.puli/
-bin/*
-!bin/puli.phar
-build/
-vendor/
-composer.lock
-phpspec.yml
-phpunit.xml
-puli.json
+/.puli/
+/behat.yml
+/build/
+/composer.lock
+/phpspec.yml
+/phpunit.xml
+/puli.json
+/vendor/
