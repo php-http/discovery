@@ -15,6 +15,7 @@ php:
 env:
     global:
         - TEST_COMMAND="composer test"
+        - PULI_VERSION=1.0.0-beta10
 
 branches:
     except:
@@ -26,13 +27,14 @@ matrix:
     fast_finish: true
     include:
         - php: 5.5
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci"
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci" PULI_VERSION=1.0.0-beta9
 
 before_install:
     - if [[ $COVERAGE != true && $TRAVIS_PHP_VERSION != hhvm ]]; then phpenv config-rm xdebug.ini; fi
 
 install:
     - wget https://github.com/puli/cli/releases/download/1.0.0-beta10/puli.phar && chmod +x puli.phar
+    - composer require puli/composer-plugin:${PULI_VERSION} --no-update
     - travis_retry composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
 
 script:
