@@ -15,8 +15,6 @@ php:
 env:
     global:
         - TEST_COMMAND="composer test"
-    matrix:
-        - PULI_VERSION=1.0.0-beta9
         - PULI_VERSION=1.0.0-beta10
 
 branches:
