@@ -1,13 +1,11 @@
 # Change Log
 
 
-## UNRELEASED
-
-## 1.0.0 - 2016-06-16
+## 1.0.0 - 2016-07-18
 
 ### Added
 
-- Added back `Http\Discovery\NotFoundException` to preserve BC with 0.8 version. You may upgrade from 0.8.x and 0.9.x to 1.0.0 without any BC breaks. 
+- Added back `Http\Discovery\NotFoundException` to preserve BC with 0.8 version. You may upgrade from 0.8.x and 0.9.x to 1.0.0 without any BC breaks.
 - Added interface `Http\Discovery\Exception` which is implemented by all our exceptions
 
 ### Changed
