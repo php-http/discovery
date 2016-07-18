@@ -16,7 +16,7 @@
     "require-dev": {
         "php-http/httplug": "^1.0",
         "php-http/message-factory": "^1.0",
-        "puli/composer-plugin": "1.0.0-beta9 || 1.0.0-beta10",
+        "puli/composer-plugin": "1.0.0-beta10",
         "phpspec/phpspec": "^2.4",
         "henrikbjorn/phpspec-code-coverage" : "^2.0.2"
     },
