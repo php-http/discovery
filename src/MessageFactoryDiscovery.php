@@ -25,7 +25,7 @@ final class MessageFactoryDiscovery extends ClassDiscovery
             $messageFactory = static::findOneByType(MessageFactory::class);
         } catch (DiscoveryFailedException $e) {
             throw new NotFoundException(
-                'No message factories found. To use Guzzle or Diactoros factories install php-http/message and the chosen message implementation.',
+                'No message factories found. To use Guzzle, Diactoros or Slim Framework factories install php-http/message and the chosen message implementation.',
                 0,
                 $e
             );
