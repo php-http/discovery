@@ -1,6 +1,12 @@
 # Change Log
 
 
+## Unreleased
+
+### Added
+
+- Discovery support for Slim Framework factories
+
 ## 1.0.0 - 2016-07-18
 
 ### Added
