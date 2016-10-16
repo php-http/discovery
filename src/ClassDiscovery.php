@@ -202,6 +202,6 @@ abstract class ClassDiscovery
             throw new ClassInstantiationFailedException('Unexcepced exception when instantiating class.', 0, $e);
         }
 
-        throw new ClassInstantiationFailedException('Could not instantiate class becuase parameter is neither a callable nor a string');
+        throw new ClassInstantiationFailedException('Could not instantiate class because parameter is neither a callable nor a string');
     }
 }
