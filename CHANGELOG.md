@@ -3,6 +3,8 @@
 
 ## Unreleased
 
+## 1.1.0 - 2016-10-20
+
 ### Added
 
 - Discovery support for Slim Framework factories
