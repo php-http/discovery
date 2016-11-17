@@ -23,7 +23,7 @@ final class DiscoveryFailedException extends \Exception implements Exception
     {
         $this->exceptions = $exceptions;
 
-        parent::__construct($message, 0, array_shift($exceptions));
+        parent::__construct($message);
     }
 
     /**
