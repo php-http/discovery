@@ -17,8 +17,7 @@ final class DiscoveryFailedException extends \Exception implements Exception
     private $exceptions;
 
     /**
-     *
-     * @param string $message
+     * @param string       $message
      * @param \Exception[] $exceptions
      */
     public function __construct($message, array $exceptions = [])
@@ -37,7 +36,7 @@ final class DiscoveryFailedException extends \Exception implements Exception
         foreach ($exceptions as $e) {
             $message .= "\n - ".$e->getMessage();
         }
-        $message.="\n\n";
+        $message .= "\n\n";
 
         return new self($message, $exceptions);
     }
