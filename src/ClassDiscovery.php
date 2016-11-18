@@ -71,7 +71,7 @@ abstract class ClassDiscovery
             }
         }
 
-        throw new DiscoveryFailedException('Could not find resource using any discovery strategy', $exceptions);
+        throw DiscoveryFailedException::create($exceptions);
     }
 
     /**
