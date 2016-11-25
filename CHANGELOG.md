@@ -5,6 +5,7 @@
 
 ### Changed
 
+- Made exception messages clearer. `StrategyUnavailableException` is no longer the previous exception to `DiscoveryFailedException`.
 - `CommonClassesStrategy` is using `self` instead of `static`. Using `static` makes no sense when `CommonClassesStrategy` is final. 
 
 ## 1.1.0 - 2016-10-20
