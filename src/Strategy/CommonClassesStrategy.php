@@ -67,8 +67,8 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     public static function getCandidates($type)
     {
-        if (isset(static::$classes[$type])) {
-            return static::$classes[$type];
+        if (isset(self::$classes[$type])) {
+            return self::$classes[$type];
         }
 
         return [];
