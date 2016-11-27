@@ -3,6 +3,8 @@
 
 ## Unreleased
 
+## 1.1.1 - 2016-11-27
+
 ### Changed
 
 - Made exception messages clearer. `StrategyUnavailableException` is no longer the previous exception to `DiscoveryFailedException`.
