@@ -150,7 +150,7 @@ abstract class ClassDiscovery
     }
 
     /**
-     * Evaulates conditions to boolean.
+     * Evaluates conditions to boolean.
      *
      * @param mixed $condition
      *
