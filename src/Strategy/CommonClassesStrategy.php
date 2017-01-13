@@ -20,6 +20,7 @@ use Http\Client\Curl\Client as Curl;
 use Http\Client\Socket\Client as Socket;
 use Http\Adapter\React\Client as React;
 use Http\Adapter\Buzz\Client as Buzz;
+use Http\Mock\Client as Mock;
 
 /**
  * @internal
@@ -59,6 +60,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Socket::class, 'condition' => Socket::class],
             ['class' => Buzz::class, 'condition' => Buzz::class],
             ['class' => React::class, 'condition' => React::class],
+            ['class' => Mock::class, 'condition' => Mock::class],
         ],
     ];
 
