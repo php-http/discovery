@@ -7,9 +7,6 @@ use Http\Mock\Client as Mock;
 /**
  * Find the Mock client.
  *
- * @internal
- * @final
- *
  * @author Sam Rapaport <me@samrapdev.com>
  */
 final class MockClientStrategy implements DiscoveryStrategy
