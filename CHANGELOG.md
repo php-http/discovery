@@ -3,6 +3,8 @@
 
 ## Unreleased
 
+## 1.2.0 - 2017-02-12
+
 ### Added
 
 - MockClientStrategy class.
