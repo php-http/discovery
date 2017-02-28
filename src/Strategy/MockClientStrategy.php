@@ -18,7 +18,7 @@ final class MockClientStrategy implements DiscoveryStrategy
     public static function getCandidates($type)
     {
         return ($type === HttpClient::class)
-            ? ['class' => Mock::class, 'condition' => Mock::class]
+            ? [['class' => Mock::class, 'condition' => Mock::class]]
             : [];
     }
 }
