@@ -1,9 +1,11 @@
 # Change Log
 
 
-## Unreleased
+## 1.2.1 - 2017-03-02
 
-- MockClientStategy class fixed
+### Fixed
+
+- Fixed minor issue with `MockClientStrategy`, also added more tests. 
 
 ## 1.2.0 - 2017-02-12
 
