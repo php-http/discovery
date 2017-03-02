@@ -3,7 +3,9 @@
 
 ## Unreleased
 
-- MockClientStategy class fixed
+## 1.2.1 - 2017-03-02
+
+- Fixed minor issue with MockClientStategy, also added more tests. 
 
 ## 1.2.0 - 2017-02-12
 
