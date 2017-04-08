@@ -30,6 +30,13 @@ Please see the [official documentation](http://php-http.readthedocs.org/en/lates
 $ composer test
 ```
 
+## Backwards compatibility promise
+
+The backwards compatibility promise does not include classes marked with the `@internal` annotation. Nor does it
+include the default order of which the strategies are executed. However we do promise that we do not remove any strategies 
+and we will also not remove any classes in the `CommonClassesStrategy`. We do also promise to support the following Puli versions: 
+
+* 1.0.0-beta10
 
 ## Contributing
 
