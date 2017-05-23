@@ -3,6 +3,7 @@
 namespace Http\Discovery\Strategy;
 
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
+use Http\Client\Common\PluginClientFactory;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Message\StreamFactory\GuzzleStreamFactory;
 use Http\Message\UriFactory\GuzzleUriFactory;
@@ -59,6 +60,9 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Socket::class, 'condition' => Socket::class],
             ['class' => Buzz::class, 'condition' => Buzz::class],
             ['class' => React::class, 'condition' => React::class],
+        ],
+        'Http\Client\Common\PluginClientFactoryInterface' => [
+            ['class' => PluginClientFactory::class, 'condition' => PluginClientFactory::class],
         ],
     ];
 

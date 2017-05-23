@@ -13,7 +13,14 @@
     "require": {
         "php": "^5.5 || ^7.0"
     },
+    "repositories": {
+        "client-common": {
+            "type": "vcs",
+            "url": "git@github.com:fbourigault/client-common"
+        }
+    },
     "require-dev": {
+        "php-http/client-common": "dev-plugin-client-factory",
         "php-http/httplug": "^1.0",
         "php-http/message-factory": "^1.0",
         "puli/composer-plugin": "1.0.0-beta10",
