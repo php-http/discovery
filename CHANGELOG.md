@@ -5,6 +5,8 @@
 ### Added
 
 - Discovery support for CakePHP adapter
+- Discovery support for Zend adapter
+- Discovery support for Artax adapter
 
 ## 1.2.1 - 2017-03-02
 
