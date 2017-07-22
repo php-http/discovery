@@ -1,5 +1,10 @@
 # Change Log
 
+## Unreleased
+
+### Added
+
+- Discovery support for CakePHP adapter
 
 ## 1.2.1 - 2017-03-02
 
