@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### Changed
+
+- Use ::class constant instead of writing the class string. 
+
 ## 1.3.0 - 2017-08-03
 
 ### Added
