@@ -54,6 +54,7 @@ abstract class ClassDiscovery
                 $candidates = call_user_func($strategy.'::getCandidates', $type);
             } catch (StrategyUnavailableException $e) {
                 $exceptions[] = $e;
+
                 continue;
             }
 
