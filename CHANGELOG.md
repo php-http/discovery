@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.4.1 - 2018-03-8
+
+- Added missing dependency nyholm/psr7
+
 ## 1.4.0 - 2018-02-06
 
 ### Added
