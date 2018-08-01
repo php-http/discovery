@@ -32,6 +32,7 @@ use Nyholm\Psr7\Request as NyholmRequest;
 use Nyholm\Psr7\Factory\MessageFactory as NyholmMessageFactory;
 use Nyholm\Psr7\Factory\StreamFactory as NyholmStreamFactory;
 use Nyholm\Psr7\Factory\UriFactory as NyholmUriFactory;
+use Nyholm\Psr7\Factory\HttplugFactory as NyholmFactory;
 
 /**
  * @internal
@@ -45,22 +46,25 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     private static $classes = [
         MessageFactory::class => [
-            ['class' => NyholmMessageFactory::class, 'condition' => [NyholmRequest::class, NyholmMessageFactory::class]],
+            ['class' => NyholmFactory::class, 'condition' => [NyholmRequest::class, NyholmFactory::class]],
             ['class' => GuzzleMessageFactory::class, 'condition' => [GuzzleRequest::class, GuzzleMessageFactory::class]],
             ['class' => DiactorosMessageFactory::class, 'condition' => [DiactorosRequest::class, DiactorosMessageFactory::class]],
             ['class' => SlimMessageFactory::class, 'condition' => [SlimRequest::class, SlimMessageFactory::class]],
+            ['class' => NyholmMessageFactory::class, 'condition' => [NyholmRequest::class, NyholmMessageFactory::class]],
         ],
         StreamFactory::class => [
-            ['class' => NyholmStreamFactory::class, 'condition' => [NyholmRequest::class, NyholmStreamFactory::class]],
+            ['class' => NyholmFactory::class, 'condition' => [NyholmRequest::class, NyholmFactory::class]],
             ['class' => GuzzleStreamFactory::class, 'condition' => [GuzzleRequest::class, GuzzleStreamFactory::class]],
             ['class' => DiactorosStreamFactory::class, 'condition' => [DiactorosRequest::class, DiactorosStreamFactory::class]],
             ['class' => SlimStreamFactory::class, 'condition' => [SlimRequest::class, SlimStreamFactory::class]],
+            ['class' => NyholmStreamFactory::class, 'condition' => [NyholmRequest::class, NyholmStreamFactory::class]],
         ],
         UriFactory::class => [
-            ['class' => NyholmUriFactory::class, 'condition' => [NyholmRequest::class, NyholmUriFactory::class]],
+            ['class' => NyholmFactory::class, 'condition' => [NyholmRequest::class, NyholmFactory::class]],
             ['class' => GuzzleUriFactory::class, 'condition' => [GuzzleRequest::class, GuzzleUriFactory::class]],
             ['class' => DiactorosUriFactory::class, 'condition' => [DiactorosRequest::class, DiactorosUriFactory::class]],
             ['class' => SlimUriFactory::class, 'condition' => [SlimRequest::class, SlimUriFactory::class]],
+            ['class' => NyholmUriFactory::class, 'condition' => [NyholmRequest::class, NyholmUriFactory::class]],
         ],
         HttpAsyncClient::class => [
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
