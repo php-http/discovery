@@ -5,6 +5,7 @@ namespace Http\Discovery\Strategy;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
+use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Message\StreamFactory;
@@ -76,6 +77,12 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Cake::class, 'condition' => Cake::class],
             ['class' => Zend::class, 'condition' => Zend::class],
             ['class' => Artax::class, 'condition' => Artax::class],
+            [
+                'class' => function() {
+                    return new \Buzz\Client\Curl([], MessageFactoryDiscovery::find());
+                },
+                'condition' => [\Buzz\Client\Curl::class, \Buzz\Message\ResponseBuilder::class]
+            ],
         ],
     ];
 
