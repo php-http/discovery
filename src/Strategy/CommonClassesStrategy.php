@@ -78,7 +78,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Zend::class, 'condition' => Zend::class],
             ['class' => Artax::class, 'condition' => Artax::class],
             [
-                'class' => ['CommonClassesStrategy::buzzInstanciate',
+                'class' => ['CommonClassesStrategy::buzzInstanciate'],
                 'condition' => [\Buzz\Client\Curl::class, \Buzz\Message\ResponseBuilder::class]
             ],
         ],
