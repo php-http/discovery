@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.5.0 - 2018-xx-xx
+
+### Added
+
+- Support for `nyholm/psr7` version 1.0. 
+
 ## 1.4.0 - 2018-02-06
 
 ### Added
