@@ -226,5 +226,4 @@ abstract class ClassDiscovery
             return false;
         }
     }
-
 }
