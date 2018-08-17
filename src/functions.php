@@ -10,9 +10,9 @@ namespace Http\Discovery;
  * This function will catch all potential exceptions and make sure it returns a boolean.
  *
  * @param string $class
- * @param boolean $autoload
+ * @param bool   $autoload
  *
- * @return boolean
+ * @return bool
  */
 function safe_class_exists($class, $autoload = true)
 {
