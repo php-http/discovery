@@ -5,7 +5,6 @@ namespace Http\Discovery;
 use Http\Discovery\Exception\ClassInstantiationFailedException;
 use Http\Discovery\Exception\DiscoveryFailedException;
 use Http\Discovery\Exception\StrategyUnavailableException;
-use Http\Discovery as Func;
 
 /**
  * Registry that based find results on class existence.
@@ -162,7 +161,7 @@ abstract class ClassDiscovery
     {
         if (is_string($condition)) {
             // Should be extended for functions, extensions???
-            return Func\safe_class_exists($condition);
+            return safe_class_exists($condition);
         } elseif (is_callable($condition)) {
             return $condition();
         } elseif (is_bool($condition)) {

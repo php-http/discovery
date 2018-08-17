@@ -1,13 +1,6 @@
 <?php
 
-namespace GuzzleHttp\Psr7;
-
-use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamInterface;
-use Psr\Http\Message\UriInterface;
+namespace Http\Discovery;
 
 /**
  * We want to do a "safe" version of PHP's "class_exists" because Magento has a bug
