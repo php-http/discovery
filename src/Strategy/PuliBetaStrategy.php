@@ -3,6 +3,7 @@
 namespace Http\Discovery\Strategy;
 
 use Http\Discovery\Exception\PuliUnavailableException;
+use function Http\Discovery\safe_class_exists;
 use Puli\Discovery\Api\Discovery;
 use Puli\GeneratedPuliFactory;
 
@@ -41,7 +42,7 @@ class PuliBetaStrategy implements DiscoveryStrategy
 
             $puliFactoryClass = PULI_FACTORY_CLASS;
 
-            if (!class_exists($puliFactoryClass)) {
+            if (!safe_class_exists($puliFactoryClass)) {
                 throw new PuliUnavailableException('Puli Factory class does not exist');
             }
 

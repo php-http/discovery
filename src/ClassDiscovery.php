@@ -161,7 +161,7 @@ abstract class ClassDiscovery
     {
         if (is_string($condition)) {
             // Should be extended for functions, extensions???
-            return class_exists($condition);
+            return safe_class_exists($condition);
         } elseif (is_callable($condition)) {
             return $condition();
         } elseif (is_bool($condition)) {
