@@ -43,6 +43,9 @@
             "dev-master": "1.3-dev"
         }
     },
+    "conflict": {
+        "nyholm/psr7": "<1.0"
+    },
     "prefer-stable": true,
     "minimum-stability": "beta"
 }
