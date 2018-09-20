@@ -171,7 +171,7 @@ abstract class ClassDiscovery
 
             // Immediately stop execution if the condition is false
             for ($i = 0; $i < count($condition) && false !== $evaluatedCondition; ++$i) {
-                $evaluatedCondition &= static::evaluateCondition($condition[$i]);
+                $evaluatedCondition = $evaluatedCondition && static::evaluateCondition($condition[$i]);
             }
 
             return $evaluatedCondition;
