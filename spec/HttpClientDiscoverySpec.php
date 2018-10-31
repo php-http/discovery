@@ -52,6 +52,10 @@ class HttpClientDiscoverySpec extends ObjectBehavior
 
     private function psr18IsInUse()
     {
+        if (PHP_MAJOR_VERSION < 7) {
+            return false;
+        }
+
         $reflection = new \ReflectionMethod(HttpClient::class, 'sendRequest');
         
         return $reflection->hasReturnType();
