@@ -161,7 +161,7 @@ abstract class ClassDiscovery
     {
         if (is_string($condition)) {
             // Should be extended for functions, extensions???
-            return class_exists($condition);
+            return self::safeClassExists($condition);
         } elseif (is_callable($condition)) {
             return $condition();
         } elseif (is_bool($condition)) {
@@ -204,5 +204,26 @@ abstract class ClassDiscovery
         }
 
         throw new ClassInstantiationFailedException('Could not instantiate class because parameter is neither a callable nor a string');
+    }
+
+    /**
+     * We want to do a "safe" version of PHP's "class_exists" because Magento has a bug
+     * (or they call it a "feature"). Magento is throwing an exception if you do class_exists()
+     * on a class that ends with "Factory" and if that file does not exits.
+     *
+     * This function will catch all potential exceptions and make sure it returns a boolean.
+     *
+     * @param string $class
+     * @param bool   $autoload
+     *
+     * @return bool
+     */
+    public static function safeClassExists($class)
+    {
+        try {
+            return class_exists($class);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }
