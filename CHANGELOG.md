@@ -1,5 +1,9 @@
 # Change Log
 
+### Added
+
+- Support for `php-http/httplug` version 2.0, hence supporting PSR-18 
+
 ## 1.5.0 - 2018-xx-xx
 
 ### Added
