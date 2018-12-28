@@ -78,8 +78,8 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Zend::class, 'condition' => Zend::class],
             ['class' => Artax::class, 'condition' => Artax::class],
             [
-                'class' => ['CommonClassesStrategy::buzzInstanciate'],
-                'condition' => [\Buzz\Client\Curl::class, \Buzz\Message\ResponseBuilder::class]
+                'class' => ['CommonClassesStrategy::buzzInstantiate'],
+                'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
             ],
         ],
     ];
@@ -96,7 +96,8 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         return [];
     }
 
-    public static function buzzInstanciate() {
-        return new \Buzz\Client\Curl([], MessageFactoryDiscovery::find());
+    public static function buzzInstantiate()
+    {
+        return new \Buzz\Client\FileGetContents(MessageFactoryDiscovery::find());
     }
 }
