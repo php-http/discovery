@@ -163,7 +163,7 @@ abstract class ClassDiscovery
             // Should be extended for functions, extensions???
             return class_exists($condition);
         } elseif (is_callable($condition)) {
-            return $condition();
+            return (bool) $condition();
         } elseif (is_bool($condition)) {
             return $condition;
         } elseif (is_array($condition)) {
@@ -174,7 +174,7 @@ abstract class ClassDiscovery
                 $evaluatedCondition = $evaluatedCondition && static::evaluateCondition($condition[$i]);
             }
 
-            return $evaluatedCondition;
+            return (bool) $evaluatedCondition;
         }
 
         return false;

@@ -6,8 +6,6 @@
 
 - Support for `nyholm/psr7` version 1.0. 
 
-## 1.4.1 - 2018-09-20
-
 ### Fixed
 
 - Fixed condition evaluation
