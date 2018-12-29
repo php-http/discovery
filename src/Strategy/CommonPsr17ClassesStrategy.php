@@ -14,7 +14,7 @@ use Psr\Http\Message\UriFactoryInterface;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-final class CommonClassesStrategy implements DiscoveryStrategy
+final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
 {
     /**
      * @var array
