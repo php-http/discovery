@@ -4,6 +4,7 @@ namespace Http\Discovery;
 
 use Http\Discovery\Exception\ClassInstantiationFailedException;
 use Http\Discovery\Exception\DiscoveryFailedException;
+use Http\Discovery\Exception\NoCandidateFoundException;
 use Http\Discovery\Exception\StrategyUnavailableException;
 
 /**
@@ -70,6 +71,8 @@ abstract class ClassDiscovery
 
                 return $candidate['class'];
             }
+
+            $exceptions[] = new NoCandidateFoundException($strategy, $candidates);
         }
 
         throw DiscoveryFailedException::create($exceptions);
