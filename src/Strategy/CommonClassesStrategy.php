@@ -29,7 +29,6 @@ use Http\Adapter\Buzz\Client as Buzz;
 use Http\Adapter\Cake\Client as Cake;
 use Http\Adapter\Zend\Client as Zend;
 use Http\Adapter\Artax\Client as Artax;
-use Nyholm\Psr7\Request as NyholmRequest;
 use Nyholm\Psr7\Factory\HttplugFactory as NyholmHttplugFactory;
 
 /**
@@ -54,7 +53,6 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => GuzzleStreamFactory::class, 'condition' => [GuzzleRequest::class, GuzzleStreamFactory::class]],
             ['class' => DiactorosStreamFactory::class, 'condition' => [DiactorosRequest::class, DiactorosStreamFactory::class]],
             ['class' => SlimStreamFactory::class, 'condition' => [SlimRequest::class, SlimStreamFactory::class]],
-            ['class' => NyholmStreamFactory::class, 'condition' => [NyholmRequest::class, NyholmStreamFactory::class]],
         ],
         UriFactory::class => [
             ['class' => NyholmHttplugFactory::class, 'condition' => [NyholmHttplugFactory::class]],
