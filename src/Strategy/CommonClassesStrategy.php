@@ -83,6 +83,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
                 'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
             ],
         ],
+        Psr18Client::class => [],
     ];
 
     /**
@@ -90,12 +91,8 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     public static function getCandidates($type)
     {
-        if (isset(self::$classes[$type])) {
-            return self::$classes[$type];
-        }
-
         if ($type === Psr18Client::class) {
-            $candidates = [];
+            $candidates = self::$classes[$type];
             foreach (self::$classes[HttpClient::class] as $c) {
                 if (is_subclass_of($c['class'], Psr18Client::class)) {
                     $candidates[] = $c;
@@ -103,6 +100,10 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             }
 
             return $candidates;
+        }
+
+        if (isset(self::$classes[$type])) {
+            return self::$classes[$type];
         }
 
         return [];
