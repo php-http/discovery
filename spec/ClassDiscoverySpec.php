@@ -44,9 +44,16 @@ class ClassDiscoverySpec extends ObjectBehavior
 
     function it_validates_conditions() {
         $c0 = ['class' => 'ClassName0', 'condition' => false];
+        $c0b = ['class' => 'ClassName0', 'condition' => [false, true]];
+        $c0c = ['class' => 'ClassName0', 'condition' => [true, false]];
+        $c0d = ['class' => 'ClassName0', 'condition' => [true, false, true]];
+        $c0e = ['class' => 'ClassName0', 'condition' => [false, function() {
+            throw new \RuntimeException('This should never be called');
+        }]];
         $c1 = ['class' => 'ClassName1', 'condition' => true];
         $c2 = ['class' => 'ClassName2', 'condition' => false];
-        DiscoveryHelper::setClasses('Foobar', [$c0, $c1, $c2]);
+        $c3 = ['class' => 'ClassName3', 'condition' => true];
+        DiscoveryHelper::setClasses('Foobar', [$c0, $c0b, $c0c, $c0d, $c0e, $c1, $c2, $c3]);
 
         $this->find('Foobar')->shouldReturn('ClassName1');
     }
