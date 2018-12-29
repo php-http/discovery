@@ -12,6 +12,7 @@
 - `ClassDiscovery::safeClassExists` which will help Magento users. 
 - Support for HTTPlug 2.0
 - Support for Buzz 1.0
+- Better error message when nothing found by introducing a new exception: `NoCandidateFoundException`.
 
 ### Fixed
 
