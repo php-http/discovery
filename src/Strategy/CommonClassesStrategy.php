@@ -92,7 +92,9 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     public static function getCandidates($type)
     {
         if (Psr18Client::class === $type) {
-            $candidates = self::$classes[$type];
+            $candidates = self::$classes[PSR18Client::class];
+
+            // HTTPlug 2.0 clients implements PSR18Client too.
             foreach (self::$classes[HttpClient::class] as $c) {
                 if (is_subclass_of($c['class'], Psr18Client::class)) {
                     $candidates[] = $c;
