@@ -91,7 +91,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     public static function getCandidates($type)
     {
-        if ($type === Psr18Client::class) {
+        if (Psr18Client::class === $type) {
             $candidates = self::$classes[$type];
             foreach (self::$classes[HttpClient::class] as $c) {
                 if (is_subclass_of($c['class'], Psr18Client::class)) {
