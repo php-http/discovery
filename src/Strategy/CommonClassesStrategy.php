@@ -79,7 +79,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Artax::class, 'condition' => Artax::class],
             [
                 'class' => [self::class, 'buzzInstantiate'],
-                'condition' => [[MessageFactoryDiscovery::class, 'find'], \Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
+                'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
             ],
         ],
     ];
