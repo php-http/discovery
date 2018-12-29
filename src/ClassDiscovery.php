@@ -162,14 +162,17 @@ abstract class ClassDiscovery
         if (is_string($condition)) {
             // Should be extended for functions, extensions???
             return self::safeClassExists($condition);
-        } elseif (is_callable($condition)) {
-            return $condition();
-        } elseif (is_bool($condition)) {
+        }
+        if (is_callable($condition)) {
+            return (bool) $condition();
+        }
+        if (is_bool($condition)) {
             return $condition;
-        } elseif (is_array($condition)) {
-            // Immediately stop execution if the condition is false
-            for ($i = 0; $i < count($condition); ++$i) {
-                if (false === static::evaluateCondition($condition[$i])) {
+        }
+        if (is_array($condition)) {
+            foreach ($condition as $c) {
+                if (false === static::evaluateCondition($c)) {
+                    // Immediately stop execution if the condition is false
                     return false;
                 }
             }
