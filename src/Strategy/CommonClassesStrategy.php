@@ -15,6 +15,7 @@ use Http\Message\UriFactory\GuzzleUriFactory;
 use Http\Message\MessageFactory\DiactorosMessageFactory;
 use Http\Message\StreamFactory\DiactorosStreamFactory;
 use Http\Message\UriFactory\DiactorosUriFactory;
+use Psr\Http\Client\ClientInterface as Psr18Client;
 use Zend\Diactoros\Request as DiactorosRequest;
 use Http\Message\MessageFactory\SlimMessageFactory;
 use Http\Message\StreamFactory\SlimStreamFactory;
@@ -91,6 +92,17 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     {
         if (isset(self::$classes[$type])) {
             return self::$classes[$type];
+        }
+
+        if ($type === Psr18Client::class) {
+            $candidates = [];
+            foreach (self::$classes[HttpClient::class] as $c) {
+                if (is_subclass_of($c['class'], Psr18Client::class)) {
+                    $candidates[] = $c;
+                }
+            }
+
+            return $candidates;
         }
 
         return [];
