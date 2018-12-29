@@ -4,15 +4,18 @@
 
 - Support for `php-http/httplug` version 2.0, hence supporting PSR-18 
 
-## 1.5.0 - 2018-xx-xx
+## 1.5.0 - 2018-12-30
 
 ### Added
 
 - Support for `nyholm/psr7` version 1.0. 
+- `ClassDiscovery::safeClassExists` which will help Magento users. 
+- Support for HTTPlug 2.0
+- Support for Buzz 1.0
 
 ### Fixed
 
-- Fixed condition evaluation
+- Fixed condition evaluation should stop after first invalid condition. 
 
 ## 1.4.0 - 2018-02-06
 
