@@ -16,7 +16,7 @@
 
 ### Fixed
 
-- Fixed condition evaluation should stop after first invalid condition. 
+- Fixed condition evaluation, it should stop after first invalid condition. 
 
 ## 1.4.0 - 2018-02-06
 
