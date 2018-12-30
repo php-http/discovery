@@ -15,6 +15,13 @@ Do not use 1.5.1.
 
 - Removed PHP 7 code
 
+## 1.6.0 - UNRELEASED
+
+### Added
+
+- Support for PSR-17 factories
+- Support for PSR-18 clients
+
 ## 1.5.1 - 2018-12-30
 
 ### Fixed
