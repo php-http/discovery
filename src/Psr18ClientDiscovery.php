@@ -6,7 +6,7 @@ use Http\Discovery\Exception\DiscoveryFailedException;
 use Psr\Http\Client\ClientInterface;
 
 /**
- * Finds a PSR18 HTTP Client.
+ * Finds a PSR-18 HTTP Client.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
