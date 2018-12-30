@@ -34,26 +34,4 @@ final class HttpClientDiscovery extends ClassDiscovery
 
         return static::instantiateClass($client);
     }
-
-    /**
-     * Finds a PSR-18 HTTP Client.
-     *
-     * @return ClientInterface
-     *
-     * @throws Exception\NotFoundException
-     */
-    public static function findPsr18Client()
-    {
-        try {
-            $client = static::findOneByType(ClientInterface::class);
-        } catch (DiscoveryFailedException $e) {
-            throw new \Http\Discovery\Exception\NotFoundException(
-                'No PSR-18 clients found. Make sure to install a package providing "psr/http-client-implementation". Example: "php-http/guzzle6-adapter".',
-                0,
-                $e
-            );
-        }
-
-        return static::instantiateClass($client);
-    }
 }
