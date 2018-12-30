@@ -4,6 +4,12 @@
 
 - Support for `php-http/httplug` version 2.0, hence supporting PSR-18 
 
+## 1.5.1 - 2018-12-30
+
+### Fixed
+
+- Removed PHP 7 code
+
 ## 1.5.0 - 2018-12-30
 
 ### Added
