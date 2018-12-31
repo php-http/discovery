@@ -1,20 +1,5 @@
 # Change Log
 
-## 1.5.2 - 2018-12-31
-
-Corrected mistakes in 1.5.1. The different between 1.5.2 and 1.5.0 is that
-we removed some PHP 7 code. 
-
-## 1.5.1 - 2018-12-31
-
-This version added new features by mistake. These are reverted in 1.5.2. 
-
-Do not use 1.5.1.
-
-### Fixed
-
-- Removed PHP 7 code
-
 ## 1.6.0 - UNRELEASED
 
 ### Added
@@ -22,7 +7,18 @@ Do not use 1.5.1.
 - Support for PSR-17 factories
 - Support for PSR-18 clients
 
-## 1.5.1 - 2018-12-30
+## 1.5.2 - 2018-12-31
+
+Corrected mistakes in 1.5.1. The different between 1.5.2 and 1.5.0 is that
+we removed some PHP 7 code. 
+
+https://github.com/php-http/discovery/compare/1.5.0...1.5.2
+
+## 1.5.1 - 2018-12-31
+
+This version added new features by mistake. These are reverted in 1.5.2. 
+
+Do not use 1.5.1.
 
 ### Fixed
 
