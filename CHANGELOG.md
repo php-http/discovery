@@ -1,10 +1,15 @@
 # Change Log
 
-### Added
+## 1.5.2 - 2018-12-31
 
-- Support for `php-http/httplug` version 2.0, hence supporting PSR-18 
+Corrected mistakes in 1.5.1. The different between 1.5.2 and 1.5.0 is that
+we removed some PHP 7 code. 
 
-## 1.5.1 - 2018-12-30
+## 1.5.1 - 2018-12-31
+
+This version added new features by mistake. These are reverted in 1.5.2. 
+
+Do not use 1.5.1.
 
 ### Fixed
 
