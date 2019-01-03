@@ -19,7 +19,7 @@ final class Psr17FactoryDiscovery extends ClassDiscovery
 {
     private static function createException($type, Exception $e)
     {
-        new \Http\Discovery\Exception\NotFoundException(
+        return new \Http\Discovery\Exception\NotFoundException(
             'No psr-17 '.$type.' found. Install a package from this list: https://packagist.org/providers/psr/http-factory-implementation',
             0,
             $e
