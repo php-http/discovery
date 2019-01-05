@@ -12,7 +12,6 @@
         </testsuite>
     </testsuites>
 
-
     <groups>
         <exclude>
             <group>NothingInstalled</group>
