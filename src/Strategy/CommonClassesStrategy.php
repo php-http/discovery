@@ -81,7 +81,12 @@ final class CommonClassesStrategy implements DiscoveryStrategy
                 'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
             ],
         ],
-        Psr18Client::class => [],
+        Psr18Client::class => [
+            [
+                'class' => [self::class, 'buzzInstantiate'],
+                'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
+            ],
+        ],
     ];
 
     /**
