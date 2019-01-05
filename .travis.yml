@@ -30,7 +30,7 @@ matrix:
     include:
         - name: PHPSpec code coverage
           php: 5.5
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci" PULI_VERSION=1.0.0-beta9 DEPENDENCIES="phpspec/phpspec:^2.4 henrikbjorn/phpspec-code-coverage:^2.0.2"
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci" PULI_VERSION=1.0.0-beta9 DEPENDENCIES="henrikbjorn/phpspec-code-coverage:^2.0.2"
         - name: PHPUnit tests
           php: 7.2
           env: TEST_COMMAND="./vendor/bin/phpunit" DEPENDENCIES="phpunit/phpunit:^7.5 nyholm/psr7:^1.0 kriswallsmith/buzz:^1.0@beta php-http/curl-client:^1.0 php-http/message"
