@@ -2,7 +2,7 @@
 
 namespace tests\Http\Discovery;
 
-use Http\Discovery\Exception\DiscoveryFailedException;
+use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\Psr18ClientDiscovery;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
@@ -20,7 +20,7 @@ class Psr18ClientDiscoveryTest extends TestCase
      */
     public function testNotFound()
     {
-        $this->expectException(DiscoveryFailedException::class);
+        $this->expectException(NotFoundException::class);
         $client = Psr18ClientDiscovery::find();
     }
 }
