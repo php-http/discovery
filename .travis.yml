@@ -40,13 +40,15 @@ matrix:
 
 before_install:
     - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
+    - if ! [ -z "$DEPENDENCIES" ]; then composer require --no-update ${DEPENDENCIES}; fi;
 
 install:
     - wget https://github.com/puli/cli/releases/download/1.0.0-beta10/puli.phar && chmod +x puli.phar
     - composer require puli/composer-plugin:${PULI_VERSION} --no-update
-    - travis_retry composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
+    - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
 
 script:
+    - composer validate --strict --no-check-lock
     - $TEST_COMMAND
 
 after_success:
