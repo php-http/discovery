@@ -2,11 +2,9 @@
 
 namespace tests\Http\Discovery;
 
-use Http\Discovery\Exception\DiscoveryFailedException;
+use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\Psr17FactoryDiscovery;
-use Http\Discovery\Psr18ClientDiscovery;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
@@ -33,7 +31,7 @@ class Psr17FactoryDiscoveryTest extends TestCase
     public function testNotFound($method)
     {
         $callable = [Psr17FactoryDiscovery::class, $method];
-        $this->expectException(DiscoveryFailedException::class);
+        $this->expectException(NotFoundException::class);
         $callable();
     }
 
