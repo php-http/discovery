@@ -3,8 +3,6 @@
 namespace tests\Http\Discovery\Exception;
 
 use Http\Discovery\Exception as DiscoveryException;
-use Http\Discovery\Strategy\CommonClassesStrategy;
-use Http\Client\HttpClient;
 use PHPUnit\Framework\TestCase;
 
 class InitializeExceptionTest extends TestCase

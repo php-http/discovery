@@ -3,8 +3,6 @@
 namespace tests\Http\Discovery\Exception;
 
 use Http\Discovery\Exception as DiscoveryException;
-use Http\Discovery\Strategy\CommonClassesStrategy;
-use Http\Client\HttpClient;
 use PHPUnit\Framework\TestCase;
 
 class NoCandidateFoundExceptionTest extends TestCase
@@ -43,7 +41,7 @@ class NoCandidateFoundExceptionTest extends TestCase
 
     public function testInitializeWithClosure()
     {
-        $obj = \Closure::fromCallable(function() {
+        $obj = \Closure::fromCallable(function () {
             $x = 2;
         });
         $candidates = [
@@ -56,7 +54,7 @@ class NoCandidateFoundExceptionTest extends TestCase
 
     public function testInitializeWithAnonymousFunction()
     {
-        $func = function() {
+        $func = function () {
             $x = 2;
         };
         $candidates = [
