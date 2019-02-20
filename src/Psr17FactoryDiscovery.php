@@ -43,7 +43,7 @@ final class Psr17FactoryDiscovery extends ClassDiscovery
     }
 
     /**
-     * @return RequestFactoryInterface
+     * @return ResponseFactoryInterface
      *
      * @throws Exception\NotFoundException
      */
