@@ -81,22 +81,22 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Zend::class, 'condition' => Zend::class],
             ['class' => Artax::class, 'condition' => Artax::class],
             [
-                'class' => [self::class, 'buzzInstantiate'],
-                'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
-            ],
-            [
                 'class' => [self::class, 'symfonyHttplugInstantiate'],
                 'condition' => SymfonyHttplug::class,
+            ],
+            [
+                'class' => [self::class, 'buzzInstantiate'],
+                'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
             ],
         ],
         Psr18Client::class => [
             [
-                'class' => [self::class, 'buzzInstantiate'],
-                'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
-            ],
-            [
                 'class' => [self::class, 'symfonyPsr18Instantiate'],
                 'condition' => SymfonyPsr18::class,
+            ],
+            [
+                'class' => [self::class, 'buzzInstantiate'],
+                'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
             ],
         ],
     ];
