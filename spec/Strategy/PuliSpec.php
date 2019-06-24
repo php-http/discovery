@@ -11,6 +11,9 @@ use Puli\Discovery\Api\Discovery;
 use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
 
+/**
+ * @require \NotPHP73
+ */
 class PuliSpec extends ObjectBehavior
 {
     function let(
@@ -67,7 +70,7 @@ class PuliSpec extends ObjectBehavior
     }
 
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveCandidate' => function ($subject, $class, $condition) {
