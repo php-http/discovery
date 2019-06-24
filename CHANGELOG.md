@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### Added
+
+- Support for `symfony/http-client`
+
 ## 1.6.1 - 2019-02-23
 
 ### Fixed

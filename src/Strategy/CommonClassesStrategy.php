@@ -5,7 +5,9 @@ namespace Http\Discovery\Strategy;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
+use Http\Discovery\ClassDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\MessageFactory;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Message\StreamFactory;
@@ -30,6 +32,8 @@ use Http\Adapter\Buzz\Client as Buzz;
 use Http\Adapter\Cake\Client as Cake;
 use Http\Adapter\Zend\Client as Zend;
 use Http\Adapter\Artax\Client as Artax;
+use Symfony\Component\HttpClient\HttplugClient as SymfonyHttplug;
+use Symfony\Component\HttpClient\Psr18Client as SymfonyPsr18;
 use Nyholm\Psr7\Factory\HttplugFactory as NyholmHttplugFactory;
 
 /**
@@ -80,11 +84,19 @@ final class CommonClassesStrategy implements DiscoveryStrategy
                 'class' => [self::class, 'buzzInstantiate'],
                 'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
             ],
+            [
+                'class' => [self::class, 'symfonyHttplugInstantiate'],
+                'condition' => SymfonyHttplug::class,
+            ],
         ],
         Psr18Client::class => [
             [
                 'class' => [self::class, 'buzzInstantiate'],
                 'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
+            ],
+            [
+                'class' => [self::class, 'symfonyPsr18Instantiate'],
+                'condition' => SymfonyPsr18::class,
             ],
         ],
     ];
@@ -117,5 +129,15 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     public static function buzzInstantiate()
     {
         return new \Buzz\Client\FileGetContents(MessageFactoryDiscovery::find());
+    }
+
+    public static function symfonyHttplugInstantiate()
+    {
+        return new SymfonyHttplug(null, ClassDiscovery::findOneByType(MessageFactory::class), ClassDiscovery::findOneByType(StreamFactory::class));
+    }
+
+    public static function symfonyPsr18Instantiate()
+    {
+        return new SymfonyPsr18(null, Psr17FactoryDiscovery::findResponseFactory(), Psr17FactoryDiscovery::findStreamFactory());
     }
 }
