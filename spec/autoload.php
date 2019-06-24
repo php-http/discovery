@@ -7,3 +7,9 @@ if (PHP_VERSION_ID >= 50600) {
         'Puli\\GeneratedPuliFactory' => __DIR__.'/../.puli/GeneratedPuliFactory.php',
     ]);
 }
+
+if (PHP_VERSION_ID >= 70300 && PHP_VERSION_ID < 70400) {
+    class PHP73 {}
+} else {
+    class NotPHP73 {}
+}

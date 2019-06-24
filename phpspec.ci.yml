@@ -5,7 +5,8 @@ suites:
 formatter.name: pretty
 bootstrap: spec/autoload.php
 extensions:
-    - PhpSpec\Extension\CodeCoverageExtension
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension: ~
+    Akeneo\SkipExampleExtension: ~
 code_coverage:
     format: clover
     output: build/coverage.xml
