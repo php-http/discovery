@@ -5,7 +5,6 @@ namespace Http\Discovery\Strategy;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
-use Http\Discovery\ClassDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\MessageFactory;
