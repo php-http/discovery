@@ -30,7 +30,7 @@ matrix:
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test" PULI_VERSION=1.0.0-beta9
         - name: PHPUnit tests
           php: 7.3
-          env: TEST_COMMAND="./vendor/bin/phpunit" DEPENDENCIES="phpunit/phpunit:^7.5 nyholm/psr7:^1.0 kriswallsmith/buzz:^1.0 php-http/curl-client:^1.0 php-http/message"
+          env: TEST_COMMAND="./vendor/bin/phpunit" DEPENDENCIES="phpunit/phpunit:^7.5 nyholm/psr7:^1.0 kriswallsmith/buzz:^1.0 php-http/curl-client:^2.0 php-http/message"
         - name: PHPUnit test with nothing installed
           php: 7.3
           env: TEST_COMMAND="./vendor/bin/phpunit --group=NothingInstalled" DEPENDENCIES="phpunit/phpunit:^7.5"
