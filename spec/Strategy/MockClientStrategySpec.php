@@ -25,11 +25,13 @@ class MockClientStrategySpec extends ObjectBehavior
         $candidates->shouldHaveCount(1);
     }
 
-    function it_should_return_the_mock_client_for_psr_interface(DiscoveryStrategy $strategy)
+    function it_should_return_the_mock_client_for_implementations(DiscoveryStrategy $strategy)
     {
-        $candidates = $this->getCandidates(ClientInterface::class);
-        $candidates->shouldBeArray();
-        $candidates->shouldHaveCount(1);
+        foreach (class_implements(HttpClient::class) as $type) {
+            $candidates = $this->getCandidates($type);
+            $candidates->shouldBeArray();
+            $candidates->shouldHaveCount(1);
+        }
     }
 
     function it_should_return_the_mock_client_as_async(DiscoveryStrategy $strategy)
