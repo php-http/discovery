@@ -2,6 +2,7 @@
 
 namespace Http\Discovery\Strategy;
 
+use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
@@ -65,15 +66,13 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => SlimUriFactory::class, 'condition' => [SlimRequest::class, SlimUriFactory::class]],
         ],
         HttpAsyncClient::class => [
+            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, Promise::class]],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Curl::class, 'condition' => Curl::class],
             ['class' => React::class, 'condition' => React::class],
         ],
         HttpClient::class => [
-            [
-                'class' => [self::class, 'symfonyHttplugInstantiate'],
-                'condition' => SymfonyHttplug::class,
-            ],
+            ['class' => SymfonyHttplug::class, 'condition' => SymfonyHttplug::class],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Guzzle5::class, 'condition' => Guzzle5::class],
             ['class' => Curl::class, 'condition' => Curl::class],
@@ -128,11 +127,6 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     public static function buzzInstantiate()
     {
         return new \Buzz\Client\FileGetContents(MessageFactoryDiscovery::find());
-    }
-
-    public static function symfonyHttplugInstantiate()
-    {
-        return new SymfonyHttplug(null, Psr17FactoryDiscovery::findResponseFactory(), Psr17FactoryDiscovery::findStreamFactory());
     }
 
     public static function symfonyPsr18Instantiate()
