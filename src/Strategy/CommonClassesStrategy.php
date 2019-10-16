@@ -35,6 +35,7 @@ use Http\Adapter\Artax\Client as Artax;
 use Symfony\Component\HttpClient\HttplugClient as SymfonyHttplug;
 use Symfony\Component\HttpClient\Psr18Client as SymfonyPsr18;
 use Nyholm\Psr7\Factory\HttplugFactory as NyholmHttplugFactory;
+use RicardoFiorani\GuzzlePsr18Adapter\Client as GuzzlePsr18Adapter;
 
 /**
  * @internal
@@ -82,6 +83,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Cake::class, 'condition' => Cake::class],
             ['class' => Zend::class, 'condition' => Zend::class],
             ['class' => Artax::class, 'condition' => Artax::class],
+            ['class' => GuzzlePsr18Adapter::class, 'condition' => GuzzlePsr18Adapter::class],
             [
                 'class' => [self::class, 'buzzInstantiate'],
                 'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
