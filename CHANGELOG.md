@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.1 - 2019-11-05
+
+### Added
+
+- Support for `ricardofiorani/guzzle-psr18-adapter`
+
 ## 1.7.0 - 2019-06-30
 
 ### Added
