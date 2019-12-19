@@ -6,6 +6,12 @@
 
 - Support for `ricardofiorani/guzzle-psr18-adapter`
 
+## 1.7.1 - 2019-12-17
+
+### Fixed
+
+- Better conditions to see if Symfony's HTTP clients are available.
+
 ## 1.7.0 - 2019-06-30
 
 ### Added
@@ -29,13 +35,13 @@
 ## 1.5.2 - 2018-12-31
 
 Corrected mistakes in 1.5.1. The different between 1.5.2 and 1.5.0 is that
-we removed some PHP 7 code. 
+we removed some PHP 7 code.
 
 https://github.com/php-http/discovery/compare/1.5.0...1.5.2
 
 ## 1.5.1 - 2018-12-31
 
-This version added new features by mistake. These are reverted in 1.5.2. 
+This version added new features by mistake. These are reverted in 1.5.2.
 
 Do not use 1.5.1.
 
@@ -47,15 +53,15 @@ Do not use 1.5.1.
 
 ### Added
 
-- Support for `nyholm/psr7` version 1.0. 
-- `ClassDiscovery::safeClassExists` which will help Magento users. 
+- Support for `nyholm/psr7` version 1.0.
+- `ClassDiscovery::safeClassExists` which will help Magento users.
 - Support for HTTPlug 2.0
 - Support for Buzz 1.0
 - Better error message when nothing found by introducing a new exception: `NoCandidateFoundException`.
 
 ### Fixed
 
-- Fixed condition evaluation, it should stop after first invalid condition. 
+- Fixed condition evaluation, it should stop after first invalid condition.
 
 ## 1.4.0 - 2018-02-06
 
@@ -75,7 +81,7 @@ Do not use 1.5.1.
 
 ### Fixed
 
-- Fixed minor issue with `MockClientStrategy`, also added more tests. 
+- Fixed minor issue with `MockClientStrategy`, also added more tests.
 
 ## 1.2.0 - 2017-02-12
 
