@@ -1,6 +1,12 @@
 # Change Log
 
-## 1.7.1 - 2019-12-17
+## 1.7.2 - 2019-12-27
+
+### Fixed
+
+- Allow a condition to specify an interface and not just classes.
+
+## 1.7.1 - 2019-12-26
 
 ### Fixed
 
