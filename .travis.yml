@@ -41,10 +41,11 @@ matrix:
               - |
                 # install_test is a helper to create folded reports (From Symfony)
                 install_test () {
-                    local title="./tests/install.sh \"$1\" \"$2\" \"$3\""
+                    local title="$1 \"$2\" ..."
                     local fold=$(date +%s%N)
                     echo -e "travis_fold:start:$fold"
                     echo -e "\\e[1;34m$title\\e[0m"
+                    echo "./tests/install.sh \"$1\" \"$2\" \"$3\""
                     ./tests/install.sh "$1" "$2" "$3" 2>&1
                     local ok=$?
                     (exit $ok) &&
