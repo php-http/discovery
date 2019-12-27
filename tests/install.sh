@@ -33,12 +33,14 @@ PHP_EXIT_CODE=$?
 
 # Print result
 echo ""
+echo ""
 if [ $PHP_EXIT_CODE -eq 0 ]; then
     echo "We found a package"
 else
     echo "We did not find anything"
 fi
 
+echo ""
 if [ "$1" = "will-find" ]; then
     exit $PHP_EXIT_CODE;
 elif [ $PHP_EXIT_CODE -ne 0 ]; then
@@ -46,4 +48,5 @@ elif [ $PHP_EXIT_CODE -ne 0 ]; then
 fi
 
 echo "We did find a class but we were not supposed to"
+echo ""
 exit 1

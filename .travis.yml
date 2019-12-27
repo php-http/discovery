@@ -23,20 +23,6 @@ branches:
 matrix:
     fast_finish: true
     include:
-        - name: Test Install
-          php: 7.3
-          install:
-          script:
-              # Test that we find Guzzle
-              - ./tests/install.sh "will-find" "Http\Discovery\HttpClientDiscovery::find();" "php-http/guzzle6-adapter"
-              # Test that we find a client with Symfony and Guzzle PSR-7
-              - ./tests/install.sh will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug php-http/message-factory guzzlehttp/psr7:1.* http-interop/http-factory-guzzle"
-              # We should fail if we dont have php-http/message-factory or PSR-17
-              - ./tests/install.sh cant-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug php-http/message-factory guzzlehttp/psr7:1.*"
-              - ./tests/install.sh cant-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug guzzlehttp/psr7:1.* http-interop/http-factory-guzzle"
-              # We should be able to find a client when Symfony is only partly installed and we have guzzle adapter installed
-              - ./tests/install.sh will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/guzzle6-adapter php-http/httplug php-http/message-factory guzzlehttp/psr7:1.*"
-
         - name: PHPSpec code coverage
           php: 7.1
             # Disable code coverage until https://github.com/leanphp/phpspec-code-coverage/pull/38 is released
@@ -48,6 +34,37 @@ matrix:
         - name: PHPUnit test with nothing installed
           php: 7.3
           env: TEST_COMMAND="./vendor/bin/phpunit --group=NothingInstalled" DEPENDENCIES="phpunit/phpunit:^7.5"
+
+        - name: Test Install
+          php: 7.3
+          install:
+              - |
+                # install_test is a helper to create folded reports (From Symfony)
+                install_test () {
+                    local title="./tests/install.sh \"$1\" \"$2\" \"$3\""
+                    local fold=$(date +%s%N)
+                    echo -e "travis_fold:start:$fold"
+                    echo -e "\\e[1;34m$title\\e[0m"
+                    ./tests/install.sh "$1" "$2" "$3" 2>&1
+                    local ok=$?
+                    (exit $ok) &&
+                        echo -e "\\e[32mOK\\e[0m $title\\n\\ntravis_fold:end:$fold" ||
+                        echo -e "\\e[41mKO\\e[0m $title\\n"
+                    (exit $ok)
+                }
+                export -f install_test
+
+          script:
+              # Test that we find Guzzle
+              - install_test "will-find" "Http\Discovery\HttpClientDiscovery::find();" "php-http/guzzle6-adapter"
+              # Test that we find a client with Symfony and Guzzle PSR-7
+              - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug php-http/message-factory guzzlehttp/psr7:1.* http-interop/http-factory-guzzle"
+              # We should fail if we dont have php-http/message-factory or PSR-17
+              - install_test cant-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug php-http/message-factory guzzlehttp/psr7:1.*"
+              - install_test cant-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug guzzlehttp/psr7:1.* http-interop/http-factory-guzzle"
+              # We should be able to find a client when Symfony is only partly installed and we have guzzle adapter installed
+              - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/guzzle6-adapter php-http/httplug php-http/message-factory guzzlehttp/psr7:1.*"
+
 
 before_install:
     - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
