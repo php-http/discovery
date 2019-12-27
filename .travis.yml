@@ -57,7 +57,7 @@ matrix:
 
           script:
               # Test that we find Guzzle
-              - install_test "will-find" "Http\Discovery\HttpClientDiscovery::find();" "php-http/guzzle6-adapter"
+              - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "php-http/guzzle6-adapter"
               # Test that we find a client with Symfony and Guzzle PSR-7
               - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug php-http/message-factory guzzlehttp/psr7:1.* http-interop/http-factory-guzzle"
               # We should fail if we dont have php-http/message-factory or PSR-17
