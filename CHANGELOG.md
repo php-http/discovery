@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.3 - 2019-12-27
+
+### Fixed
+
+- Enough conditions to only use Symfony HTTP client if all needed components are available.
+
 ## 1.7.2 - 2019-12-27
 
 ### Fixed
