@@ -65,6 +65,8 @@ matrix:
               - install_test cant-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug guzzlehttp/psr7:1.* http-interop/http-factory-guzzle"
               # We should be able to find a client when Symfony is only partly installed and we have guzzle adapter installed
               - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/guzzle6-adapter php-http/httplug php-http/message-factory guzzlehttp/psr7:1.*"
+              # Test that we find a client with Symfony and Guzzle
+              - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/guzzle6-adapter
 
 
 before_install:
