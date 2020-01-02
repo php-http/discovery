@@ -6,6 +6,7 @@ use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
+use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\RequestFactory;
@@ -68,13 +69,13 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => SlimUriFactory::class, 'condition' => [SlimRequest::class, SlimUriFactory::class]],
         ],
         HttpAsyncClient::class => [
-            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, Promise::class, RequestFactory::class]],
+            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, Promise::class, RequestFactory::class, [CommonClassesStrategy::class, 'isPsr17FactoryInstalled']]],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Curl::class, 'condition' => Curl::class],
             ['class' => React::class, 'condition' => React::class],
         ],
         HttpClient::class => [
-            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, RequestFactory::class, Psr17RequestFactory::class]],
+            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, RequestFactory::class, [CommonClassesStrategy::class, 'isPsr17FactoryInstalled']]],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Guzzle5::class, 'condition' => Guzzle5::class],
             ['class' => Curl::class, 'condition' => Curl::class],
@@ -134,5 +135,20 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     public static function symfonyPsr18Instantiate()
     {
         return new SymfonyPsr18(null, Psr17FactoryDiscovery::findResponseFactory(), Psr17FactoryDiscovery::findStreamFactory());
+    }
+
+    /**
+     * Can be use as a condition.
+     * @return bool
+     */
+    public static function isPsr17FactoryInstalled()
+    {
+        try {
+            Psr17FactoryDiscovery::findResponseFactory();
+        } catch (NotFoundException $e) {
+            return false;
+        }
+
+        return true;
     }
 }
