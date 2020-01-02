@@ -67,6 +67,8 @@ matrix:
               - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/guzzle6-adapter php-http/httplug php-http/message-factory guzzlehttp/psr7:1.*"
               # Test that we find a client with Symfony and Guzzle
               - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/guzzle6-adapter
+              # Test that we find an async client with Symfony and Guzzle
+              - install_test will-find "Http\Discovery\HttpAsyncClientDiscovery::find();" "symfony/http-client:5.* php-http/guzzle6-adapter
 
 
 before_install:
