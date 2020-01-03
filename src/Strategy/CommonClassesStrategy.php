@@ -149,7 +149,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         } catch (NotFoundException $e) {
             return false;
         } catch (\Throwable $e) {
-            trigger_error('Trying to find a PSR-17 ResponseFactory when an exception got thrown: '.$e->getMessage(), E_USER_ERROR);
+            trigger_error(sprintf('Got exception "%s (%s)" while checking if a PSR-17 ResponseFactory is available', get_class($e), $e->getMessage()), E_USER_WARNING);
 
             return false;
         }
