@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.7.4 - 2020-01-03
+
+### Fixed
+
+- Improve conditions on Symfony's async HTTPlug client. 
+
 ## 1.7.3 - 2019-12-27
 
 ### Fixed
