@@ -138,7 +138,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     }
 
     /**
-     * Can be use as a condition.
+     * Can be used as a condition.
      * @return bool
      */
     public static function isPsr17FactoryInstalled()
@@ -146,6 +146,10 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         try {
             Psr17FactoryDiscovery::findResponseFactory();
         } catch (NotFoundException $e) {
+            return false;
+        } catch (\Throwable $e) {
+            trigger_error('Trying to find a PSR-17 ResponseFactory when an exception got thrown: '.$e->getMessage(), E_USER_ERROR);
+
             return false;
         }
 
