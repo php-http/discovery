@@ -69,13 +69,13 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => SlimUriFactory::class, 'condition' => [SlimRequest::class, SlimUriFactory::class]],
         ],
         HttpAsyncClient::class => [
-            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, Promise::class, RequestFactory::class, [CommonClassesStrategy::class, 'isPsr17FactoryInstalled']]],
+            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, Promise::class, RequestFactory::class, [self::class, 'isPsr17FactoryInstalled']]],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Curl::class, 'condition' => Curl::class],
             ['class' => React::class, 'condition' => React::class],
         ],
         HttpClient::class => [
-            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, RequestFactory::class, [CommonClassesStrategy::class, 'isPsr17FactoryInstalled']]],
+            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, RequestFactory::class, [self::class, 'isPsr17FactoryInstalled']]],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Guzzle5::class, 'condition' => Guzzle5::class],
             ['class' => Curl::class, 'condition' => Curl::class],
@@ -139,6 +139,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
 
     /**
      * Can be used as a condition.
+     *
      * @return bool
      */
     public static function isPsr17FactoryInstalled()
