@@ -23,6 +23,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
         RequestFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\RequestFactory',
+            'GuzzleHttp\Psr7\HttpFactory',
             'Http\Factory\Diactoros\RequestFactory',
             'Http\Factory\Guzzle\RequestFactory',
             'Http\Factory\Slim\RequestFactory',
@@ -30,6 +31,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
         ResponseFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\ResponseFactory',
+            'GuzzleHttp\Psr7\HttpFactory',
             'Http\Factory\Diactoros\ResponseFactory',
             'Http\Factory\Guzzle\ResponseFactory',
             'Http\Factory\Slim\ResponseFactory',
@@ -37,6 +39,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
         ServerRequestFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\ServerRequestFactory',
+            'GuzzleHttp\Psr7\HttpFactory',
             'Http\Factory\Diactoros\ServerRequestFactory',
             'Http\Factory\Guzzle\ServerRequestFactory',
             'Http\Factory\Slim\ServerRequestFactory',
@@ -44,6 +47,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
         StreamFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\StreamFactory',
+            'GuzzleHttp\Psr7\HttpFactory',
             'Http\Factory\Diactoros\StreamFactory',
             'Http\Factory\Guzzle\StreamFactory',
             'Http\Factory\Slim\StreamFactory',
@@ -51,6 +55,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
         UploadedFileFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\UploadedFileFactory',
+            'GuzzleHttp\Psr7\HttpFactory',
             'Http\Factory\Diactoros\UploadedFileFactory',
             'Http\Factory\Guzzle\UploadedFileFactory',
             'Http\Factory\Slim\UploadedFileFactory',
@@ -58,6 +63,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
         UriFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\UriFactory',
+            'GuzzleHttp\Psr7\HttpFactory',
             'Http\Factory\Diactoros\UriFactory',
             'Http\Factory\Guzzle\UriFactory',
             'Http\Factory\Slim\UriFactory',

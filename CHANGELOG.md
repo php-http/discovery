@@ -1,10 +1,16 @@
 # Change Log
 
+## Unreleased
+
+### Added
+
+- Support discovering PSR-17 factories of `guzzlehttp/psr7` package
+
 ## 1.7.4 - 2020-01-03
 
 ### Fixed
 
-- Improve conditions on Symfony's async HTTPlug client. 
+- Improve conditions on Symfony's async HTTPlug client.
 
 ## 1.7.3 - 2019-12-27
 
