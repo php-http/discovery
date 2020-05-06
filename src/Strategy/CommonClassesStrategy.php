@@ -112,7 +112,9 @@ final class CommonClassesStrategy implements DiscoveryStrategy
 
             // HTTPlug 2.0 clients implements PSR18Client too.
             foreach (self::$classes[HttpClient::class] as $c) {
-                if (is_subclass_of($c['class'], Psr18Client::class)) {
+                // Attempting to load the Symfony HTTPlug client will throw an
+                // exception if the necessary dependencies are not installed.
+                if (SymfonyHttplug::class !== $c['class'] && is_subclass_of($c['class'], Psr18Client::class)) {
                     $candidates[] = $c;
                 }
             }
