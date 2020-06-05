@@ -6,6 +6,7 @@
 
 - Support discovering PSR-17 factories of `guzzlehttp/psr7` package
 - Support discovering PSR-17 factories of `laminas/laminas-diactoros` pakcage
+- `ClassDiscovery::getStrategies()` to retrieve the list of current strategies.
 
 ## 1.7.4 - 2020-01-03
 
