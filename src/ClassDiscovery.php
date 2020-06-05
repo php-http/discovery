@@ -125,11 +125,11 @@ abstract class ClassDiscovery
     }
 
     /**
-     * Returns the currently configured discovery strategies as fully qualified class names
+     * Returns the currently configured discovery strategies as fully qualified class names.
      *
      * @return string[]
      */
-    public static function getStrategies() : iterable
+    public static function getStrategies(): iterable
     {
         return self::$strategies;
     }
