@@ -27,6 +27,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Diactoros\RequestFactory',
             'Http\Factory\Guzzle\RequestFactory',
             'Http\Factory\Slim\RequestFactory',
+            'Laminas\Diactoros\RequestFactory',
         ],
         ResponseFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
@@ -35,6 +36,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Diactoros\ResponseFactory',
             'Http\Factory\Guzzle\ResponseFactory',
             'Http\Factory\Slim\ResponseFactory',
+            'Laminas\Diactoros\ResponseFactory',
         ],
         ServerRequestFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
@@ -43,6 +45,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Diactoros\ServerRequestFactory',
             'Http\Factory\Guzzle\ServerRequestFactory',
             'Http\Factory\Slim\ServerRequestFactory',
+            'Laminas\Diactoros\ServerRequestFactory',
         ],
         StreamFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
@@ -51,6 +54,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Diactoros\StreamFactory',
             'Http\Factory\Guzzle\StreamFactory',
             'Http\Factory\Slim\StreamFactory',
+            'Laminas\Diactoros\StreamFactory',
         ],
         UploadedFileFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
@@ -59,6 +63,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Diactoros\UploadedFileFactory',
             'Http\Factory\Guzzle\UploadedFileFactory',
             'Http\Factory\Slim\UploadedFileFactory',
+            'Laminas\Diactoros\UploadedFileFactory',
         ],
         UriFactoryInterface::class => [
             'Nyholm\Psr7\Factory\Psr17Factory',
@@ -67,6 +72,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Diactoros\UriFactory',
             'Http\Factory\Guzzle\UriFactory',
             'Http\Factory\Slim\UriFactory',
+            'Laminas\Diactoros\UriFactory',
         ],
     ];
 
