@@ -112,8 +112,12 @@ final class CommonClassesStrategy implements DiscoveryStrategy
 
             // HTTPlug 2.0 clients implements PSR18Client too.
             foreach (self::$classes[HttpClient::class] as $c) {
-                if (is_subclass_of($c['class'], Psr18Client::class)) {
-                    $candidates[] = $c;
+                try {
+                    if (is_subclass_of($c['class'], Psr18Client::class)) {
+                        $candidates[] = $c;
+                    }
+                } catch (\Throwable $e) {
+                    trigger_error(sprintf('Got exception "%s (%s)" while checking if a PSR-18 Client is available', get_class($e), $e->getMessage()), E_USER_WARNING);
                 }
             }
 
