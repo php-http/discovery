@@ -2,11 +2,17 @@
 
 ## Unreleased
 
+## 1.8.0 - 2020-06-14
+
 ### Added
 
 - Support discovering PSR-17 factories of `guzzlehttp/psr7` package
 - Support discovering PSR-17 factories of `laminas/laminas-diactoros` pakcage
 - `ClassDiscovery::getStrategies()` to retrieve the list of current strategies.
+
+### Fixed
+
+- Ignore exception during discovery when Symfony HttplugClient checks if HTTPlug is available.
 
 ## 1.7.4 - 2020-01-03
 
