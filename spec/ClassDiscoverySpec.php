@@ -68,6 +68,11 @@ class ClassDiscoverySpec extends ObjectBehavior
         $this->find('Foobar')->shouldReturn('Added');
     }
 
+    function it_retrieves_configured_strategies() {
+        $expect = [DiscoveryHelper::class];
+        $this->getStrategies()->shouldReturn($expect);
+    }
+
     function it_appends_strategies() {
         $candidate = ['class' => 'Added'];
         DiscoveryHelper::setClasses('Foobar', [$candidate]);
