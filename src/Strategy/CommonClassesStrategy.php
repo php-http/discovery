@@ -112,9 +112,21 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     public static function getCandidates($type)
     {
-        if (Psr18Client::class === $type) {
-            $candidates = self::$classes[PSR18Client::class];
+        $candidates = [];
 
+        // Not all versions of all clients implement the same interfaces. For example, 
+        // Guzzle 6 does not implement the PSR-18 client interface, but Guzzle 7 does.
+        foreach (self::$classes[$type] ?? [] as $c) {
+            try {
+                if (is_subclass_of($c['class'], $type)) {
+                    $candidates[] = $c;
+                }
+            } catch (\Throwable $e) {
+                trigger_error(sprintf('Got exception "%s (%s)" while checking if a PSR-18 Client is available', get_class($e), $e->getMessage()), E_USER_WARNING);
+            }
+        }
+
+        if (Psr18Client::class === $type) {
             // HTTPlug 2.0 clients implements PSR18Client too.
             foreach (self::$classes[HttpClient::class] as $c) {
                 try {
@@ -125,15 +137,9 @@ final class CommonClassesStrategy implements DiscoveryStrategy
                     trigger_error(sprintf('Got exception "%s (%s)" while checking if a PSR-18 Client is available', get_class($e), $e->getMessage()), E_USER_WARNING);
                 }
             }
-
-            return $candidates;
         }
 
-        if (isset(self::$classes[$type])) {
-            return self::$classes[$type];
-        }
-
-        return [];
+        return $candidates;
     }
 
     public static function buzzInstantiate()
