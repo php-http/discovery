@@ -77,7 +77,6 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         ],
         HttpClient::class => [
             ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, RequestFactory::class, [self::class, 'isPsr17FactoryInstalled']]],
-            ['class' => GuzzleHttp::class, 'condition' => GuzzleHttp::class],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Guzzle5::class, 'condition' => Guzzle5::class],
             ['class' => Curl::class, 'condition' => Curl::class],
@@ -96,6 +95,10 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             [
                 'class' => [self::class, 'symfonyPsr18Instantiate'],
                 'condition' => [SymfonyPsr18::class, Psr17RequestFactory::class],
+            ],
+            [
+                'class' => GuzzleHttp::class,
+                'condition' => GuzzleHttp::class,
             ],
             [
                 'class' => [self::class, 'buzzInstantiate'],
