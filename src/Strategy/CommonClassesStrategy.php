@@ -114,7 +114,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     {
         $candidates = [];
 
-        // Not all versions of all clients implement the same interfaces. For example, 
+        // Not all versions of all clients implement the same interfaces. For example,
         // Guzzle 6 does not implement the PSR-18 client interface, but Guzzle 7 does.
         foreach (self::$classes[$type] ?? [] as $c) {
             try {
