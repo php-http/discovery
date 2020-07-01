@@ -112,11 +112,24 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     public static function getCandidates($type)
     {
+        if (Psr18Client::class === $type) {
+            return self::getPsr18Candidates();
+        }
+
+        return self::$classes[$type] ?? [];
+    }
+
+    /**
+     * @return array The return value is always an array with zero or more elements. Each
+     *               element is an array with two keys ['class' => string, 'condition' => mixed].
+     */
+    private static function getPsr18Candidates()
+    {
         $candidates = [];
 
-        foreach (self::$classes[$type] ?? [] as $c) {
-            // Guzzle 6 does not implement the PSR-18 client interface, but Guzzle 7 does.
-            if (Psr18Client::class === $type && GuzzleHttp::class === $c['class']) {
+        // Guzzle 6 does not implement the PSR-18 client interface, but Guzzle 7 does.
+        foreach (self::$classes[Psr18Client::class] ?? [] as $c) {
+            if (GuzzleHttp::class === $c['class']) {
                 if (defined('GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
                     $candidates[] = $c;
                 }
@@ -125,16 +138,14 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             }
         }
 
-        if (Psr18Client::class === $type) {
-            // HTTPlug 2.0 clients implements PSR18Client too.
-            foreach (self::$classes[HttpClient::class] as $c) {
-                try {
-                    if (is_subclass_of($c['class'], Psr18Client::class)) {
-                        $candidates[] = $c;
-                    }
-                } catch (\Throwable $e) {
-                    trigger_error(sprintf('Got exception "%s (%s)" while checking if a PSR-18 Client is available', get_class($e), $e->getMessage()), E_USER_WARNING);
+        // HTTPlug 2.0 clients implements PSR18Client too.
+        foreach (self::$classes[HttpClient::class] as $c) {
+            try {
+                if (is_subclass_of($c['class'], Psr18Client::class)) {
+                    $candidates[] = $c;
                 }
+            } catch (\Throwable $e) {
+                trigger_error(sprintf('Got exception "%s (%s)" while checking if a PSR-18 Client is available', get_class($e), $e->getMessage()), E_USER_WARNING);
             }
         }
 
