@@ -116,7 +116,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
 
         foreach (self::$classes[$type] ?? [] as $c) {
             // Guzzle 6 does not implement the PSR-18 client interface, but Guzzle 7 does.
-            if (Psr18Client::class === $type && $c['class'] === GuzzleHttp::class) {
+            if (Psr18Client::class === $type && GuzzleHttp::class === $c['class']) {
                 if (defined('GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
                     $candidates[] = $c;
                 }
