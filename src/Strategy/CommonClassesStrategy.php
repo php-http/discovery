@@ -26,6 +26,7 @@ use Http\Message\MessageFactory\SlimMessageFactory;
 use Http\Message\StreamFactory\SlimStreamFactory;
 use Http\Message\UriFactory\SlimUriFactory;
 use Slim\Http\Request as SlimRequest;
+use GuzzleHttp\Client as GuzzleHttp;
 use Http\Adapter\Guzzle6\Client as Guzzle6;
 use Http\Adapter\Guzzle5\Client as Guzzle5;
 use Http\Client\Curl\Client as Curl;
@@ -96,6 +97,10 @@ final class CommonClassesStrategy implements DiscoveryStrategy
                 'condition' => [SymfonyPsr18::class, Psr17RequestFactory::class],
             ],
             [
+                'class' => GuzzleHttp::class,
+                'condition' => GuzzleHttp::class,
+            ],
+            [
                 'class' => [self::class, 'buzzInstantiate'],
                 'condition' => [\Buzz\Client\FileGetContents::class, \Buzz\Message\ResponseBuilder::class],
             ],
@@ -108,27 +113,43 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     public static function getCandidates($type)
     {
         if (Psr18Client::class === $type) {
-            $candidates = self::$classes[PSR18Client::class];
+            return self::getPsr18Candidates();
+        }
 
-            // HTTPlug 2.0 clients implements PSR18Client too.
-            foreach (self::$classes[HttpClient::class] as $c) {
-                try {
-                    if (is_subclass_of($c['class'], Psr18Client::class)) {
-                        $candidates[] = $c;
-                    }
-                } catch (\Throwable $e) {
-                    trigger_error(sprintf('Got exception "%s (%s)" while checking if a PSR-18 Client is available', get_class($e), $e->getMessage()), E_USER_WARNING);
+        return self::$classes[$type] ?? [];
+    }
+
+    /**
+     * @return array The return value is always an array with zero or more elements. Each
+     *               element is an array with two keys ['class' => string, 'condition' => mixed].
+     */
+    private static function getPsr18Candidates()
+    {
+        $candidates = [];
+
+        // Guzzle 6 does not implement the PSR-18 client interface, but Guzzle 7 does.
+        foreach (self::$classes[Psr18Client::class] ?? [] as $c) {
+            if (GuzzleHttp::class === $c['class']) {
+                if (defined('GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
+                    $candidates[] = $c;
                 }
+            } else {
+                $candidates[] = $c;
             }
-
-            return $candidates;
         }
 
-        if (isset(self::$classes[$type])) {
-            return self::$classes[$type];
+        // HTTPlug 2.0 clients implements PSR18Client too.
+        foreach (self::$classes[HttpClient::class] as $c) {
+            try {
+                if (is_subclass_of($c['class'], Psr18Client::class)) {
+                    $candidates[] = $c;
+                }
+            } catch (\Throwable $e) {
+                trigger_error(sprintf('Got exception "%s (%s)" while checking if a PSR-18 Client is available', get_class($e), $e->getMessage()), E_USER_WARNING);
+            }
         }
 
-        return [];
+        return $candidates;
     }
 
     public static function buzzInstantiate()

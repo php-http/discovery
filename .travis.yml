@@ -56,8 +56,10 @@ matrix:
                 export -f install_test
 
           script:
-              # Test that we find Guzzle
-              - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "php-http/guzzle6-adapter"
+              # Test that we find Guzzle 6 v1
+              - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "php-http/guzzle6-adapter:^1.1.1"
+              # Test that we find Guzzle 6 v2
+              - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "php-http/guzzle6-adapter:^2.0.1"
               # Test that we find a client with Symfony and Guzzle PSR-7
               - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug php-http/message-factory guzzlehttp/psr7:1.* http-interop/http-factory-guzzle"
               # We should fail if we dont have php-http/message-factory or PSR-17
@@ -69,6 +71,10 @@ matrix:
               - install_test will-find "Http\Discovery\HttpClientDiscovery::find();" "php-http/client-common:2.* php-http/message:1.8.* symfony/http-client:4.* php-http/guzzle6-adapter"
               # Test that we find an async client with Symfony and Guzzle
               - install_test will-find "Http\Discovery\HttpAsyncClientDiscovery::find();" "php-http/client-common:2.* php-http/message:1.8.* symfony/http-client:4.* php-http/guzzle6-adapter"
+              # Test that we find PSR-18 Guzzle 6
+              - install_test will-find "Http\Discovery\Psr18ClientDiscovery::find();" "php-http/guzzle6-adapter:^2.0.1"
+              # Test that we find PSR-18 Guzzle 7
+              - install_test will-find "Http\Discovery\Psr18ClientDiscovery::find();" "guzzlehttp/guzzle:^7.0.1"
 
 before_install:
     - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi

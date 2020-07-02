@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Support discovering PSR-18 factories of `guzzlehttp/guzzle` 7+
+
 ## 1.8.0 - 2020-06-14
 
 ### Added
