@@ -98,7 +98,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ],
             [
                 'class' => GuzzleHttp::class,
-                'condition' => [self::class, 'isGuzzleImplementingPsr18']
+                'condition' => [self::class, 'isGuzzleImplementingPsr18'],
             ],
             [
                 'class' => [self::class, 'buzzInstantiate'],
