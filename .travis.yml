@@ -76,6 +76,14 @@ matrix:
               - install_test will-find "Http\Discovery\Psr18ClientDiscovery::find();" "php-http/guzzle6-adapter:^2.0.1"
               # Test that we find PSR-18 Guzzle 7
               - install_test will-find "Http\Discovery\Psr18ClientDiscovery::find();" "guzzlehttp/guzzle:^7.0.1"
+              # Test that we find PSR-18 Symfony 4
+              - install_test will-find "Http\Discovery\Psr18ClientDiscovery::find();" "symfony/http-client:4.* php-http/httplug nyholm/psr7:^1.3"
+              # Test that we find PSR-18 Symfony 5
+              - install_test will-find "Http\Discovery\Psr18ClientDiscovery::find();" "symfony/http-client:5.* php-http/httplug nyholm/psr7:^1.3"
+              # Test that we find PSR-17 http-interop
+              - install_test will-find "Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();" "http-interop/http-factory-guzzle:1.*"
+              # Test that we find PSR-17 nyholm
+              - install_test will-find "Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();" "nyholm/psr7:^1.3"
 
 before_install:
     - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
