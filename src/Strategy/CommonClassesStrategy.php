@@ -98,7 +98,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ],
             [
                 'class' => GuzzleHttp::class,
-                'condition' => GuzzleHttp::class,
+                'condition' => [self::class, 'isGuzzleImplementingPsr18'],
             ],
             [
                 'class' => [self::class, 'buzzInstantiate'],
@@ -125,18 +125,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     private static function getPsr18Candidates()
     {
-        $candidates = [];
-
-        // Guzzle 6 does not implement the PSR-18 client interface, but Guzzle 7 does.
-        foreach (self::$classes[Psr18Client::class] ?? [] as $c) {
-            if (GuzzleHttp::class === $c['class']) {
-                if (defined('GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
-                    $candidates[] = $c;
-                }
-            } else {
-                $candidates[] = $c;
-            }
-        }
+        $candidates = self::$classes[Psr18Client::class];
 
         // HTTPlug 2.0 clients implements PSR18Client too.
         foreach (self::$classes[HttpClient::class] as $c) {
@@ -160,6 +149,11 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     public static function symfonyPsr18Instantiate()
     {
         return new SymfonyPsr18(null, Psr17FactoryDiscovery::findResponseFactory(), Psr17FactoryDiscovery::findStreamFactory());
+    }
+
+    public static function isGuzzleImplementingPsr18()
+    {
+        return defined('GuzzleHttp\ClientInterface::MAJOR_VERSION');
     }
 
     /**
