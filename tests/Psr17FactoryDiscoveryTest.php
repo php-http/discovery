@@ -42,6 +42,7 @@ class Psr17FactoryDiscoveryTest extends TestCase
         yield ['findServerRequestFactory', ServerRequestFactoryInterface::class];
         yield ['findStreamFactory', StreamFactoryInterface::class];
         yield ['findUploadedFileFactory', UploadedFileFactoryInterface::class];
+        yield ['findUriFactory', UriFactoryInterface::class];
         yield ['findUrlFactory', UriFactoryInterface::class];
     }
 }
