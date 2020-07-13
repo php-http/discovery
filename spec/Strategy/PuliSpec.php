@@ -12,7 +12,7 @@ use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @require \NotPHP73
+ * @require \PuliIsSupported
  */
 class PuliSpec extends ObjectBehavior
 {
