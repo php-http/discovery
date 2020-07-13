@@ -8,8 +8,6 @@ if (PHP_VERSION_ID >= 50600) {
     ]);
 }
 
-if (PHP_VERSION_ID >= 70300 && PHP_VERSION_ID < 70400) {
-    class PHP73 {}
-} else {
-    class NotPHP73 {}
+if (PHP_VERSION_ID < 70300) {
+    class PuliIsSupported {}
 }

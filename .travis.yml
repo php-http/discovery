@@ -1,15 +1,8 @@
 language: php
 
-sudo: false
-
 cache:
     directories:
         - $HOME/.composer/cache/files
-
-php:
-    - 7.1
-    - 7.2
-    - 7.3
 
 env:
     global:
@@ -23,12 +16,23 @@ branches:
 matrix:
     fast_finish: true
     include:
-        - name: PHPSpec
+        - name: PHPSpec 7.1
           php: 7.1
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" TEST_COMMAND="composer test" PULI_VERSION=1.0.0-beta9
+        - name: PHPSpec 7.2
+          php: 7.2
+        - name: PHPSpec 7.3
+          php: 7.3
+        - name: PHPSpec 7.4
+          php: 7.4
+        - name: PHPSpec 8.0
+          php: nightly
+          env: COMPOSER_FLAGS="--prefer-stable --ignore-platform-reqs" DEPENDENCIES="phpdocumentor/reflection-docblock:^5.2@dev"
+        - name: PHPSpec lowest
+          php: 7.1
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" PULI_VERSION=1.0.0-beta9
         - name: PHPSpec code coverage
           php: 7.2
-          env: COVERAGE=true TEST_COMMAND="composer test-ci" PULI_VERSION=1.0.0-beta10 DEPENDENCIES="friends-of-phpspec/phpspec-code-coverage:^4.3"
+          env: COVERAGE=true TEST_COMMAND="composer test-ci" DEPENDENCIES="friends-of-phpspec/phpspec-code-coverage:^4.3 phpspec/phpspec:^5.1"
         - name: PHPUnit tests
           php: 7.3
           env: TEST_COMMAND="./vendor/bin/phpunit" DEPENDENCIES="phpunit/phpunit:^7.5 nyholm/psr7:^1.0 kriswallsmith/buzz:^1.0 php-http/curl-client:^1.0 php-http/message"
