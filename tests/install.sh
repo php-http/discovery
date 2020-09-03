@@ -20,7 +20,7 @@ mkdir -p $BUILD_DIR
 composer init --working-dir $BUILD_DIR --no-interaction
 composer req --working-dir $BUILD_DIR php-http/discovery --no-update
 
-# Define packages from arguments
+# Argument 3 installs additional composer packages
 if ! [ -z "$3" ]; then
     composer req --working-dir $BUILD_DIR $3
 fi
