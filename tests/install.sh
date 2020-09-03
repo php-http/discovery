@@ -28,10 +28,11 @@ fi
 # Arg 4 means some pecl things will be install
 if ! [ -z "$4" ]; then
     pecl install $4
-    pwd
 fi
 
 # Copy the current version of php-http/discovery
+ls -al
+ls -al $BUILD_DIR
 cp -R src $BUILD_DIR/vendor/php-http/discovery
 cd $BUILD_DIR
 
