@@ -21,6 +21,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
      */
     private static $classes = [
         RequestFactoryInterface::class => [
+            'Phalcon\Http\Message\RequestFactory',
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\RequestFactory',
             'GuzzleHttp\Psr7\HttpFactory',
@@ -30,6 +31,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Laminas\Diactoros\RequestFactory',
         ],
         ResponseFactoryInterface::class => [
+            'Phalcon\Http\Message\ResponseFactory',
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\ResponseFactory',
             'GuzzleHttp\Psr7\HttpFactory',
@@ -39,6 +41,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Laminas\Diactoros\ResponseFactory',
         ],
         ServerRequestFactoryInterface::class => [
+            'Phalcon\Http\Message\ServerRequestFactory',
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\ServerRequestFactory',
             'GuzzleHttp\Psr7\HttpFactory',
@@ -48,6 +51,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Laminas\Diactoros\ServerRequestFactory',
         ],
         StreamFactoryInterface::class => [
+            'Phalcon\Http\Message\StreamFactory',
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\StreamFactory',
             'GuzzleHttp\Psr7\HttpFactory',
@@ -57,6 +61,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Laminas\Diactoros\StreamFactory',
         ],
         UploadedFileFactoryInterface::class => [
+            'Phalcon\Http\Message\UploadedFileFactory',
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\UploadedFileFactory',
             'GuzzleHttp\Psr7\HttpFactory',
@@ -66,6 +71,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Laminas\Diactoros\UploadedFileFactory',
         ],
         UriFactoryInterface::class => [
+            'Phalcon\Http\Message\UriFactory',
             'Nyholm\Psr7\Factory\Psr17Factory',
             'Zend\Diactoros\UriFactory',
             'GuzzleHttp\Psr7\HttpFactory',
