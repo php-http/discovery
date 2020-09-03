@@ -18,7 +18,6 @@ mkdir -p $BUILD_DIR
 
 # Init composer
 composer init --working-dir $BUILD_DIR --no-interaction
-composer req --working-dir $BUILD_DIR php-http/discovery --no-update
 
 # Argument 3 installs additional composer packages
 if ! [ -z "$3" ]; then
@@ -29,6 +28,8 @@ fi
 if ! [ -z "$4" ]; then
     pecl install $4
 fi
+
+composer req --working-dir $BUILD_DIR php-http/discovery --no-update
 
 # Copy the current version of php-http/discovery
 ls -al
