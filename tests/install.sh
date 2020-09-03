@@ -21,12 +21,12 @@ composer init --working-dir $BUILD_DIR --no-interaction
 composer req --working-dir $BUILD_DIR php-http/discovery --no-update
 
 # Define packages from arguments
-if [ $3 -ne ""]; then
+if ! [ -z "$3" ]; then
     composer req --working-dir $BUILD_DIR $3
 fi
 
 # Arg 4 means some pecl things will be install
-if [ $4 -ne ""]; then
+if ! [ -z "$4" ]; then
     pecl install $4
 fi
 
