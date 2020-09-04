@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.10.0 - 2020-09-04
+
+- Discover PSR-18 implementation of phalcon
+
 ## 1.9.1 - 2020-07-13
 
 ### Fixed
