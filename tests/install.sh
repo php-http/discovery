@@ -18,25 +18,19 @@ mkdir -p $BUILD_DIR
 
 # Init composer
 composer init --working-dir $BUILD_DIR --no-interaction
-
 composer req --working-dir $BUILD_DIR php-http/discovery --no-update
 
 # Argument 3 installs additional composer packages
-if ! [ -z "$3" ]; then
-    composer req --working-dir $BUILD_DIR $3
-else
-    # composer req --no-update impiles --no install
-    composer req --working-dir $BUILD_DIR
+composer req --working-dir $BUILD_DIR $3
+
+# Arg 4 means some pecl things will be install
+if ! [ -z "$4" ]; then
+    pecl install $4
 fi
 
 # Copy the current version of php-http/discovery
 cp -R src $BUILD_DIR/vendor/php-http/discovery
 cd $BUILD_DIR
-
-# Arg 4 means some pecl things will be install
-if ! [ -z "$4" ]; then
-    pecl install $4 > /dev/null
-fi
 
 # Run PHP and check exit code
 php -r "require 'vendor/autoload.php'; ${2}" > /dev/null
