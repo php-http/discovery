@@ -20,8 +20,13 @@ mkdir -p $BUILD_DIR
 composer init --working-dir $BUILD_DIR --no-interaction
 composer req --working-dir $BUILD_DIR php-http/discovery --no-update
 
-# Define packages from arguments
+# Argument 3 installs additional composer packages
 composer req --working-dir $BUILD_DIR $3
+
+# Arg 4 means some pecl things will be install
+if ! [ -z "$4" ]; then
+    pecl install $4
+fi
 
 # Copy the current version of php-http/discovery
 cp -R src $BUILD_DIR/vendor/php-http/discovery
