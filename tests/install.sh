@@ -23,6 +23,8 @@ composer req --working-dir $BUILD_DIR php-http/discovery --no-update
 # Argument 3 installs additional composer packages
 if ! [ -z "$3" ]; then
     composer req --working-dir $BUILD_DIR $3
+else
+    composer req --working-dir $BUILD_DIR
 fi
 
 # Copy the current version of php-http/discovery
