@@ -29,15 +29,14 @@ fi
 cp -R src $BUILD_DIR/vendor/php-http/discovery
 cd $BUILD_DIR
 
+# Arg 4 means some pecl things will be install
+if ! [ -z "$4" ]; then
+    pecl install $4 > /dev/null
+fi
+
 # Run PHP and check exit code
 php -r "require 'vendor/autoload.php'; ${2}" > /dev/null
 PHP_EXIT_CODE=$?
-
-
-# Arg 4 means some pecl things will be install
-if ! [ -z "$4" ]; then
-    pecl install $4
-fi
 
 # Print result
 echo ""
