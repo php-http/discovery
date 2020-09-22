@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 1.12.0 - 2020-09-22
 
 - Support discovering HttpClient of `php-http/guzzle7-adapter` https://github.com/php-http/discovery/pull/189
 
