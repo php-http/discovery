@@ -72,7 +72,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         ],
         HttpAsyncClient::class => [
             ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, Promise::class, RequestFactory::class, [self::class, 'isPsr17FactoryInstalled']]],
-            ['class' => Guzzle7::class, 'condition' => Guzzle7::class],           
+            ['class' => Guzzle7::class, 'condition' => Guzzle7::class],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Curl::class, 'condition' => Curl::class],
             ['class' => React::class, 'condition' => React::class],
