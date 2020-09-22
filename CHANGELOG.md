@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.11.0 - 2020-09-21
+## 1.11.0 - 2020-09-22
 
 - Use correct method name to find Uri Factory in PSR17 https://github.com/php-http/discovery/pull/181
 
