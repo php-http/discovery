@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.11.0 - 2020-09-22
+
+- Use correct method name to find Uri Factory in PSR17 https://github.com/php-http/discovery/pull/181
+
 ## 1.10.0 - 2020-09-04
 
 - Discover PSR-18 implementation of phalcon
