@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Support discovering HttpClient of `php-http/guzzle7-adapter` https://github.com/php-http/discovery/pull/189
+
 ## 1.11.0 - 2020-09-22
 
 - Use correct method name to find Uri Factory in PSR17 https://github.com/php-http/discovery/pull/181
