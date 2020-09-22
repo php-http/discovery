@@ -27,6 +27,7 @@ use Http\Message\StreamFactory\SlimStreamFactory;
 use Http\Message\UriFactory\SlimUriFactory;
 use Slim\Http\Request as SlimRequest;
 use GuzzleHttp\Client as GuzzleHttp;
+use Http\Adapter\Guzzle7\Client as Guzzle7;
 use Http\Adapter\Guzzle6\Client as Guzzle6;
 use Http\Adapter\Guzzle5\Client as Guzzle5;
 use Http\Client\Curl\Client as Curl;
@@ -71,12 +72,14 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         ],
         HttpAsyncClient::class => [
             ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, Promise::class, RequestFactory::class, [self::class, 'isPsr17FactoryInstalled']]],
+            ['class' => Guzzle7::class, 'condition' => Guzzle7::class],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Curl::class, 'condition' => Curl::class],
             ['class' => React::class, 'condition' => React::class],
         ],
         HttpClient::class => [
             ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, RequestFactory::class, [self::class, 'isPsr17FactoryInstalled']]],
+            ['class' => Guzzle7::class, 'condition' => Guzzle7::class],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Guzzle5::class, 'condition' => Guzzle5::class],
             ['class' => Curl::class, 'condition' => Curl::class],
