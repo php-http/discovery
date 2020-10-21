@@ -127,7 +127,7 @@ final class Psr17FactoryDiscovery extends ClassDiscovery
      *
      * @throws Exception\NotFoundException
      *
-     * @deprecated This will be removed in 2.0. Consider using the findUrlFactory() method.
+     * @deprecated This will be removed in 2.0. Consider using the findUriFactory() method.
      */
     public static function findUrlFactory()
     {
