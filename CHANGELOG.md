@@ -1,8 +1,8 @@
 # Change Log
 
-## Added
+## 1.13.0 - 2020-11-27
 
-- Support discovering PSR-17 factories of `slim/psr7` package
+- Support discovering PSR-17 factories of `slim/psr7` package https://github.com/php-http/discovery/pull/192
 
 ## 1.12.0 - 2020-09-22
 
