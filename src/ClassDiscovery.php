@@ -27,6 +27,10 @@ abstract class ClassDiscovery
         Strategy\CommonPsr17ClassesStrategy::class,
     ];
 
+    private static $deprecatedStrategies = [
+        Strategy\PuliBetaStrategy::class => true,
+    ];
+
     /**
      * Discovery cache to make the second time we use discovery faster.
      *
@@ -55,7 +59,9 @@ abstract class ClassDiscovery
             try {
                 $candidates = call_user_func($strategy.'::getCandidates', $type);
             } catch (StrategyUnavailableException $e) {
-                $exceptions[] = $e;
+                if (!isset(self::$deprecatedStrategies[$strategy])) {
+                    $exceptions[] = $e;
+                }
 
                 continue;
             }
