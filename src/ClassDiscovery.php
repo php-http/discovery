@@ -22,9 +22,9 @@ abstract class ClassDiscovery
      * @var array
      */
     private static $strategies = [
-        Strategy\PuliBetaStrategy::class,
         Strategy\CommonClassesStrategy::class,
         Strategy\CommonPsr17ClassesStrategy::class,
+        Strategy\PuliBetaStrategy::class,
     ];
 
     private static $deprecatedStrategies = [
