@@ -11,7 +11,6 @@ class InitializeExceptionTest extends TestCase
     {
         $e[] = new DiscoveryException\ClassInstantiationFailedException();
         $e[] = new DiscoveryException\NotFoundException();
-        $e[] = new DiscoveryException\PuliUnavailableException();
         $e[] = new DiscoveryException\StrategyUnavailableException();
         $e[] = new DiscoveryException\NoCandidateFoundException('CommonClasses', []);
         $e[] = DiscoveryException\DiscoveryFailedException::create($e);
