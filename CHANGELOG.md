@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.14.0 - unreleased
+## 1.14.0 - 2021-06-21
 
 - Deprecate puli as it has been unmaintained for a long time and is not compatible with composer 2 https://github.com/php-http/discovery/pull/195
 
