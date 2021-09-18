@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.14.1 - TBC
+## 1.14.1 - 2021-09-18
 
 - [#199](https://github.com/php-http/discovery/pull/199) - Fixes message factory discovery for `laminas-diactoros ^2.7` 
 
