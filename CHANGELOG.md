@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.14.1 - TBC
+
+- [#199](https://github.com/php-http/discovery/pull/199) - Fixes message factory discovery for `laminas-diactoros ^2.7` 
+
 ## 1.14.0 - 2021-06-21
 
 - Deprecate puli as it has been unmaintained for a long time and is not compatible with composer 2 https://github.com/php-http/discovery/pull/195
