@@ -78,7 +78,6 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
         UriFactoryInterface::class => [
             'Phalcon\Http\Message\UriFactory',
             'Nyholm\Psr7\Factory\Psr17Factory',
-            'Zend\Diactoros\UriFactory',
             'GuzzleHttp\Psr7\HttpFactory',
             'Http\Factory\Diactoros\UriFactory',
             'Http\Factory\Guzzle\UriFactory',
