@@ -2,8 +2,6 @@
 
 namespace spec\Http\Discovery\Strategy;
 
-use Http\Discovery\ClassDiscovery;
-use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\Strategy\PuliBetaStrategy;
 use Puli\Discovery\Binding\ClassBinding;
 use Puli\GeneratedPuliFactory;

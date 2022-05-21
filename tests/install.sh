@@ -17,13 +17,12 @@ echo "Using directory: ${BUILD_DIR}"
 mkdir -p $BUILD_DIR
 
 # Init composer
-composer init --working-dir $BUILD_DIR --no-interaction
 composer req --working-dir $BUILD_DIR php-http/discovery --no-update
 
 # Argument 3 installs additional composer packages
 composer req --working-dir $BUILD_DIR $3
 
-# Arg 4 means some pecl things will be install
+# Arg 4 means we need to install pecl libraries
 if ! [ -z "$4" ]; then
     pecl install $4
 fi

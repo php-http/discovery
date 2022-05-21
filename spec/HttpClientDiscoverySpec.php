@@ -6,10 +6,6 @@ use Http\Client\HttpClient;
 use Http\Discovery\ClassDiscovery;
 use Http\Discovery\NotFoundException;
 use Http\Discovery\Strategy\DiscoveryStrategy;
-use Puli\GeneratedPuliFactory;
-use Puli\Discovery\Api\Discovery;
-use Puli\Discovery\Binding\ClassBinding;
-use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
 use spec\Http\Discovery\Helper\DiscoveryHelper;
 use Http\Discovery\HttpClientDiscovery;
@@ -34,7 +30,7 @@ class HttpClientDiscoverySpec extends ObjectBehavior
         $this->shouldHaveType(ClassDiscovery::class);
     }
 
-    function it_finds_a_http_client(DiscoveryStrategy $strategy) 
+    function it_finds_a_http_client(DiscoveryStrategy $strategy)
     {
         $candidate = ['class' => HttpClientStub::class, 'condition' => true];
         if ($this->psr18IsInUse()) {
@@ -57,7 +53,7 @@ class HttpClientDiscoverySpec extends ObjectBehavior
         }
 
         $reflection = new \ReflectionMethod(HttpClient::class, 'sendRequest');
-        
+
         return $reflection->hasReturnType();
     }
 }

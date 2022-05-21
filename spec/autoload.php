@@ -8,6 +8,6 @@ if (PHP_VERSION_ID >= 50600) {
     ]);
 }
 
-if (PHP_VERSION_ID < 70300) {
+if (PHP_VERSION_ID < 70300 && class_exists('Puli\\GeneratedPuliFactory')) {
     class PuliIsSupported {}
 }

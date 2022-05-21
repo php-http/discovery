@@ -7,10 +7,6 @@ use Http\Discovery\ClassDiscovery;
 use Http\Discovery\NotFoundException;
 use Http\Discovery\Strategy\DiscoveryStrategy;
 use Prophecy\Argument;
-use Puli\GeneratedPuliFactory;
-use Puli\Discovery\Api\Discovery;
-use Puli\Discovery\Binding\ClassBinding;
-use Puli\Repository\Api\ResourceRepository;
 use PhpSpec\ObjectBehavior;
 use spec\Http\Discovery\Helper\DiscoveryHelper;
 
