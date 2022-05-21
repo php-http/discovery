@@ -1,0 +1,94 @@
+name: Installation
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  installation:
+    name: Installation test ${{ matrix.expect }} ${{ matrix.method }} ${{ matrix.requirements }} ${{ matrix.pecl }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          # Test that we find Guzzle 6 v1
+          - expect: will-find
+            requirements: "php-http/guzzle6-adapter:^1.1.1"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          # Test that we find Guzzle 6 v2
+          - expect: will-find
+            requirements: "php-http/guzzle6-adapter:^2.0.1"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          # Test that we find Guzzle 7 Adapter
+          - expect: will-find
+            requirements: "php-http/guzzle7-adapter:^0.1"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          # Test that we find a client with Symfony and Guzzle PSR-7
+          - expect: will-find
+            requirements: "symfony/http-client:^5 php-http/httplug php-http/message-factory guzzlehttp/psr7:^1 http-interop/http-factory-guzzle"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          # We should fail if we dont have php-http/message-factory or PSR-17
+          - expect: cant-find
+            requirements: "symfony/http-client:^5 php-http/httplug php-http/message-factory guzzlehttp/psr7:^1"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          - expect: cant-find
+            requirements: "symfony/http-client:^5 php-http/httplug guzzlehttp/psr7:^1 http-interop/http-factory-guzzle"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          # We should be able to find a client when Symfony is only partly installed and we have guzzle adapter installed
+          - expect: will-find
+            requirements: "symfony/http-client:^5 php-http/guzzle6-adapter php-http/httplug php-http/message-factory guzzlehttp/psr7:^1"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          # Test that we find a client with Symfony and Guzzle
+          - expect: will-find
+            requirements: "php-http/client-common:^2 php-http/message:^1.8 symfony/http-client:^4 php-http/guzzle6-adapter"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          # Test that we find an async client with Symfony and Guzzle
+          - expect: will-find
+            requirements: "php-http/client-common:^2 php-http/message:^1.8 symfony/http-client:^4 php-http/guzzle6-adapter"
+            method: "Http\\Discovery\\HttpAsyncClientDiscovery::find();"
+          # Test that we find PSR-18 Guzzle 6
+          - expect: will-find
+            requirements: "php-http/guzzle6-adapter:^2.0.1"
+            method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
+          # Test that we find PSR-18 Guzzle 7
+          - expect: will-find
+            requirements: "guzzlehttp/guzzle:^7.0.1"
+            method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
+          # Test that we find PSR-18 Symfony 4
+          - expect: will-find
+            requirements: "symfony/http-client:^4 php-http/httplug nyholm/psr7:^1.3"
+            method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
+          # Test that we find PSR-18 Symfony 5
+          - expect: will-find
+            requirements: "symfony/http-client:^5 php-http/httplug nyholm/psr7:^1.3"
+            method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
+          # Test that we find PSR-17 http-interop
+          - expect: will-find
+            requirements: "http-interop/http-factory-guzzle:^1"
+            method: "Http\\Discovery\\Psr17FactoryDiscovery::findRequestFactory();"
+          # Test that we find PSR-17 nyholm
+          - expect: will-find
+            requirements: "nyholm/psr7:^1.3"
+            method: "Http\\Discovery\\Psr17FactoryDiscovery::findRequestFactory();"
+          # Test that we find Phalcon with PSR
+          - expect: will-find
+            pecl: "psr-1.0.0, phalcon-4.0.6"
+            method: "Http\\Discovery\\Psr17FactoryDiscovery::findRequestFactory();"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          tools: composer:v2
+          coverage: xdebug
+          extensions: ${{ matrix.pecl }}
+
+      - name: Check Install
+        run: |
+          tests/install.sh ${{ matrix.expect }} "${{ matrix.method }}" "${{ matrix.requirements }}"
