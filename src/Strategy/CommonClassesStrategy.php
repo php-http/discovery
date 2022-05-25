@@ -17,6 +17,7 @@ use Http\Client\Curl\Client as Curl;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
 use Http\Client\Socket\Client as Socket;
+use Http\Discovery\ClassDiscovery;
 use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\Psr17FactoryDiscovery;
@@ -136,8 +137,11 @@ final class CommonClassesStrategy implements DiscoveryStrategy
 
         // HTTPlug 2.0 clients implements PSR18Client too.
         foreach (self::$classes[HttpClient::class] as $c) {
+            if (!is_string($c['class'])) {
+                continue;
+            }
             try {
-                if (is_subclass_of($c['class'], Psr18Client::class)) {
+                if (ClassDiscovery::safeClassExists($c['class']) && is_subclass_of($c['class'], Psr18Client::class)) {
                     $candidates[] = $c;
                 }
             } catch (\Throwable $e) {
