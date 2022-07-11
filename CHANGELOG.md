@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.14.3 - Unreleased
+## 1.14.3 - 2022-07-11
 
 - [#207](https://github.com/php-http/discovery/pull/207) - Updates Exception to extend Throwable solving static analysis errors for consumers
 
