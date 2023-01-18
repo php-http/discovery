@@ -1,0 +1,23 @@
+{
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../..",
+            "options": {
+                "versions": {
+                    "php-http/discovery": "99.99.x-dev"
+                }
+            }
+        }
+    ],
+    "require": {
+        "guzzlehttp/psr7": "^1",
+        "php-http/discovery": "99.99.x-dev",
+        "psr/http-factory-implementation": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

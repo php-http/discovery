@@ -1,8 +1,11 @@
 # Change Log
 
-## 1.15.0 - 2023-01-XX
+## 1.15.0 - 2023-02-09
 
 - [#209](https://github.com/php-http/discovery/pull/209) - Add generic `Psr17Factory` class
+- [#208](https://github.com/php-http/discovery/pull/208) - Add composer plugin to auto-install missing implementations.
+  When libraries require an http implementation but no packages providing that implementation is installed in the application, the plugin will automatically install one.
+  This is only done for libraries that directly require php-http/discovery to avoid unexpected dependency installation.
 
 ## 1.14.3 - 2022-07-11
 
