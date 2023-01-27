@@ -19,6 +19,10 @@ class Psr17FactoryDiscoveryTest extends TestCase
      */
     public function testFind($method, $interface)
     {
+        if (!interface_exists(RequestFactoryInterface::class)) {
+            $this->markTestSkipped(RequestFactoryInterface::class.' required.');
+        }
+
         $callable = [Psr17FactoryDiscovery::class, $method];
         $client = $callable();
         $this->assertInstanceOf($interface, $client);

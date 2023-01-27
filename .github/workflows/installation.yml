@@ -92,3 +92,10 @@ jobs:
       - name: Check Install
         run: |
           tests/install.sh ${{ matrix.expect }} "${{ matrix.method }}" "${{ matrix.requirements }}"
+
+      - name: Run Tests
+        run: |
+          composer remove --dev --no-update php-http/httplug php-http/message-factory
+          composer require --dev ${{ matrix.requirements }}
+          vendor/bin/simple-phpunit
+        if: "matrix.expect == 'will-find' && matrix.method != 'Http\\Discovery\\HttpClientDiscovery::find();' && matrix.method != 'Http\\Discovery\\HttpAsyncClientDiscovery::find();' && matrix.pecl != 'psr-1.0.0, phalcon-4.0.6'"
