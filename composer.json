@@ -2,7 +2,7 @@
     "name": "php-http/discovery",
     "description": "Finds installed HTTPlug implementations and PSR-7 message factories",
     "license": "MIT",
-    "keywords": ["http", "discovery", "client", "adapter", "message", "factory", "psr7"],
+    "keywords": ["http", "discovery", "client", "adapter", "message", "factory", "psr7", "psr17"],
     "homepage": "http://php-http.org",
     "authors": [
         {
@@ -17,7 +17,8 @@
         "graham-campbell/phpspec-skip-example-extension": "^5.0",
         "php-http/httplug": "^1.0 || ^2.0",
         "php-http/message-factory": "^1.0",
-        "phpspec/phpspec": "^5.1 || ^6.1"
+        "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3",
+        "symfony/phpunit-bridge": "^6.2"
     },
     "suggest": {
         "php-http/message": "Allow to use Guzzle, Diactoros or Slim Framework factories"
@@ -33,13 +34,11 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpspec run",
+        "test": [
+            "vendor/bin/phpspec run",
+            "vendor/bin/simple-phpunit --group NothingInstalled"
+        ],
         "test-ci": "vendor/bin/phpspec run -c phpspec.ci.yml"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.9-dev"
-        }
     },
     "conflict": {
         "nyholm/psr7": "<1.0"

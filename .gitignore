@@ -7,3 +7,4 @@
 /puli.json
 /vendor/
 .php-cs-fixer.cache
+.phpunit.result.cache
