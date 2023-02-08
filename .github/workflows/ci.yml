@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - "*.x"
   pull_request:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.1', '7.2', '7.3', '7.4', '8.0']
+        php: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
 
     steps:
       - name: Checkout code
@@ -25,15 +25,10 @@ jobs:
           tools: composer:v2
           coverage: none
 
-      - name: Install PHP 7 dependencies
-        run: composer update --prefer-dist --no-interaction --no-progress
-        if: "startsWith(matrix.php, '7.')"
-
-      - name: Install PHP 8 dependencies
+      - name: Install dependencies
         run: |
-          composer require "phpdocumentor/reflection-docblock:^5.2@dev" --no-interaction --no-update
-          composer update --prefer-dist --prefer-stable --no-interaction --no-progress --ignore-platform-req=php
-        if: "startsWith(matrix.php, '8.')"
+          composer update --prefer-dist --no-interaction --no-progress
+          vendor/bin/simple-phpunit install
 
       - name: Execute tests
         run: composer test
@@ -61,6 +56,7 @@ jobs:
           wget https://github.com/puli/cli/releases/download/1.0.0-beta9/puli.phar && chmod +x puli.phar
           composer require "sebastian/comparator:^3.0.2" "puli/composer-plugin:1.0.0-beta9" --no-interaction --no-update
           composer update --prefer-dist --prefer-stable --prefer-lowest --no-interaction --no-progress
+          vendor/bin/simple-phpunit install
 
       - name: Execute tests
         run: composer test
