@@ -7,8 +7,9 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-http/discovery.svg?style=flat-square)](https://packagist.org/packages/php-http/discovery)
 
-**Finds installed HTTPlug implementations and PSR-7 message factories.**
+**Find installed PSR-17 factories, PSR-18 clients and HTTPlug factories.**
 
+Since 1.15.0, this library also provides a composer plugin that automatically installs well-known PSR implementations if composer dependencies require a PSR implementation but do not specify which implementation to install.
 
 ## Install
 
