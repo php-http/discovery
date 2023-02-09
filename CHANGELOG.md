@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.15.0 - 2023-01-XX
+
+- [#209](https://github.com/php-http/discovery/pull/209) - Add generic `Psr17Factory` class
+
 ## 1.14.3 - 2022-07-11
 
 - [#207](https://github.com/php-http/discovery/pull/207) - Updates Exception to extend Throwable solving static analysis errors for consumers

@@ -11,6 +11,10 @@ class Psr18ClientDiscoveryTest extends TestCase
 {
     public function testFind()
     {
+        if (!interface_exists(ClientInterface::class)) {
+            $this->markTestSkipped(ClientInterface::class.' required.');
+        }
+
         $client = Psr18ClientDiscovery::find();
         $this->assertInstanceOf(ClientInterface::class, $client);
     }

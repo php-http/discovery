@@ -10,6 +10,10 @@ class HttpClientDiscoveryTest extends TestCase
 {
     public function testFind()
     {
+        if (!interface_exists(HttpClient::class)) {
+            $this->markTestSkipped(HttpClient::class.' required.');
+        }
+
         $client = HttpClientDiscovery::find();
         $this->assertInstanceOf(HttpClient::class, $client);
     }
