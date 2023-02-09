@@ -66,7 +66,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             'kriswallsmith/buzz:^1' => [],
         ],
         'psr/http-message-implementation' => [
-            'psr/http-factory-implementation' => [],
+            'php-http/discovery' => ['psr/http-factory-implementation'],
         ],
         'psr/http-factory-implementation' => [
             'nyholm/psr7' => [],

@@ -17,7 +17,8 @@ echo "Using directory: ${BUILD_DIR}"
 mkdir -p $BUILD_DIR
 
 # Init composer
-composer req --working-dir $BUILD_DIR php-http/discovery --no-update
+composer req --working-dir $BUILD_DIR php-http/discovery --no-update --no-plugins
+composer config --working-dir $BUILD_DIR --no-plugins allow-plugins.php-http/discovery false
 
 # Argument 3 installs additional composer packages
 composer req --working-dir $BUILD_DIR $3
