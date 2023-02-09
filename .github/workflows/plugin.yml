@@ -1,0 +1,36 @@
+name: Plugin
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  plugin:
+    name: Plugin test with Composer ${{ matrix.composer }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - composer: v1
+          - composer: v2
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.1
+          tools: composer:${{ matrix.composer }}
+
+      - name: Check Plugin
+        run: |
+          mkdir /tmp/plugin
+          # replace the relative path for the repository url with an absolute path for composer v1 compatibility
+          jq '.repositories[0].url="'$(pwd)'"' tests/plugin/composer.json > /tmp/plugin/composer.json
+          cd /tmp/plugin
+          composer update
+          composer show http-interop/http-factory-guzzle -q
