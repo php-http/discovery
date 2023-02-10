@@ -48,7 +48,8 @@
         "test-ci": "vendor/bin/phpspec run -c phpspec.ci.yml"
     },
     "extra": {
-        "class": "Http\\Discovery\\Composer\\Plugin"
+        "class": "Http\\Discovery\\Composer\\Plugin",
+        "plugin-optional": true
     },
     "conflict": {
         "nyholm/psr7": "<1.0"
