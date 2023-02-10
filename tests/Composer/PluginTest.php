@@ -27,15 +27,19 @@ class PluginTest extends TestCase
     public static function provideMissingRequires()
     {
         $link = new Link('source', 'target', new Constraint(Constraint::STR_OP_GE, '1'));
-        $repo = new InstalledArrayRepository([]);
+        $repo = new InstalledArrayRepository([
+            'php-http/discovery' => new Package('php-http/discovery', '1.0.0.0', '1.0'),
+        ]);
 
         yield 'empty' => [[[], [], []], $repo, [], []];
 
         $rootRequires = [
             'php-http/discovery' => $link,
             'php-http/async-client-implementation' => $link,
+            'psr/http-message-implementation' => $link,
         ];
         $expected = [[
+            'psr/http-message-implementation' => [],
             'php-http/async-client-implementation' => [
                 'symfony/http-client',
                 'guzzlehttp/promises',
@@ -49,15 +53,30 @@ class PluginTest extends TestCase
         yield 'async-httplug' => [$expected, $repo, $rootRequires, []];
 
         $repo = new InstalledArrayRepository([
+            'php-http/discovery' => new Package('php-http/discovery', '1.0.0.0', '1.0'),
             'nyholm/psr7' => new Package('nyholm/psr7', '1.0.0.0', '1.0'),
         ]);
         $repo->setDevPackageNames(['nyholm/psr7']);
 
-        $expected[2] = [
+        $rootRequires = [
+            'php-http/discovery' => $link,
+            'php-http/async-client-implementation' => $link,
+        ];
+
+        $expected = [[
+            'php-http/async-client-implementation' => [
+                'symfony/http-client',
+                'guzzlehttp/promises',
+                'php-http/message-factory',
+            ],
             'psr/http-factory-implementation' => [
                 'nyholm/psr7',
             ],
-        ];
+        ], [], [
+            'psr/http-factory-implementation' => [
+                'nyholm/psr7',
+            ],
+        ]];
 
         yield 'move-to-require' => [$expected, $repo, $rootRequires, []];
     }
