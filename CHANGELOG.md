@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.15.1 - 2023-02-10
+
+- [#214](https://github.com/php-http/discovery/pull/214) - Fix resolving deps for psr/http-message-implementation
+- [#216](https://github.com/php-http/discovery/pull/216) - Fix keeping platform requirements when rebooting composer
+- [#217](https://github.com/php-http/discovery/pull/217) - Set extra.plugin-optional composer flag
+
 ## 1.15.0 - 2023-02-09
 
 - [#209](https://github.com/php-http/discovery/pull/209) - Add generic `Psr17Factory` class
