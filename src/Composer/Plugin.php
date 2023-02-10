@@ -177,6 +177,9 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             $composer->getEventDispatcher(),
             $composer->getAutoloadGenerator()
         );
+        if (method_exists($installer, 'setPlatformRequirementFilter')) {
+            $installer->setPlatformRequirementFilter(((array) $trace['object'])["\0*\0platformRequirementFilter"]);
+        }
 
         if (0 !== $installer->run()) {
             file_put_contents(Factory::getComposerFile(), $composerJsonContents);
