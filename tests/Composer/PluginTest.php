@@ -79,5 +79,31 @@ class PluginTest extends TestCase
         ]];
 
         yield 'move-to-require' => [$expected, $repo, $rootRequires, []];
+
+        $package = new Package('symfony/symfony', '1.0.0.0', '1.0');
+        $package->setReplaces([new Link('symfony/symfony', 'symfony/http-client', new Constraint(Constraint::STR_OP_GE, '1'))]);
+
+        $repo = new InstalledArrayRepository([
+            'php-http/discovery' => new Package('php-http/discovery', '1.0.0.0', '1.0'),
+            'symfony/symfony' => $package,
+        ]);
+
+        $rootRequires = [
+            'php-http/discovery' => $link,
+            'php-http/async-client-implementation' => $link,
+            'symfony/symfony' => $link,
+        ];
+
+        $expected = [[
+            'php-http/async-client-implementation' => [
+                'guzzlehttp/promises',
+                'php-http/message-factory',
+            ],
+            'psr/http-factory-implementation' => [
+                'nyholm/psr7',
+            ],
+        ], [], []];
+
+        yield 'replace' => [$expected, $repo, $rootRequires, []];
     }
 }

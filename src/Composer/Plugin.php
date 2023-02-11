@@ -209,18 +209,26 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     public function getMissingRequires(InstalledRepositoryInterface $repo, array $requires, bool $isProject): array
     {
         $allPackages = [];
-        $devPackages = method_exists($repo, 'getDevPackageNames') ? array_flip($repo->getDevPackageNames()) : [];
+        $devPackages = method_exists($repo, 'getDevPackageNames') ? array_fill_keys($repo->getDevPackageNames(), true) : [];
 
-        // One must require "php-http/discovery" or "friendsofphp/well-known-implementations"
+        // One must require "php-http/discovery"
         // to opt-in for auto-installation of virtual package implementations
-        if (!isset($requires[0]['php-http/discovery']) && !isset($requires[0]['friendsofphp/well-known-implementations'])) {
+        if (!isset($requires[0]['php-http/discovery'])) {
             $requires = [[], []];
         }
 
         foreach ($repo->getPackages() as $package) {
-            $allPackages[$package->getName()] = $package;
+            $allPackages[$package->getName()] = true;
 
-            if (isset($package->getRequires()['php-http/discovery']) || isset($package->getRequires()['friendsofphp/well-known-implementations'])) {
+            if (1 < \count($names = $package->getNames(false))) {
+                $allPackages += array_fill_keys($names, false);
+
+                if (isset($devPackages[$package->getName()])) {
+                    $devPackages += $names;
+                }
+            }
+
+            if (isset($package->getRequires()['php-http/discovery'])) {
                 $requires[(int) isset($devPackages[$package->getName()])] += $package->getRequires();
             }
         }
