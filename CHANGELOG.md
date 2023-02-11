@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.15.2 - 2023-02-11
+
+- [#219](https://github.com/php-http/discovery/pull/219) - Fix handling of replaced packages
+
 ## 1.15.1 - 2023-02-10
 
 - [#214](https://github.com/php-http/discovery/pull/214) - Fix resolving deps for psr/http-message-implementation
