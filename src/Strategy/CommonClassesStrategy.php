@@ -103,11 +103,11 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         ],
         Psr18Client::class => [
             [
-                'class' => [self::class, 'symfonyPsr18Instantiate'],
+                'class' => [self::class, 'symfonyPsr18InstantiateWithOptions'],
                 'condition' => [SymfonyPsr18::class, Psr17RequestFactory::class],
             ],
             [
-                'class' => GuzzleHttp::class,
+                'class' => [self::class, 'guzzleInstantiateWithOptions'],
                 'condition' => [self::class, 'isGuzzleImplementingPsr18'],
             ],
             [
@@ -159,9 +159,50 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         return new \Buzz\Client\FileGetContents(MessageFactoryDiscovery::find());
     }
 
+    public static function buzzInstantiateWithOptions(array $options = [])
+    {
+        $convertedOptions = [];
+
+        if (isset($options['timeout']) && is_int($options['timeout']) && $options['timeout'] > 0) {
+            $convertedOptions['timeout'] = $options['timeout'];
+        }
+
+        return new \Buzz\Client\FileGetContents(MessageFactoryDiscovery::find(), $convertedOptions);
+    }
+
+    public static function guzzleInstantiateWithOptions(array $options = [])
+    {
+        $convertedOptions = [];
+
+        if (isset($options['connect_timeout']) && is_int($options['connect_timeout']) && $options['connect_timeout'] > 0) {
+            $convertedOptions['connect_timeout'] = $options['connect_timeout'];
+        }
+
+        if (isset($options['timeout']) && is_int($options['timeout']) && $options['timeout'] > 0) {
+            $convertedOptions['timeout'] = $options['timeout'];
+        }
+
+        return new GuzzleHttp($convertedOptions);
+    }
+
     public static function symfonyPsr18Instantiate()
     {
         return new SymfonyPsr18(null, Psr17FactoryDiscovery::findResponseFactory(), Psr17FactoryDiscovery::findStreamFactory());
+    }
+
+    public static function symfonyPsr18InstantiateWithOptions(array $options = [])
+    {
+        $convertedOptions = [];
+
+        if (isset($options['timeout']) && is_int($options['timeout']) && $options['timeout'] > 0) {
+            $convertedOptions['timeout'] = $options['timeout'];
+        }
+
+        return new SymfonyPsr18(
+            HttpClient::create($convertedOptions),
+            Psr17FactoryDiscovery::findResponseFactory(),
+            Psr17FactoryDiscovery::findStreamFactory(),
+        );
     }
 
     public static function isGuzzleImplementingPsr18()

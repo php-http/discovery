@@ -15,11 +15,13 @@ final class HttpClientDiscovery extends ClassDiscovery
     /**
      * Finds an HTTP Client.
      *
+     * @param ?array{?connect_timeout: int, ?timeout: int} $options
+     *
      * @return HttpClient
      *
      * @throws Exception\NotFoundException
      */
-    public static function find()
+    public static function find(?array $options = null)
     {
         try {
             $client = static::findOneByType(HttpClient::class);
@@ -27,6 +29,8 @@ final class HttpClientDiscovery extends ClassDiscovery
             throw new NotFoundException('No HTTPlug clients found. Make sure to install a package providing "php-http/client-implementation". Example: "php-http/guzzle6-adapter".', 0, $e);
         }
 
-        return static::instantiateClass($client);
+        return null !== $options
+            ? static::instantiateClassWithOptions($client, $options);
+            : static::instantiateClass($client);
     }
 }

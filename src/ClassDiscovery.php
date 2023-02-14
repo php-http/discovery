@@ -230,6 +230,33 @@ abstract class ClassDiscovery
     }
 
     /**
+     * Get an instance of the $class.
+     *
+     * @param string|\Closure $class   A FQCN of a class or a closure that instantiate the class.
+     * @param array           $options The normalized array of options.
+     *
+     * @return object
+     *
+     * @throws ClassInstantiationFailedException
+     */
+    protected static function instantiateClassWithOptions($class, $options)
+    {
+        try {
+            if (is_string($class)) {
+                return new $class($options);
+            }
+
+            if (is_callable($class)) {
+                return $class($options);
+            }
+        } catch (\Exception $e) {
+            throw new ClassInstantiationFailedException('Unexpected exception when instantiating class.', 0, $e);
+        }
+
+        throw new ClassInstantiationFailedException('Could not instantiate class because parameter is neither a callable nor a string');
+    }
+
+    /**
      * We want to do a "safe" version of PHP's "class_exists" because Magento has a bug
      * (or they call it a "feature"). Magento is throwing an exception if you do class_exists()
      * on a class that ends with "Factory" and if that file does not exits.
