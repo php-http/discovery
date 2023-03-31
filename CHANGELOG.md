@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.15.3 - 2023-03-31
+
+- [#224](https://github.com/php-http/discovery/pull/224) - Fix regression with Magento classloader
+
 ## 1.15.2 - 2023-02-11
 
 - [#219](https://github.com/php-http/discovery/pull/219) - Fix handling of replaced packages

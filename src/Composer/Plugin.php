@@ -18,6 +18,7 @@ use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Repository\RepositorySet;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
+use Http\Discovery\ClassDiscovery;
 
 /**
  * Auto-installs missing implementations.
@@ -187,7 +188,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             return;
         }
 
-        $versionSelector = new VersionSelector(class_exists(RepositorySet::class) ? new RepositorySet() : new Pool());
+        $versionSelector = new VersionSelector(ClassDiscovery::safeClassExists(RepositorySet::class) ? new RepositorySet() : new Pool());
         $updateComposerJson = false;
 
         foreach ($composer->getRepositoryManager()->getLocalRepository()->getPackages() as $package) {
@@ -236,7 +237,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $missingRequires = [[], [], []];
         $versionParser = new VersionParser();
 
-        if (class_exists(\Phalcon\Http\Message\RequestFactory::class, false)) {
+        if (ClassDiscovery::safeClassExists(\Phalcon\Http\Message\RequestFactory::class, false)) {
             $missingRequires[0]['psr/http-factory-implementation'] = [];
             $missingRequires[1]['psr/http-factory-implementation'] = [];
         }
@@ -360,7 +361,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $lock = substr(Factory::getComposerFile(), 0, -4).'lock';
         $composerJson = file_get_contents(Factory::getComposerFile());
         $lockFile = new JsonFile($lock, null, $io);
-        $locker = class_exists(RepositorySet::class)
+        $locker = ClassDiscovery::safeClassExists(RepositorySet::class)
             ? new Locker($io, $lockFile, $composer->getInstallationManager(), $composerJson)
             : new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), $composerJson);
         $lockData = $locker->getLockData();
