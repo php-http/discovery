@@ -52,7 +52,8 @@
         "plugin-optional": true
     },
     "conflict": {
-        "nyholm/psr7": "<1.0"
+        "nyholm/psr7": "<1.0",
+        "zendframework/zend-diactoros": "*"
     },
     "prefer-stable": true,
     "minimum-stability": "beta"

@@ -12,7 +12,6 @@ use Http\Adapter\Guzzle5\Client as Guzzle5;
 use Http\Adapter\Guzzle6\Client as Guzzle6;
 use Http\Adapter\Guzzle7\Client as Guzzle7;
 use Http\Adapter\React\Client as React;
-use Http\Adapter\Zend\Client as Zend;
 use Http\Client\Curl\Client as Curl;
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
@@ -41,7 +40,6 @@ use Psr\Http\Message\RequestFactoryInterface as Psr17RequestFactory;
 use Slim\Http\Request as SlimRequest;
 use Symfony\Component\HttpClient\HttplugClient as SymfonyHttplug;
 use Symfony\Component\HttpClient\Psr18Client as SymfonyPsr18;
-use Zend\Diactoros\Request as ZendDiactorosRequest;
 
 /**
  * @internal
@@ -59,21 +57,18 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         MessageFactory::class => [
             ['class' => NyholmHttplugFactory::class, 'condition' => [NyholmHttplugFactory::class]],
             ['class' => GuzzleMessageFactory::class, 'condition' => [GuzzleRequest::class, GuzzleMessageFactory::class]],
-            ['class' => DiactorosMessageFactory::class, 'condition' => [ZendDiactorosRequest::class, DiactorosMessageFactory::class]],
             ['class' => DiactorosMessageFactory::class, 'condition' => [DiactorosRequest::class, DiactorosMessageFactory::class]],
             ['class' => SlimMessageFactory::class, 'condition' => [SlimRequest::class, SlimMessageFactory::class]],
         ],
         StreamFactory::class => [
             ['class' => NyholmHttplugFactory::class, 'condition' => [NyholmHttplugFactory::class]],
             ['class' => GuzzleStreamFactory::class, 'condition' => [GuzzleRequest::class, GuzzleStreamFactory::class]],
-            ['class' => DiactorosStreamFactory::class, 'condition' => [ZendDiactorosRequest::class, DiactorosStreamFactory::class]],
             ['class' => DiactorosStreamFactory::class, 'condition' => [DiactorosRequest::class, DiactorosStreamFactory::class]],
             ['class' => SlimStreamFactory::class, 'condition' => [SlimRequest::class, SlimStreamFactory::class]],
         ],
         UriFactory::class => [
             ['class' => NyholmHttplugFactory::class, 'condition' => [NyholmHttplugFactory::class]],
             ['class' => GuzzleUriFactory::class, 'condition' => [GuzzleRequest::class, GuzzleUriFactory::class]],
-            ['class' => DiactorosUriFactory::class, 'condition' => [ZendDiactorosRequest::class, DiactorosUriFactory::class]],
             ['class' => DiactorosUriFactory::class, 'condition' => [DiactorosRequest::class, DiactorosUriFactory::class]],
             ['class' => SlimUriFactory::class, 'condition' => [SlimRequest::class, SlimUriFactory::class]],
         ],
@@ -94,7 +89,6 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => Buzz::class, 'condition' => Buzz::class],
             ['class' => React::class, 'condition' => React::class],
             ['class' => Cake::class, 'condition' => Cake::class],
-            ['class' => Zend::class, 'condition' => Zend::class],
             ['class' => Artax::class, 'condition' => Artax::class],
             [
                 'class' => [self::class, 'buzzInstantiate'],
