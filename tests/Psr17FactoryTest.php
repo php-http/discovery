@@ -282,14 +282,14 @@ class Psr17FactoryTest extends TestCase
             'file' => [
                 'name' => 'MyFile.txt',
                 'type' => 'text/plain',
-                'tmp_name' => 'php://memory',
+                'tmp_name' => __FILE__,
                 'error' => UPLOAD_ERR_OK,
                 'size' => 123,
             ],
             'files' => [
                 'name' => ['file_0' => ['NestedFile.txt']],
                 'type' => ['file_0' => ['text/plain']],
-                'tmp_name' => ['file_0' => ['php://memory']],
+                'tmp_name' => ['file_0' => ['/not-exists']],
                 'error' => ['file_0' => [UPLOAD_ERR_OK]],
                 'size' => ['file_0' => [123]],
             ],
@@ -339,5 +339,8 @@ class Psr17FactoryTest extends TestCase
         ];
 
         self::assertEquals($expectedFiles, $server->getUploadedFiles());
+
+        self::assertSame('plainfile', $server->getUploadedFiles()['file']->getStream()->getMetadata()['wrapper_type']);
+        self::assertSame('PHP', $server->getUploadedFiles()['files']['file_0'][0]->getStream()->getMetadata()['wrapper_type']);
     }
 }
