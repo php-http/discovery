@@ -2,33 +2,70 @@
 
 [![Latest Version](https://img.shields.io/github/release/php-http/discovery.svg?style=flat-square)](https://github.com/php-http/discovery/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status](https://img.shields.io/travis/php-http/discovery/master.svg?style=flat-square)](https://travis-ci.org/php-http/discovery)
+[![Tests](https://github.com/php-http/discovery/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/php-http/discovery/actions/workflows/ci.yml?query=branch%3Amaster)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
 [![Quality Score](https://img.shields.io/scrutinizer/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-http/discovery.svg?style=flat-square)](https://packagist.org/packages/php-http/discovery)
 
-**Find installed PSR-17 factories, PSR-18 clients and HTTPlug factories.**
+**This library provides auto-discovery and auto-installation of well-known PSR-17, PSR-18 and HTTPlug implementations.**
 
-Since 1.15.0, this library also provides a composer plugin that automatically installs well-known PSR implementations if composer dependencies require a PSR implementation but do not specify which implementation to install.
 
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require php-http/discovery
+composer require php-http/discovery
 ```
 
 
-## Documentation
+## Usage
 
 Please see the [official documentation](http://php-http.readthedocs.org/en/latest/discovery.html).
 
+If your library/SDK needs a PSR-18 client, here is a quick example.
+
+First, you need to install a PSR-18 client and a PSR-17 factory implementations. This should
+be done only for dev dependencies as you don't want to force a specific one on your users:
+
+```bash
+composer require --dev symfony/http-client
+composer require --dev nyholm/psr7
+```
+
+Then, you can disable the Composer plugin embeded in `php-http/discovery`
+because you just installed the dev dependencies you need for testing:
+
+```bash
+composer config allow-plugins.php-http/discovery false
+```
+
+Finally, you need to require `php-http/discovery` and the generic implementations that
+your library is going to need:
+
+```bash
+composer require php-http/discovery:^1.17
+composer require psr/http-client-implementation:*
+composer require psr/http-factory-implementation:*
+```
+
+Now, you're ready to make an HTTP request:
+
+```php
+use Http\Discovery\Psr18Client;
+
+$client = new Psr18Client();
+
+$request = $client->createRequest('GET', 'https://example.com');
+$response = $client->sendRequest($request);
+```
+
+Internally, this code will use whatever PSR-7, PSR-17 and PSR-18 implementations that your users have installed.
 
 ## Testing
 
 ``` bash
-$ composer test
+composer test
 ```
 
 

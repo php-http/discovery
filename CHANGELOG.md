@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.17.0 - 2023-XX-XX
+
+- [#230](https://github.com/php-http/discovery/pull/230) - Add Psr18Client to make it straightforward to use PSR-18
+
 ## 1.16.0 - 2023-04-26
 
 - [#225](https://github.com/php-http/discovery/pull/225) - Remove support for the abandoned Zend Diactoros which has been replaced with Laminas Diactoros; marked the zend library as conflict in composer.json to avoid confusion
