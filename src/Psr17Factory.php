@@ -283,7 +283,7 @@ class Psr17Factory implements RequestFactoryInterface, ResponseFactoryInterface,
     private function createUploadedFileFromSpec(array $value)
     {
         if (!is_array($tmpName = $value['tmp_name'])) {
-            $file = $this->createStreamFromFile($tmpName, 'r');
+            $file = is_file($tmpName) ? $this->createStreamFromFile($tmpName, 'r') : $this->createStream();
 
             return $this->createUploadedFile($file, $value['size'], $value['error'], $value['name'], $value['type']);
         }
