@@ -184,15 +184,15 @@ class Psr17Factory implements RequestFactoryInterface, ResponseFactoryInterface,
             ->withUploadedFiles($this->normalizeFiles($files));
 
         $headers = [];
-        foreach ($server as $key => $value) {
-            if (0 === strpos($key, 'HTTP_')) {
-                $key = substr($key, 5);
-            } elseif (!\in_array($key, ['CONTENT_TYPE', 'CONTENT_LENGTH', 'CONTENT_MD5'], true)) {
+        foreach ($server as $k => $v) {
+            if (0 === strpos($k, 'HTTP_')) {
+                $k = substr($k, 5);
+            } elseif (!\in_array($k, ['CONTENT_TYPE', 'CONTENT_LENGTH', 'CONTENT_MD5'], true)) {
                 continue;
             }
-            $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', $key))));
+            $k = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', $k))));
 
-            $headers[$key] = $value;
+            $headers[$k] = $v;
         }
 
         if (!isset($headers['Authorization'])) {
@@ -205,9 +205,9 @@ class Psr17Factory implements RequestFactoryInterface, ResponseFactoryInterface,
             }
         }
 
-        foreach ($headers as $key => $value) {
+        foreach ($headers as $k => $v) {
             try {
-                $request = $request->withHeader($key, $value);
+                $request = $request->withHeader($k, $v);
             } catch (\InvalidArgumentException $e) {
                 // ignore invalid headers
             }
@@ -257,26 +257,47 @@ class Psr17Factory implements RequestFactoryInterface, ResponseFactoryInterface,
 
     private function normalizeFiles(array $files): array
     {
-        $normalized = [];
-
-        foreach ($files as $key => $value) {
-            if ($value instanceof UploadedFileInterface) {
-                $normalized[$key] = $value;
-            } elseif (!\is_array($value)) {
+        foreach ($files as $k => $v) {
+            if ($v instanceof UploadedFileInterface) {
                 continue;
-            } elseif (!isset($value['tmp_name'])) {
-                $normalized[$key] = $this->normalizeFiles($value);
-            } elseif (\is_array($value['tmp_name'])) {
-                foreach ($value['tmp_name'] as $k => $v) {
-                    $file = $this->createStreamFromFile($value['tmp_name'][$k], 'r');
-                    $normalized[$key][$k] = $this->createUploadedFile($file, $value['size'][$k], $value['error'][$k], $value['name'][$k], $value['type'][$k]);
-                }
+            }
+            if (!\is_array($v)) {
+                unset($files[$k]);
+            } elseif (!isset($v['tmp_name'])) {
+                $files[$k] = $this->normalizeFiles($v);
             } else {
-                $file = $this->createStreamFromFile($value['tmp_name'], 'r');
-                $normalized[$key] = $this->createUploadedFile($file, $value['size'], $value['error'], $value['name'], $value['type']);
+                $files[$k] = $this->createUploadedFileFromSpec($v);
             }
         }
 
-        return $normalized;
+        return $files;
+    }
+
+    /**
+     * Create and return an UploadedFile instance from a $_FILES specification.
+     *
+     * @param array $value $_FILES struct
+     *
+     * @return UploadedFileInterface|UploadedFileInterface[]
+     */
+    private function createUploadedFileFromSpec(array $value)
+    {
+        if (!is_array($tmpName = $value['tmp_name'])) {
+            $file = $this->createStreamFromFile($tmpName, 'r');
+
+            return $this->createUploadedFile($file, $value['size'], $value['error'], $value['name'], $value['type']);
+        }
+
+        foreach ($tmpName as $k => $v) {
+            $tmpName[$k] = $this->createUploadedFileFromSpec([
+                'tmp_name' => $v,
+                'size' => $value['size'][$k] ?? null,
+                'error' => $value['error'][$k] ?? null,
+                'name' => $value['name'][$k] ?? null,
+                'type' => $value['type'][$k] ?? null,
+            ]);
+        }
+
+        return $tmpName;
     }
 }
