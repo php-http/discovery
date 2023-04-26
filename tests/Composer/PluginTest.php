@@ -81,7 +81,9 @@ class PluginTest extends TestCase
         yield 'move-to-require' => [$expected, $repo, $rootRequires, []];
 
         $package = new Package('symfony/symfony', '1.0.0.0', '1.0');
-        $package->setReplaces([new Link('symfony/symfony', 'symfony/http-client', new Constraint(Constraint::STR_OP_GE, '1'))]);
+        $package->setReplaces([
+            'symfony/http-client' => new Link('symfony/symfony', 'symfony/http-client', new Constraint(Constraint::STR_OP_GE, '1'))
+        ]);
 
         $repo = new InstalledArrayRepository([
             'php-http/discovery' => new Package('php-http/discovery', '1.0.0.0', '1.0'),

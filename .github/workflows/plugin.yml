@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -26,11 +26,20 @@ jobs:
           php-version: 7.1
           tools: composer:${{ matrix.composer }}
 
-      - name: Check Plugin
+      - name: Check Auto-install
         run: |
-          mkdir /tmp/plugin
+          mkdir /tmp/plugin-auto-install
           # replace the relative path for the repository url with an absolute path for composer v1 compatibility
-          jq '.repositories[0].url="'$(pwd)'"' tests/plugin/composer.json > /tmp/plugin/composer.json
-          cd /tmp/plugin
+          jq '.repositories[0].url="'$(pwd)'"' tests/plugin/auto-install/composer.json > /tmp/plugin-auto-install/composer.json
+          cd /tmp/plugin-auto-install
           composer update
           composer show http-interop/http-factory-guzzle -q
+
+      - name: Check Pinning
+        run: |
+          cp -a tests/plugin/pinning /tmp/plugin-pinning
+          # replace the relative path for the repository url with an absolute path for composer v1 compatibility
+          jq '.repositories[0].url="'$(pwd)'"' tests/plugin/pinning/composer.json > /tmp/plugin-pinning/composer.json
+          cd /tmp/plugin-pinning
+          composer update
+          [ 'Slim\Psr7\Factory\RequestFactory' == $(php test.php) ]

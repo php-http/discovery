@@ -18,6 +18,7 @@ use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Repository\RepositorySet;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
+use Composer\Util\Filesystem;
 use Http\Discovery\ClassDiscovery;
 
 /**
@@ -98,9 +99,30 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         'http-interop/http-factory-slim' => 'slim/slim:^3',
     ];
 
+    private const INTERFACE_MAP = [
+        'php-http/async-client-implementation' => [
+            'Http\Client\HttpAsyncClient',
+        ],
+        'php-http/client-implementation' => [
+            'Http\Client\HttpClient',
+        ],
+        'psr/http-client-implementation' => [
+            'Psr\Http\Client\ClientInterface',
+        ],
+        'psr/http-factory-implementation' => [
+            'Psr\Http\Message\RequestFactoryInterface',
+            'Psr\Http\Message\ResponseFactoryInterface',
+            'Psr\Http\Message\ServerRequestFactoryInterface',
+            'Psr\Http\Message\StreamFactoryInterface',
+            'Psr\Http\Message\UploadedFileFactoryInterface',
+            'Psr\Http\Message\UriFactoryInterface',
+        ],
+    ];
+
     public static function getSubscribedEvents(): array
     {
         return [
+            ScriptEvents::PRE_AUTOLOAD_DUMP => 'preAutoloadDump',
             ScriptEvents::POST_UPDATE_CMD => 'postUpdate',
         ];
     }
@@ -332,6 +354,70 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $missingRequires[1] = array_diff_key($missingRequires[1], $missingRequires[0]);
 
         return $missingRequires;
+    }
+
+    public function preAutoloadDump(Event $event)
+    {
+        $filesystem = new Filesystem();
+        // Double realpath() on purpose, see https://bugs.php.net/72738
+        $vendorDir = $filesystem->normalizePath(realpath(realpath($event->getComposer()->getConfig()->get('vendor-dir'))));
+        $filesystem->ensureDirectoryExists($vendorDir.'/composer');
+        $pinned = $event->getComposer()->getPackage()->getExtra()['discovery'] ?? [];
+        $candidates = [];
+
+        $allInterfaces = array_merge(...array_values(self::INTERFACE_MAP));
+        foreach ($pinned as $abstraction => $class) {
+            if (isset(self::INTERFACE_MAP[$abstraction])) {
+                $interfaces = self::INTERFACE_MAP[$abstraction];
+            } elseif (false !== $k = array_search($abstraction, $allInterfaces, true)) {
+                $interfaces = [$allInterfaces[$k]];
+            } else {
+                throw new \UnexpectedValueException(sprintf('Invalid "extra.discovery" pinned in composer.json: "%s" is not one of ["%s"].', $abstraction, implode('", "', array_keys(self::INTERFACE_MAP))));
+            }
+
+            foreach ($interfaces as $interface) {
+                $candidates[] = sprintf("case %s: return [['class' => %s]];\n", var_export($interface, true), var_export($class, true));
+            }
+        }
+
+        $file = $vendorDir.'/composer/GeneratedDiscoveryStrategy.php';
+
+        if (!$candidates) {
+            if (file_exists($file)) {
+                unlink($file);
+            }
+
+            return;
+        }
+
+        $candidates = implode('            ', $candidates);
+        $code = <<<EOPHP
+<?php
+
+namespace Http\Discovery\Strategy;
+
+class GeneratedDiscoveryStrategy implements DiscoveryStrategy
+{
+    public static function getCandidates(\$type)
+    {
+        switch (\$type) {
+            $candidates
+            default: return [];
+        }
+    }
+}
+
+EOPHP
+        ;
+
+        if (!file_exists($file) || $code !== file_get_contents($file)) {
+            file_put_contents($file, $code);
+        }
+
+        $rootPackage = $event->getComposer()->getPackage();
+        $autoload = $rootPackage->getAutoload();
+        $autoload['classmap'][] = $vendorDir.'/composer/GeneratedDiscoveryStrategy.php';
+        $rootPackage->setAutoload($autoload);
     }
 
     private function updateComposerJson(array $missingRequires, bool $sortPackages)

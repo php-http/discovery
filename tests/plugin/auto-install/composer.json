@@ -2,7 +2,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../..",
+            "url": "../../..",
             "options": {
                 "versions": {
                     "php-http/discovery": "99.99.x-dev"

@@ -19,14 +19,15 @@ composer require php-http/discovery
 ```
 
 
-## Usage
+## Usage as a library author
 
 Please see the [official documentation](http://php-http.readthedocs.org/en/latest/discovery.html).
 
 If your library/SDK needs a PSR-18 client, here is a quick example.
 
-First, you need to install a PSR-18 client and a PSR-17 factory implementations. This should
-be done only for dev dependencies as you don't want to force a specific one on your users:
+First, you need to install a PSR-18 client and a PSR-17 factory implementations.
+This should be done only for dev dependencies as you don't want to force a
+specific implementation on your users:
 
 ```bash
 composer require --dev symfony/http-client
@@ -40,8 +41,8 @@ because you just installed the dev dependencies you need for testing:
 composer config allow-plugins.php-http/discovery false
 ```
 
-Finally, you need to require `php-http/discovery` and the generic implementations that
-your library is going to need:
+Finally, you need to require `php-http/discovery` and the generic implementations
+that your library is going to need:
 
 ```bash
 composer require php-http/discovery:^1.17
@@ -60,7 +61,44 @@ $request = $client->createRequest('GET', 'https://example.com');
 $response = $client->sendRequest($request);
 ```
 
-Internally, this code will use whatever PSR-7, PSR-17 and PSR-18 implementations that your users have installed.
+Internally, this code will use whatever PSR-7, PSR-17 and PSR-18 implementations
+that your users have installed.
+
+
+## Usage as a library user
+
+If you use a library/SDK that requires `php-http/discovery`, you can configure
+the auto-discovery mechanism to use a specific implementation when many are
+available in your project.
+
+For example, if you have both `nyholm/psr7` and `guzzlehttp/guzzle` in your
+project, you can tell `php-http/discovery` to use `guzzlehttp/guzzle` instead of
+`nyholm/psr7` by running the following command:
+
+```bash
+composer config extra.discovery.psr/http-factory-implementation GuzzleHttp\\Psr7\\HttpFactory
+```
+
+This will update your `composer.json` file to add the following configuration:
+
+```json
+{
+    "extra": {
+        "discovery": {
+            "psr/http-factory-implementation": "GuzzleHttp\\Psr7\\HttpFactory"
+        }
+    }
+}
+```
+
+Don't forget to run `composer install` to apply the changes, and ensure that
+the composer plugin is enabled:
+
+```bash
+composer config allow-plugins.php-http/discovery true
+composer install
+```
+
 
 ## Testing
 
