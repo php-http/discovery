@@ -2,7 +2,11 @@
 
 ## 1.16.0 (unreleased)
 
-- [#x]() - Remove support for the abandoned Zend Diactoros which has been replaced with Laminas Diactoros. Marked the zend library as conflict in composer.json to avoid confusion.
+- [#225](https://github.com/php-http/discovery/pull/225) - Remove support for the abandoned Zend Diactoros which has been replaced with Laminas Diactoros; marked the zend library as conflict in composer.json to avoid confusion
+
+## 1.15.4 - 2023-04-26
+
+- [#227](https://github.com/php-http/discovery/pull/227) - Fix handling requests with nested files
 
 ## 1.15.3 - 2023-03-31
 
