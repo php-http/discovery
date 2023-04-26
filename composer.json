@@ -33,7 +33,10 @@
     "autoload": {
         "psr-4": {
             "Http\\Discovery\\": "src/"
-        }
+        },
+        "exclude-from-classmap": [
+            "src/Composer/Plugin.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

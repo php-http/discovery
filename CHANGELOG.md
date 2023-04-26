@@ -3,6 +3,7 @@
 ## 1.17.0 - 2023-XX-XX
 
 - [#230](https://github.com/php-http/discovery/pull/230) - Add Psr18Client to make it straightforward to use PSR-18
+- [#232](https://github.com/php-http/discovery/pull/232) - Allow pinning the preferred implementations in composer.json
 
 ## 1.16.0 - 2023-04-26
 

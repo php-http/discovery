@@ -22,6 +22,7 @@ abstract class ClassDiscovery
      * @var array
      */
     private static $strategies = [
+        Strategy\GeneratedDiscoveryStrategy::class,
         Strategy\CommonClassesStrategy::class,
         Strategy\CommonPsr17ClassesStrategy::class,
         Strategy\PuliBetaStrategy::class,
@@ -54,10 +55,17 @@ abstract class ClassDiscovery
             return $class;
         }
 
+        static $skipStrategy;
+        $skipStrategy ?? $skipStrategy = self::safeClassExists(Strategy\GeneratedDiscoveryStrategy::class) ? false : Strategy\GeneratedDiscoveryStrategy::class;
+
         $exceptions = [];
         foreach (self::$strategies as $strategy) {
+            if ($skipStrategy === $strategy) {
+                continue;
+            }
+
             try {
-                $candidates = call_user_func($strategy.'::getCandidates', $type);
+                $candidates = $strategy::getCandidates($type);
             } catch (StrategyUnavailableException $e) {
                 if (!isset(self::$deprecatedStrategies[$strategy])) {
                     $exceptions[] = $e;
