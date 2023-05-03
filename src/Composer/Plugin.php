@@ -45,6 +45,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     private const PROVIDE_RULES = [
         'php-http/async-client-implementation' => [
+            'symfony/http-client:>=6.3' => ['guzzlehttp/promises', 'psr/http-factory-implementation'],
             'symfony/http-client' => ['guzzlehttp/promises', 'php-http/message-factory', 'psr/http-factory-implementation'],
             'php-http/guzzle7-adapter' => [],
             'php-http/guzzle6-adapter' => [],
@@ -52,6 +53,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             'php-http/react-adapter' => [],
         ],
         'php-http/client-implementation' => [
+            'symfony/http-client:>=6.3' => ['psr/http-factory-implementation'],
             'symfony/http-client' => ['php-http/message-factory', 'psr/http-factory-implementation'],
             'php-http/guzzle7-adapter' => [],
             'php-http/guzzle6-adapter' => [],
@@ -332,21 +334,11 @@ class Plugin implements PluginInterface, EventSubscriberInterface
                 }
 
                 $dep = key($candidates);
+                [$dep] = explode(':', $dep, 2);
                 $missingRequires[$dev][$abstraction] = [$dep];
 
                 if ($isProject && !$dev && isset($devPackages[$dep])) {
                     $missingRequires[2][$abstraction][] = $dep;
-                }
-
-                foreach (current($candidates) as $dep) {
-                    if (isset(self::PROVIDE_RULES[$dep])) {
-                        $abstractions[] = $dep;
-                    } elseif (!isset($allPackages[$dep])) {
-                        $missingRequires[$dev][$abstraction][] = $dep;
-                    } elseif ($isProject && !$dev && isset($devPackages[$dep])) {
-                        $missingRequires[0][$abstraction][] = $dep;
-                        $missingRequires[2][$abstraction][] = $dep;
-                    }
                 }
             }
         }

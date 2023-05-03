@@ -42,8 +42,6 @@ class PluginTest extends TestCase
             'psr/http-message-implementation' => [],
             'php-http/async-client-implementation' => [
                 'symfony/http-client',
-                'guzzlehttp/promises',
-                'php-http/message-factory',
             ],
             'psr/http-factory-implementation' => [
                 'nyholm/psr7',
@@ -60,15 +58,10 @@ class PluginTest extends TestCase
 
         $rootRequires = [
             'php-http/discovery' => $link,
-            'php-http/async-client-implementation' => $link,
+            'psr/http-factory-implementation' => $link,
         ];
 
         $expected = [[
-            'php-http/async-client-implementation' => [
-                'symfony/http-client',
-                'guzzlehttp/promises',
-                'php-http/message-factory',
-            ],
             'psr/http-factory-implementation' => [
                 'nyholm/psr7',
             ],
