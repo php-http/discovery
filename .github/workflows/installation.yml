@@ -31,7 +31,7 @@ jobs:
             method: "Http\\Discovery\\HttpClientDiscovery::find();"
           # We should fail if we dont have php-http/message-factory or PSR-17
           - expect: cant-find
-            requirements: "symfony/http-client:^5 php-http/httplug php-http/message-factory guzzlehttp/psr7:^1"
+            requirements: "symfony/http-client:^5 php-http/httplug guzzlehttp/psr7:^1"
             method: "Http\\Discovery\\HttpClientDiscovery::find();"
           - expect: cant-find
             requirements: "symfony/http-client:^5 php-http/httplug guzzlehttp/psr7:^1 http-interop/http-factory-guzzle"
@@ -58,11 +58,11 @@ jobs:
             method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
           # Test that we find PSR-18 Symfony 4
           - expect: will-find
-            requirements: "symfony/http-client:^4 php-http/httplug nyholm/psr7:^1.3"
+            requirements: "symfony/http-client:^4 php-http/httplug php-http/message-factory nyholm/psr7:^1.3"
             method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
           # Test that we find PSR-18 Symfony 5
           - expect: will-find
-            requirements: "symfony/http-client:^5 php-http/httplug nyholm/psr7:^1.3"
+            requirements: "symfony/http-client:^5 php-http/httplug php-http/message-factory nyholm/psr7:^1.3"
             method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
           # Test that we find PSR-17 http-interop
           - expect: will-find
