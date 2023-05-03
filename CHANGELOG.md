@@ -1,9 +1,10 @@
 # Change Log
 
-## 1.18.0 - 2023-XX-XX
+## 1.18.0 - 2023-05-03
 
 - [#235](https://github.com/php-http/discovery/pull/235) - Deprecate HttpClientDiscovery, use Psr18ClientDiscovery instead
 - [#238](https://github.com/php-http/discovery/pull/238) - Skip requiring php-http/message-factory when installing symfony/http-client 6.3+
+- [#239](https://github.com/php-http/discovery/pull/239) - Skip auto-installing when the root package's extra.discovery is enough
 
 ## 1.17.0 - 2023-04-26
 

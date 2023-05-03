@@ -149,8 +149,18 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             $composer->getPackage()->getRequires(),
             $composer->getPackage()->getDevRequires(),
         ];
+        $pinnedAbstractions = [];
+        $pinned = $composer->getPackage()->getExtra()['discovery'] ?? [];
+        foreach (self::INTERFACE_MAP as $abstraction => $interfaces) {
+            foreach (isset($pinned[$abstraction]) ? [] : $interfaces as $interface) {
+                if (!isset($pinned[$interface])) {
+                    continue 2;
+                }
+            }
+            $pinnedAbstractions[$abstraction] = true;
+        }
 
-        $missingRequires = $this->getMissingRequires($repo, $requires, 'project' === $composer->getPackage()->getType());
+        $missingRequires = $this->getMissingRequires($repo, $requires, 'project' === $composer->getPackage()->getType(), $pinnedAbstractions);
         $missingRequires = [
             'require' => array_fill_keys(array_merge([], ...array_values($missingRequires[0])), '*'),
             'require-dev' => array_fill_keys(array_merge([], ...array_values($missingRequires[1])), '*'),
@@ -229,7 +239,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         }
     }
 
-    public function getMissingRequires(InstalledRepositoryInterface $repo, array $requires, bool $isProject): array
+    public function getMissingRequires(InstalledRepositoryInterface $repo, array $requires, bool $isProject, array $pinnedAbstractions): array
     {
         $allPackages = [];
         $devPackages = method_exists($repo, 'getDevPackageNames') ? array_fill_keys($repo->getDevPackageNames(), true) : [];
@@ -269,7 +279,14 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             $rules = array_intersect_key(self::PROVIDE_RULES, $rules);
 
             while ($rules) {
-                $abstractions[] = $abstraction = key($rules);
+                $abstraction = key($rules);
+
+                if (isset($pinnedAbstractions[$abstraction])) {
+                    unset($rules[$abstraction]);
+                    continue;
+                }
+
+                $abstractions[] = $abstraction;
 
                 foreach (array_shift($rules) as $candidate => $deps) {
                     [$candidate, $version] = explode(':', $candidate, 2) + [1 => null];
