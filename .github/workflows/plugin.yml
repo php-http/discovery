@@ -42,4 +42,4 @@ jobs:
           jq '.repositories[0].url="'$(pwd)'"' tests/plugin/pinning/composer.json > /tmp/plugin-pinning/composer.json
           cd /tmp/plugin-pinning
           composer update
-          [ 'Slim\Psr7\Factory\RequestFactory' == $(php test.php) ]
+          [ 'Slim\Psr7\Factory\RequestFactory-MyClient' == $(php test.php) ]

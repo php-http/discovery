@@ -17,11 +17,11 @@ class PluginTest extends TestCase
     /**
      * @dataProvider provideMissingRequires
      */
-    public function testMissingRequires(array $expected, InstalledArrayRepository $repo, array $rootRequires, array $rootDevRequires)
+    public function testMissingRequires(array $expected, InstalledArrayRepository $repo, array $rootRequires, array $rootDevRequires, $pinnedAbstractions = [])
     {
         $plugin = new Plugin();
 
-        $this->assertSame($expected, $plugin->getMissingRequires($repo, [$rootRequires, $rootDevRequires], true));
+        $this->assertSame($expected, $plugin->getMissingRequires($repo, [$rootRequires, $rootDevRequires], true, $pinnedAbstractions));
     }
 
     public static function provideMissingRequires()
@@ -49,6 +49,10 @@ class PluginTest extends TestCase
         ], [], []];
 
         yield 'async-httplug' => [$expected, $repo, $rootRequires, []];
+
+        unset($expected[0]['php-http/async-client-implementation']);
+
+        yield 'pinned' => [$expected, $repo, $rootRequires, [], ['php-http/async-client-implementation' => true]];
 
         $repo = new InstalledArrayRepository([
             'php-http/discovery' => new Package('php-http/discovery', '1.0.0.0', '1.0'),

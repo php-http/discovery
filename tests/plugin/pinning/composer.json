@@ -13,6 +13,8 @@
     "require": {
         "nyholm/psr7": "*",
         "php-http/discovery": "99.99.x-dev",
+        "psr/http-client": "*",
+        "psr/http-client-implementation": "*",
         "slim/psr7": "*"
     },
     "config": {
@@ -22,6 +24,7 @@
     },
     "extra": {
         "discovery": {
+            "Psr\\Http\\Client\\ClientInterface": "MyClient",
             "Psr\\Http\\Message\\RequestFactoryInterface": "Slim\\Psr7\\Factory\\RequestFactory"
         }
     }
