@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.19.0 - 2023-XX-XX
+
+- [#241](https://github.com/php-http/discovery/pull/241) - Support discovering PSR-17 factories of `httpsoft/http-message` package
+
 ## 1.18.0 - 2023-05-03
 
 - [#235](https://github.com/php-http/discovery/pull/235) - Deprecate HttpClientDiscovery, use Psr18ClientDiscovery instead
