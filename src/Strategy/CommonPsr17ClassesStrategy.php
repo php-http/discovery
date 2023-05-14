@@ -31,6 +31,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Slim\RequestFactory',
             'Laminas\Diactoros\RequestFactory',
             'Slim\Psr7\Factory\RequestFactory',
+            'HttpSoft\Message\RequestFactory',
         ],
         ResponseFactoryInterface::class => [
             'Phalcon\Http\Message\ResponseFactory',
@@ -41,6 +42,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Slim\ResponseFactory',
             'Laminas\Diactoros\ResponseFactory',
             'Slim\Psr7\Factory\ResponseFactory',
+            'HttpSoft\Message\ResponseFactory',
         ],
         ServerRequestFactoryInterface::class => [
             'Phalcon\Http\Message\ServerRequestFactory',
@@ -51,6 +53,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Slim\ServerRequestFactory',
             'Laminas\Diactoros\ServerRequestFactory',
             'Slim\Psr7\Factory\ServerRequestFactory',
+            'HttpSoft\Message\ServerRequestFactory',
         ],
         StreamFactoryInterface::class => [
             'Phalcon\Http\Message\StreamFactory',
@@ -61,6 +64,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Slim\StreamFactory',
             'Laminas\Diactoros\StreamFactory',
             'Slim\Psr7\Factory\StreamFactory',
+            'HttpSoft\Message\StreamFactory',
         ],
         UploadedFileFactoryInterface::class => [
             'Phalcon\Http\Message\UploadedFileFactory',
@@ -71,6 +75,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Slim\UploadedFileFactory',
             'Laminas\Diactoros\UploadedFileFactory',
             'Slim\Psr7\Factory\UploadedFileFactory',
+            'HttpSoft\Message\UploadedFileFactory',
         ],
         UriFactoryInterface::class => [
             'Phalcon\Http\Message\UriFactory',
@@ -81,6 +86,7 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
             'Http\Factory\Slim\UriFactory',
             'Laminas\Diactoros\UriFactory',
             'Slim\Psr7\Factory\UriFactory',
+            'HttpSoft\Message\UriFactory',
         ],
     ];
 
