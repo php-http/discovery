@@ -45,9 +45,9 @@ Finally, you need to require `php-http/discovery` and the generic implementation
 that your library is going to need:
 
 ```bash
-composer require php-http/discovery:^1.17
-composer require psr/http-client-implementation:*
-composer require psr/http-factory-implementation:*
+composer require 'php-http/discovery:^1.17'
+composer require 'psr/http-client-implementation:*'
+composer require 'psr/http-factory-implementation:*'
 ```
 
 Now, you're ready to make an HTTP request:
