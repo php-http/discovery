@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.19.0 - 2023-XX-XX
+## (unreleased)
 
 - [#241](https://github.com/php-http/discovery/pull/241) - Support discovering PSR-17 factories of `httpsoft/http-message` package
 
