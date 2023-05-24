@@ -81,6 +81,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             'http-interop/http-factory-guzzle' => [],
             'http-interop/http-factory-diactoros' => [],
             'http-interop/http-factory-slim' => [],
+            'httpsoft/http-message' => [],
         ],
     ];
 

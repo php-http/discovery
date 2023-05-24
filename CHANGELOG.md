@@ -1,5 +1,9 @@
 # Change Log
 
+## (unreleased)
+
+- [#241](https://github.com/php-http/discovery/pull/241) - Support discovering PSR-17 factories of `httpsoft/http-message` package
+
 ## 1.18.1 - 2023-05-17
 
 - [#242](https://github.com/php-http/discovery/pull/242) - Better exception message when no legacy php-http message factories can be built. Also needs php-http/message-factory package and they are deprecated in favor of PSR-17 anyways.
