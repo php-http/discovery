@@ -10,7 +10,7 @@ use Http\Discovery\Exception\DiscoveryFailedException;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  *
- * @deprecated This will be removed in 2.0. Consider using Psr18FactoryDiscovery.
+ * @deprecated This will be removed in 2.0. Consider using Psr18ClientDiscovery.
  */
 final class HttpClientDiscovery extends ClassDiscovery
 {
