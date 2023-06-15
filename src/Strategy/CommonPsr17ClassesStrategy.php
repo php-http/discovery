@@ -90,9 +90,6 @@ final class CommonPsr17ClassesStrategy implements DiscoveryStrategy
         ],
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getCandidates($type)
     {
         $candidates = [];
