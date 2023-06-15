@@ -179,8 +179,6 @@ abstract class ClassDiscovery
     /**
      * Evaluates conditions to boolean.
      *
-     * @param mixed $condition
-     *
      * @return bool
      */
     protected static function evaluateCondition($condition)

@@ -72,9 +72,6 @@ class PuliBetaStrategy implements DiscoveryStrategy
         return self::$puliDiscovery;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getCandidates($type)
     {
         $returnData = [];
