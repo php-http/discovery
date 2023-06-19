@@ -45,16 +45,16 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     private const PROVIDE_RULES = [
         'php-http/async-client-implementation' => [
-            'symfony/http-client:>=6.3' => ['guzzlehttp/promises', 'psr/http-factory-implementation'],
-            'symfony/http-client' => ['guzzlehttp/promises', 'php-http/message-factory', 'psr/http-factory-implementation'],
+            'symfony/http-client:>=6.3' => ['guzzlehttp/promises', 'psr/http-factory-implementation', 'php-http/httplug'],
+            'symfony/http-client' => ['guzzlehttp/promises', 'php-http/message-factory', 'psr/http-factory-implementation', 'php-http/httplug'],
             'php-http/guzzle7-adapter' => [],
             'php-http/guzzle6-adapter' => [],
             'php-http/curl-client' => [],
             'php-http/react-adapter' => [],
         ],
         'php-http/client-implementation' => [
-            'symfony/http-client:>=6.3' => ['psr/http-factory-implementation'],
-            'symfony/http-client' => ['php-http/message-factory', 'psr/http-factory-implementation'],
+            'symfony/http-client:>=6.3' => ['psr/http-factory-implementation', 'php-http/httplug'],
+            'symfony/http-client' => ['php-http/message-factory', 'psr/http-factory-implementation', 'php-http/httplug'],
             'php-http/guzzle7-adapter' => [],
             'php-http/guzzle6-adapter' => [],
             'php-http/cakephp-adapter' => [],
@@ -65,7 +65,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             'kriswallsmith/buzz:^1' => [],
         ],
         'psr/http-client-implementation' => [
-            'symfony/http-client' => ['psr/http-factory-implementation'],
+            'symfony/http-client' => ['psr/http-factory-implementation', 'psr/http-client'],
             'guzzlehttp/guzzle' => [],
             'kriswallsmith/buzz:^1' => [],
         ],

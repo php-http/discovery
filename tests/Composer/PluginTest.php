@@ -97,6 +97,7 @@ class PluginTest extends TestCase
             'php-http/async-client-implementation' => [
                 'guzzlehttp/promises',
                 'php-http/message-factory',
+                'php-http/httplug',
             ],
             'psr/http-factory-implementation' => [
                 'nyholm/psr7',
