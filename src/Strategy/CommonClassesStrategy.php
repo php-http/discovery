@@ -18,7 +18,6 @@ use Http\Client\HttpClient;
 use Http\Client\Socket\Client as Socket;
 use Http\Discovery\ClassDiscovery;
 use Http\Discovery\Exception\NotFoundException;
-use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\MessageFactory;
 use Http\Message\MessageFactory\DiactorosMessageFactory;
@@ -146,7 +145,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
 
     public static function buzzInstantiate()
     {
-        return new \Buzz\Client\FileGetContents(MessageFactoryDiscovery::find());
+        return new \Buzz\Client\FileGetContents(Psr17FactoryDiscovery::findResponseFactory());
     }
 
     public static function symfonyPsr18Instantiate()
