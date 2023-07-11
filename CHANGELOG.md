@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.19.1 - 2023-07-11
+
+- [#250](https://github.com/php-http/discovery/pull/250) - Fix: Buzz client instantiation using deprecated Message Factory Discovery, use PSR-17 factory discovery instead.
+
 ## 1.19.0 - 2023-06-19
 
 - [#249](https://github.com/php-http/discovery/pull/249) - Have composer plugin correctly install Symfony http client when nothing explicitly requires psr 18 resp. httplug.
