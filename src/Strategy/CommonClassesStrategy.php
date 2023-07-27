@@ -32,7 +32,7 @@ use Http\Message\UriFactory\DiactorosUriFactory;
 use Http\Message\UriFactory\GuzzleUriFactory;
 use Http\Message\UriFactory\SlimUriFactory;
 use Laminas\Diactoros\Request as DiactorosRequest;
-use Nyholm\Psr7\Factory\HttplugFactory as NyholmHttplugFactory;
+use Nyholm\Psr7\Factory\Psr17Factory as NyholmPsr17Factory;
 use Psr\Http\Client\ClientInterface as Psr18Client;
 use Psr\Http\Message\RequestFactoryInterface as Psr17RequestFactory;
 use Slim\Http\Request as SlimRequest;
@@ -53,19 +53,19 @@ final class CommonClassesStrategy implements DiscoveryStrategy
      */
     private static $classes = [
         MessageFactory::class => [
-            ['class' => NyholmHttplugFactory::class, 'condition' => [NyholmHttplugFactory::class]],
+            ['class' => NyholmPsr17Factory::class, 'condition' => [NyholmPsr17Factory::class]],
             ['class' => GuzzleMessageFactory::class, 'condition' => [GuzzleRequest::class, GuzzleMessageFactory::class]],
             ['class' => DiactorosMessageFactory::class, 'condition' => [DiactorosRequest::class, DiactorosMessageFactory::class]],
             ['class' => SlimMessageFactory::class, 'condition' => [SlimRequest::class, SlimMessageFactory::class]],
         ],
         StreamFactory::class => [
-            ['class' => NyholmHttplugFactory::class, 'condition' => [NyholmHttplugFactory::class]],
+            ['class' => NyholmPsr17Factory::class, 'condition' => [NyholmPsr17Factory::class]],
             ['class' => GuzzleStreamFactory::class, 'condition' => [GuzzleRequest::class, GuzzleStreamFactory::class]],
             ['class' => DiactorosStreamFactory::class, 'condition' => [DiactorosRequest::class, DiactorosStreamFactory::class]],
             ['class' => SlimStreamFactory::class, 'condition' => [SlimRequest::class, SlimStreamFactory::class]],
         ],
         UriFactory::class => [
-            ['class' => NyholmHttplugFactory::class, 'condition' => [NyholmHttplugFactory::class]],
+            ['class' => NyholmPsr17Factory::class, 'condition' => [NyholmPsr17Factory::class]],
             ['class' => GuzzleUriFactory::class, 'condition' => [GuzzleRequest::class, GuzzleUriFactory::class]],
             ['class' => DiactorosUriFactory::class, 'condition' => [DiactorosRequest::class, DiactorosUriFactory::class]],
             ['class' => SlimUriFactory::class, 'condition' => [SlimRequest::class, SlimUriFactory::class]],
