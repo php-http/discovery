@@ -160,7 +160,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
 
     public static function isSymfonyImplementingHttpClient()
     {
-        return is_a(SymfonyHttplug::class, HttpClient::class, true);
+        return is_subclass_of(SymfonyHttplug::class, HttpClient::class);
     }
 
     /**
