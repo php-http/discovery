@@ -78,7 +78,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
             ['class' => React::class, 'condition' => React::class],
         ],
         HttpClient::class => [
-            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, [self::class, 'isPsr17FactoryInstalled']]],
+            ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, [self::class, 'isPsr17FactoryInstalled'], [self::class, 'isSymfonyImplementingHttpClient']]],
             ['class' => Guzzle7::class, 'condition' => Guzzle7::class],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Guzzle5::class, 'condition' => Guzzle5::class],
@@ -156,6 +156,11 @@ final class CommonClassesStrategy implements DiscoveryStrategy
     public static function isGuzzleImplementingPsr18()
     {
         return defined('GuzzleHttp\ClientInterface::MAJOR_VERSION');
+    }
+
+    public static function isSymfonyImplementingHttpClient()
+    {
+        return is_subclass_of(SymfonyHttplug::class, HttpClient::class);
     }
 
     /**
