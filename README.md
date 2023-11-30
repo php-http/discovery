@@ -2,7 +2,7 @@
 
 [![Latest Version](https://img.shields.io/github/release/php-http/discovery.svg?style=flat-square)](https://github.com/php-http/discovery/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Tests](https://github.com/php-http/discovery/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/php-http/discovery/actions/workflows/ci.yml?query=branch%3Amaster)
+[![Tests](https://github.com/php-http/discovery/actions/workflows/ci.yml/badge.svg?branch=1.x)](https://github.com/php-http/discovery/actions/workflows/ci.yml?query=branch%3A1.x)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
 [![Quality Score](https://img.shields.io/scrutinizer/g/php-http/discovery.svg?style=flat-square)](https://scrutinizer-ci.com/g/php-http/discovery)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-http/discovery.svg?style=flat-square)](https://packagist.org/packages/php-http/discovery)
