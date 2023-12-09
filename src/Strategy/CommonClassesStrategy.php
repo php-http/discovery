@@ -2,6 +2,9 @@
 
 namespace Http\Discovery\Strategy;
 
+use Amp\Http\Client\HttpClientBuilder as AmphpHttpClientBuilder;
+use Amp\Http\Client\Psr7\PsrAdapter as AmphpPsrAdapter;
+use Amp\Http\Client\Psr7\PsrHttpClient as AmphpPsrHttpClient;
 use GuzzleHttp\Client as GuzzleHttp;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
@@ -35,6 +38,7 @@ use Laminas\Diactoros\Request as DiactorosRequest;
 use Nyholm\Psr7\Factory\HttplugFactory as NyholmHttplugFactory;
 use Psr\Http\Client\ClientInterface as Psr18Client;
 use Psr\Http\Message\RequestFactoryInterface as Psr17RequestFactory;
+use Psr\Http\Message\ResponseFactoryInterface as Psr17ResponseFactory;
 use Slim\Http\Request as SlimRequest;
 use Symfony\Component\HttpClient\HttplugClient as SymfonyHttplug;
 use Symfony\Component\HttpClient\Psr18Client as SymfonyPsr18;
@@ -99,6 +103,10 @@ final class CommonClassesStrategy implements DiscoveryStrategy
                 'condition' => [SymfonyPsr18::class, Psr17RequestFactory::class],
             ],
             [
+                'class' => [self::class, 'amphpPsr18Instantiate'],
+                'condition' => [[self::class, 'isAmphpImplementingPsr18'], AmphpPsrHttpClient::class, Psr17RequestFactory::class, Psr17ResponseFactory::class],
+            ],
+            [
                 'class' => GuzzleHttp::class,
                 'condition' => [self::class, 'isGuzzleImplementingPsr18'],
             ],
@@ -141,6 +149,20 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         }
 
         return $candidates;
+    }
+
+    public static function amphpPsr18Instantiate()
+    {
+        $httpClient = AmphpHttpClientBuilder::buildDefault();
+        $psrAdapter = new AmphpPsrAdapter(Psr17FactoryDiscovery::findRequestFactory(), Psr17FactoryDiscovery::findResponseFactory());
+
+        return new AmphpPsrHttpClient($httpClient, $psrAdapter);
+    }
+
+    public static function isAmphpImplementingPsr18()
+    {
+        // Amphp PsrHttpClient is implementing the interface only on the v2 branch
+        return is_subclass_of(AmphpPsrHttpClient::class, Psr18Client::class);
     }
 
     public static function buzzInstantiate()
