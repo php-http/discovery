@@ -1,5 +1,6 @@
 # HTTPlug Discovery
 
+Trigger CI
 [![Latest Version](https://img.shields.io/github/release/php-http/discovery.svg?style=flat-square)](https://github.com/php-http/discovery/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Tests](https://github.com/php-http/discovery/actions/workflows/ci.yml/badge.svg?branch=1.x)](https://github.com/php-http/discovery/actions/workflows/ci.yml?query=branch%3A1.x)
