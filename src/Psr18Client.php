@@ -25,13 +25,13 @@ class Psr18Client extends Psr17Factory implements ClientInterface
     private $client;
 
     public function __construct(
-        ClientInterface $client = null,
-        RequestFactoryInterface $requestFactory = null,
-        ResponseFactoryInterface $responseFactory = null,
-        ServerRequestFactoryInterface $serverRequestFactory = null,
-        StreamFactoryInterface $streamFactory = null,
-        UploadedFileFactoryInterface $uploadedFileFactory = null,
-        UriFactoryInterface $uriFactory = null
+        ?ClientInterface $client = null,
+        ?RequestFactoryInterface $requestFactory = null,
+        ?ResponseFactoryInterface $responseFactory = null,
+        ?ServerRequestFactoryInterface $serverRequestFactory = null,
+        ?StreamFactoryInterface $streamFactory = null,
+        ?UploadedFileFactoryInterface $uploadedFileFactory = null,
+        ?UriFactoryInterface $uriFactory = null
     ) {
         parent::__construct($requestFactory, $responseFactory, $serverRequestFactory, $streamFactory, $uploadedFileFactory, $uriFactory);
 
