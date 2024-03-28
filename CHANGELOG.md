@@ -1,8 +1,12 @@
 # Change Log
 
+## 1.19.3 - 2024-03-28
+
+- [#261](https://github.com/php-http/discovery/pull/261) - explicitly mark nullable parameters as nullable (avoid deprecation in PHP 8.4)
+
 ## 1.19.2 - 2023-11-30
 
-- [#253](https://github.com/php-http/discovery/pull/253) - Symfony 7 dropped the deprecated PHP-HTTP `HttpClient` interface from their HTTP client, do not discover the version 7 client when lookig for the old interface.
+- [#253](https://github.com/php-http/discovery/pull/253) - Symfony 7 dropped the deprecated PHP-HTTP `HttpClient` interface from their HTTP client, do not discover the version 7 client when looking for the old interface.
 
 ## 1.19.1 - 2023-07-11
 
