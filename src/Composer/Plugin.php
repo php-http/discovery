@@ -78,7 +78,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             'slim/psr7' => [],
             'laminas/laminas-diactoros' => [],
             'phalcon/cphalcon:^4' => [],
-            'http-interop/http-factory-guzzle' => [],
+            'http-interop/http-factory-guzzle:>=1' => [],
             'http-interop/http-factory-diactoros' => [],
             'http-interop/http-factory-slim' => [],
             'httpsoft/http-message' => [],
@@ -98,7 +98,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         'php-http/react-adapter' => 'react/event-loop',
         'php-http/buzz-adapter' => 'kriswallsmith/buzz:^0.15.1',
         'php-http/artax-adapter' => 'amphp/artax:^3',
-        'http-interop/http-factory-guzzle' => 'guzzlehttp/psr7:^1',
+        'http-interop/http-factory-guzzle:>=1' => 'guzzlehttp/psr7:^1',
         'http-interop/http-factory-slim' => 'slim/slim:^3',
     ];
 
