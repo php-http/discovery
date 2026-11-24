@@ -5,6 +5,10 @@ on:
       - "*.x"
   pull_request:
 
+env:
+  # We test against old versions of dependencies, some of which have security advisories
+  COMPOSER_POLICY_ADVISORIES_BLOCK: '0'
+
 jobs:
   installation:
     name: Installation test ${{ matrix.expect }} ${{ matrix.method }} ${{ matrix.requirements }} ${{ matrix.pecl }}
@@ -79,7 +83,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

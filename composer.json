@@ -24,11 +24,10 @@
     },
     "require-dev": {
         "composer/composer": "^1.0.2|^2.0",
-        "graham-campbell/phpspec-skip-example-extension": "^5.0",
         "php-http/httplug": "^1.0 || ^2.0",
         "php-http/message-factory": "^1.0",
-        "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3",
-        "symfony/phpunit-bridge": "^6.4.4 || ^7.0.1",
+        "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3 || ^8.0",
+        "symfony/phpunit-bridge": "^6.4.4 || ^7.0.1 || ^8.0",
         "sebastian/comparator": "^3.0.5 || ^4.0.8"
     },
     "autoload": {
@@ -48,8 +47,7 @@
         "test": [
             "vendor/bin/phpspec run",
             "vendor/bin/simple-phpunit --group NothingInstalled"
-        ],
-        "test-ci": "vendor/bin/phpspec run -c phpspec.ci.yml"
+        ]
     },
     "extra": {
         "class": "Http\\Discovery\\Composer\\Plugin",

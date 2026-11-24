@@ -3,6 +3,3 @@ suites:
         namespace: Http\Discovery
         psr4_prefix: Http\Discovery
 formatter.name: pretty
-bootstrap: spec/autoload.php
-extensions:
-    Akeneo\SkipExampleExtension: ~

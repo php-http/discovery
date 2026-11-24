@@ -6,6 +6,11 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true">
 
+    <php>
+        <!-- Report deprecations but do not fail the test run because of them -->
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[total]=999999"/>
+    </php>
+
     <testsuites>
         <testsuite name="HTTPlug unit tests">
             <directory suffix="Test.php">./tests</directory>
