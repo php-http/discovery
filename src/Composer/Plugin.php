@@ -47,6 +47,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         'php-http/async-client-implementation' => [
             'symfony/http-client:>=6.3' => ['guzzlehttp/promises', 'psr/http-factory-implementation', 'php-http/httplug'],
             'symfony/http-client' => ['guzzlehttp/promises', 'php-http/message-factory', 'psr/http-factory-implementation', 'php-http/httplug'],
+            'php-http/guzzle8-adapter' => [],
             'php-http/guzzle7-adapter' => [],
             'php-http/guzzle6-adapter' => [],
             'php-http/curl-client' => [],
@@ -55,6 +56,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         'php-http/client-implementation' => [
             'symfony/http-client:>=6.3' => ['psr/http-factory-implementation', 'php-http/httplug'],
             'symfony/http-client' => ['php-http/message-factory', 'psr/http-factory-implementation', 'php-http/httplug'],
+            'php-http/guzzle8-adapter' => [],
             'php-http/guzzle7-adapter' => [],
             'php-http/guzzle6-adapter' => [],
             'php-http/cakephp-adapter' => [],
@@ -91,6 +93,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     private const STICKYNESS_RULES = [
         'symfony/http-client' => 'symfony/framework-bundle',
+        'php-http/guzzle8-adapter' => 'guzzlehttp/guzzle:^8',
         'php-http/guzzle7-adapter' => 'guzzlehttp/guzzle:^7',
         'php-http/guzzle6-adapter' => 'guzzlehttp/guzzle:^6',
         'php-http/guzzle5-adapter' => 'guzzlehttp/guzzle:^5',
