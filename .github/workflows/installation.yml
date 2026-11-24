@@ -5,6 +5,10 @@ on:
       - "*.x"
   pull_request:
 
+env:
+  # We test against old versions of dependencies, some of which have security advisories
+  COMPOSER_POLICY_ADVISORIES_BLOCK: '0'
+
 jobs:
   installation:
     name: Installation test ${{ matrix.expect }} ${{ matrix.method }} ${{ matrix.requirements }} ${{ matrix.pecl }}

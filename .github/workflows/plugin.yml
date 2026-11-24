@@ -5,6 +5,10 @@ on:
       - master
   pull_request:
 
+env:
+  # We test against old versions of dependencies, some of which have security advisories
+  COMPOSER_POLICY_ADVISORIES_BLOCK: '0'
+
 jobs:
   plugin:
     name: Plugin test with Composer ${{ matrix.composer }}
@@ -13,7 +17,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - composer: v1
           - composer: v2
 
     steps:

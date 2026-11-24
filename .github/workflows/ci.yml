@@ -6,6 +6,10 @@ on:
       - "*.x"
   pull_request:
 
+env:
+  # We test against old versions of dependencies, some of which have security advisories
+  COMPOSER_POLICY_ADVISORIES_BLOCK: '0'
+
 jobs:
   latest:
     name: PHP ${{ matrix.php }} Latest
@@ -48,43 +52,14 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          tools: composer:v1
+          tools: composer:v2
           coverage: none
 
       - name: Install dependencies
         run: |
-          wget https://github.com/puli/cli/releases/download/1.0.0-beta9/puli.phar && chmod +x puli.phar
-          composer require "sebastian/comparator:^3.0.2" "puli/composer-plugin:1.0.0-beta9" --no-interaction --no-update
+          composer require "sebastian/comparator:^3.0.2" --no-interaction --no-update
           composer update --prefer-dist --prefer-stable --prefer-lowest --no-interaction --no-progress
           vendor/bin/simple-phpunit install
 
       - name: Execute tests
         run: composer test
-
-  coverage:
-    name: Code Coverage
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.4
-          tools: composer:v2
-          coverage: xdebug
-
-      - name: Install dependencies
-        run: |
-          composer require "friends-of-phpspec/phpspec-code-coverage:^4.3.2" --no-interaction --no-update
-          composer update --prefer-dist --no-interaction --no-progress
-
-      - name: Execute tests
-        run: composer test-ci
-
-      - name: Upload coverage
-        run: |
-          wget https://scrutinizer-ci.com/ocular.phar
-          php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml
