@@ -11,6 +11,7 @@ use Http\Adapter\Cake\Client as Cake;
 use Http\Adapter\Guzzle5\Client as Guzzle5;
 use Http\Adapter\Guzzle6\Client as Guzzle6;
 use Http\Adapter\Guzzle7\Client as Guzzle7;
+use Http\Adapter\Guzzle8\Client as Guzzle8;
 use Http\Adapter\React\Client as React;
 use Http\Client\Curl\Client as Curl;
 use Http\Client\HttpAsyncClient;
@@ -72,6 +73,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         ],
         HttpAsyncClient::class => [
             ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, Promise::class, [self::class, 'isPsr17FactoryInstalled']]],
+            ['class' => Guzzle8::class, 'condition' => Guzzle8::class],
             ['class' => Guzzle7::class, 'condition' => Guzzle7::class],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Curl::class, 'condition' => Curl::class],
@@ -79,6 +81,7 @@ final class CommonClassesStrategy implements DiscoveryStrategy
         ],
         HttpClient::class => [
             ['class' => SymfonyHttplug::class, 'condition' => [SymfonyHttplug::class, [self::class, 'isPsr17FactoryInstalled'], [self::class, 'isSymfonyImplementingHttpClient']]],
+            ['class' => Guzzle8::class, 'condition' => Guzzle8::class],
             ['class' => Guzzle7::class, 'condition' => Guzzle7::class],
             ['class' => Guzzle6::class, 'condition' => Guzzle6::class],
             ['class' => Guzzle5::class, 'condition' => Guzzle5::class],

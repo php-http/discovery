@@ -29,6 +29,13 @@ jobs:
           - expect: will-find
             requirements: "php-http/guzzle7-adapter:^0.1"
             method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          # Test that we find Guzzle 8 Adapter
+          - expect: will-find
+            requirements: "php-http/guzzle8-adapter:1.x-dev"
+            method: "Http\\Discovery\\HttpClientDiscovery::find();"
+          - expect: will-find
+            requirements: "php-http/guzzle8-adapter:1.x-dev"
+            method: "Http\\Discovery\\HttpAsyncClientDiscovery::find();"
           # Test that we find a client with Symfony and Guzzle PSR-7
           - expect: will-find
             requirements: "symfony/http-client:^5 php-http/httplug php-http/message-factory guzzlehttp/psr7:^1 http-interop/http-factory-guzzle"
@@ -59,6 +66,10 @@ jobs:
           # Test that we find PSR-18 Guzzle 7
           - expect: will-find
             requirements: "guzzlehttp/guzzle:^7.0.1"
+            method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
+          # Test that we find PSR-18 Guzzle 8
+          - expect: will-find
+            requirements: "guzzlehttp/guzzle:^8"
             method: "Http\\Discovery\\Psr18ClientDiscovery::find();"
           # Test that we find PSR-18 Symfony 4
           - expect: will-find

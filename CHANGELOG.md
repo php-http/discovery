@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.21.0 - 2026-11-24
+
+- Discover guzzle 8
+
 ## 1.20.0 - 2024-10-02
 
 - [#268](https://github.com/php-http/discovery/pull/268) - Do not attempt to update lock file when it is not existing.
