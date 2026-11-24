@@ -235,7 +235,7 @@ class Psr17Factory implements RequestFactoryInterface, ResponseFactoryInterface,
         }
 
         if (!$hasPort && isset($server['SERVER_PORT'])) {
-            $uri = $uri->withPort($server['SERVER_PORT']);
+            $uri = $uri->withPort((int) $server['SERVER_PORT']);
         }
 
         $hasQuery = false;
